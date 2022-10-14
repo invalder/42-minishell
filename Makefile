@@ -6,12 +6,11 @@
 #    By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2022/10/09 12:41:14 by nnakarac         ###   ########.fr        #
+#    Updated: 2022/10/09 13:05:05 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NORM = norminette -R CheckForbiddenSourceHeaderDefine
-NORMCNT = $(shell cat ./norm.result | grep -c 'Error:')
 
 UNAME = $(shell uname -s)
 ifeq ($(UNAME), Linux)
@@ -26,24 +25,56 @@ else
 	TIEIN = afplay easter_egg/tie_in.wav -v 0.7 &
 endif
 
-MEME2 = say -v kanya "กำลังรัน นอร์มิเน็ตโตะ"
-ANYA2 = say -v kanya "วากุ วากุ"
-SPONSOR2 = say -v kanya "เอ่อ โค้ดนี้ก็ สปอนเซอร์นะครับ แก้ เขียน ครบ จบในที่เดียว ยังไงก็ ให้ผ่านนะครับ เค้าจะได้จ้างผมต่อ"
+MEME2 = say -v kanya "กำลังรัน นอร์มิเน็ตโตะ" &
+ANYA2 = say -v kanya "วากุ วากุ" &
+SPONSOR2 = say -v kanya -r 0.8 "เอ่อ โค้ดนี้ก็ เขียนเองนะครับ    แก้  เขียน  ครบ    จบในที่เดียว ยังไงก็ให้ผ่านนะครับ ผมจะได้ไปต่อ" &
+SPONSOR4 = say -v kanya -r 20 "เอ่อ โค้ดนี้ก็ เขียนเองนะครับ" &
+SPONSOR5 = say -v kanya -r 10 "แก้  บั๊ก  ครบ    จบในที่เดียว" &
+SPONSOR6 = say -v kanya -r 20 "ยังไงก็ให้ผ่านนะครับ ผมจะได้ไปต่อ" &
 
 MEME3 = ./easter_egg/credits.sh
 ANYA3 = ./easter_egg/anya.sh
 SPONSOR3 = ./easter_egg/sponsor.sh
 
 NAME = minishell
+CC		= gcc
+CFLAGS	= -Wall -Wextra -Werror -g
+RM		= /bin/rm -rf
+
+SRC_DIR	= srcs/
+OBJ_DIR	= objs/
+INC_DIR	= includes
+
+INCS	= -I$(INC_DIR)
+
+SRCS	= minishell.c \
+
+OBJS	= $(SRCS:.c=.o)
 
 .SILENT: credits anya norm
 
 ALL: $(NAME)
-	@$(TIEIN)
 	@$(SPONSOR)
 	@$(SPONSOR3)
+	@sleep 3
+	@$(TIEIN)
+	reset
 
-$(NAME):
+$(NAME): $(addprefix $(OBJ_DIR),$(OBJS))
+	@$(CC) $(CFLAGS) $(addprefix $(OBJ_DIR),$(OBJS)) -o $(NAME)
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@mkdir -p $(OBJ_DIR)
+	@$(CC) -g -pthread $(CFLAGS) -c $< $(INCS) -o $@
+
+clean:
+	@$(RM) $(OBJ_DIR)
+	@$(RM) $(NAME)
+	@$(RM) "$(NAME).dSYM"
+
+fclean: clean
+
+re: fclean all
 
 norm:
 ifeq ($(shell $(NORM) | grep -c "Error:"), 0)
@@ -67,5 +98,11 @@ anya:
 sponsor:
 	@$(SPONSOR3)
 	@$(SPONSOR)
-	@$(SPONSOR2)
+	@sleep 2
+	@$(SPONSOR4)
+	@sleep 5
+	@$(SPONSOR5)
+	@sleep 8
+	@$(SPONSOR6)
 
+.PHONY: fclean all clean re minishell norm credits anya sponsor
