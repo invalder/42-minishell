@@ -6,7 +6,7 @@
 #    By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2022/10/09 13:05:05 by nnakarac         ###   ########.fr        #
+#    Updated: 2022/10/14 21:44:07 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,12 @@ else
 endif
 
 MEME2 = say -v kanya "กำลังรัน นอร์มิเน็ตโตะ" &
+MEME4 = say -v kanya "กำลังรัน MAKE RE" &
 ANYA2 = say -v kanya "วากุ วากุ" &
 SPONSOR2 = say -v kanya -r 0.8 "เอ่อ โค้ดนี้ก็ เขียนเองนะครับ    แก้  เขียน  ครบ    จบในที่เดียว ยังไงก็ให้ผ่านนะครับ ผมจะได้ไปต่อ" &
 SPONSOR4 = say -v kanya -r 20 "เอ่อ โค้ดนี้ก็ เขียนเองนะครับ" &
 SPONSOR5 = say -v kanya -r 10 "แก้  บั๊ก  ครบ    จบในที่เดียว" &
-SPONSOR6 = say -v kanya -r 20 "ยังไงก็ให้ผ่านนะครับ ผมจะได้ไปต่อ" &
+SPONSOR6 = say -v kanya -r 20 "ให้ผ่านเถอะครับ ผมจะได้ไปต่อ" &
 
 MEME3 = ./easter_egg/credits.sh
 ANYA3 = ./easter_egg/anya.sh
@@ -44,8 +45,12 @@ RM		= /bin/rm -rf
 SRC_DIR	= srcs/
 OBJ_DIR	= objs/
 INC_DIR	= includes
+LIB_DIR = libft/
 
-INCS	= -I$(INC_DIR)
+LIBS	= -L$(LIB_DIR) -lft
+
+INCS	= -I$(INC_DIR)\
+		-I$(LIB_DIR)includes \
 
 SRCS	= minishell.c \
 
@@ -53,26 +58,33 @@ OBJS	= $(SRCS:.c=.o)
 
 .SILENT: credits anya norm
 
-ALL: $(NAME)
-	@$(SPONSOR)
+all: $(NAME)
 	@$(SPONSOR3)
-	@sleep 3
-	@$(TIEIN)
+	@$(SPONSOR)
+	@sleep 2
+	@$(SPONSOR4)
+	@sleep 5
+	@$(SPONSOR5)
+	@sleep 8
+	@$(SPONSOR6)
 	reset
 
 $(NAME): $(addprefix $(OBJ_DIR),$(OBJS))
-	@$(CC) $(CFLAGS) $(addprefix $(OBJ_DIR),$(OBJS)) -o $(NAME)
+	@make -C $(LIB_DIR) --silent
+	@$(CC) $(CFLAGS) $(addprefix $(OBJ_DIR),$(OBJS)) $(LIBS) -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
-	@$(CC) -g -pthread $(CFLAGS) -c $< $(INCS) -o $@
+	@$(CC) -Ilibft $(CFLAGS) -c $< $(INCS) -o $@
 
 clean:
+	@make -C $(LIB_DIR) clean --silent
 	@$(RM) $(OBJ_DIR)
 	@$(RM) $(NAME)
 	@$(RM) "$(NAME).dSYM"
 
 fclean: clean
+	@make -C $(LIB_DIR) fclean --silent
 
 re: fclean all
 
@@ -86,7 +98,6 @@ endif
 
 credits:
 	@$(MEME)
-	@$(NORM)
 	@$(MEME2)
 	@$(MEME3)
 
