@@ -6,7 +6,7 @@
 #    By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2022/10/14 21:44:07 by nnakarac         ###   ########.fr        #
+#    Updated: 2022/10/15 01:51:30 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ ANYA3 = ./easter_egg/anya.sh
 SPONSOR3 = ./easter_egg/sponsor.sh
 
 NAME = minishell
+NAMEP = pipex
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -g
 RM		= /bin/rm -rf
@@ -54,24 +55,25 @@ INCS	= -I$(INC_DIR)\
 
 SRCS	= minishell.c \
 
+SRCS_P	= pipex.c \
+		pipex_error.c \
+		pipex_envp.c \
+
 OBJS	= $(SRCS:.c=.o)
+
+OBJP	= $(SRCS_P:.c=.o)
 
 .SILENT: credits anya norm
 
 all: $(NAME)
-	@$(SPONSOR3)
-	@$(SPONSOR)
-	@sleep 2
-	@$(SPONSOR4)
-	@sleep 5
-	@$(SPONSOR5)
-	@sleep 8
-	@$(SPONSOR6)
-	reset
 
 $(NAME): $(addprefix $(OBJ_DIR),$(OBJS))
 	@make -C $(LIB_DIR) --silent
 	@$(CC) $(CFLAGS) $(addprefix $(OBJ_DIR),$(OBJS)) $(LIBS) -o $(NAME)
+
+$(NAMEP): $(addprefix $(OBJ_DIR),$(OBJP))
+	@make -C $(LIB_DIR) --silent
+	@$(CC) $(CFLAGS) $(addprefix $(OBJ_DIR),$(OBJP)) $(LIBS) -o $(NAMEP)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
@@ -81,7 +83,9 @@ clean:
 	@make -C $(LIB_DIR) clean --silent
 	@$(RM) $(OBJ_DIR)
 	@$(RM) $(NAME)
+	@$(RM) $(NAMEP)
 	@$(RM) "$(NAME).dSYM"
+	@$(RM) "$(NAMEP).dSYM"
 
 fclean: clean
 	@make -C $(LIB_DIR) fclean --silent
