@@ -6,7 +6,7 @@
 #    By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2022/10/30 19:21:58 by nnakarac         ###   ########.fr        #
+#    Updated: 2022/10/30 19:31:35 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,10 @@ MEME2 = say -v kanya "กำลังรัน นอร์มิเน็ตโ
 MEME4 = say -v kanya "กำลังรัน MAKE RE" &
 ANYA2 = say -v kanya "วากุ วากุ" &
 SPONSOR2 = say -v kanya -r 0.8 "เอ่อ โค้ดนี้ก็ เขียนเองนะครับ    แก้  เขียน  ครบ    จบในที่เดียว ยังไงก็ให้ผ่านนะครับ ผมจะได้ไปต่อ" &
-SPONSOR4 = say -v kanya -r 20 "เอ่อ โค้ดนี้ก็ เขียนเองนะครับ" &
-SPONSOR5 = say -v kanya -r 10 "แก้  บั๊ก  ครบ    จบในที่เดียว" &
-SPONSOR6 = say -v kanya -r 20 "ให้ผ่านเถอะครับ ผมจะได้ไปต่อ" &
+SPONSOR4 = say -v kanya -r 20 "เอ่อ โค้ดนี้ก็ ทำเองนะครับ" &
+SPONSOR5 = say -v kanya -r 10 "เขียน  บั๊ก  ครบ    จบในที่เดียว" &
+SPONSOR6 = say -v kanya -r 40 "มีบั๊กทุกบรรทัดแหละครับ    ไม่ต้องคิดมาก" &
+SPONSOR7 = say -v kanya -r 20 "ให้ผ่านเถอะครับ ผมจะได้ไปต่อ" &
 
 MEME3 = ./easter_egg/credits.sh
 ANYA3 = ./easter_egg/anya.sh
@@ -119,7 +120,9 @@ sponsor:
 	@$(SPONSOR4)
 	@sleep 5
 	@$(SPONSOR5)
-	@sleep 8
+	@sleep 6
 	@$(SPONSOR6)
+	@sleep 4
+	@$(SPONSOR7)
 
 .PHONY: fclean all clean re minishell norm credits anya sponsor
