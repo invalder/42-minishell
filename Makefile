@@ -6,7 +6,7 @@
 #    By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2022/10/30 19:31:35 by nnakarac         ###   ########.fr        #
+#    Updated: 2022/10/30 19:38:38 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,7 +105,6 @@ endif
 
 credits:
 	@$(MEME)
-	@$(MEME2)
 	@$(MEME3)
 
 anya:
@@ -122,7 +121,7 @@ sponsor:
 	@$(SPONSOR5)
 	@sleep 6
 	@$(SPONSOR6)
-	@sleep 4
+	@sleep 6
 	@$(SPONSOR7)
 
 .PHONY: fclean all clean re minishell norm credits anya sponsor
