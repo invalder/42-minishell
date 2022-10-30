@@ -6,7 +6,7 @@
 #    By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2022/10/15 01:51:30 by nnakarac         ###   ########.fr        #
+#    Updated: 2022/10/30 19:21:58 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,8 @@ SRCS	= minishell.c \
 SRCS_P	= pipex.c \
 		pipex_error.c \
 		pipex_envp.c \
+		pipex_exec.c \
+		pipex_utils.c \
 
 OBJS	= $(SRCS:.c=.o)
 

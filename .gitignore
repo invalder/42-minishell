@@ -53,3 +53,7 @@ dkms.conf
 
 minishell
 pipex
+
+outfile
+infile
+fd_tmp

@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 23:05:30 by nnakarac          #+#    #+#             */
-/*   Updated: 2022/10/15 10:11:37 by nnakarac         ###   ########.fr       */
+/*   Updated: 2022/10/30 19:21:29 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,29 @@
 #  define BUFFER_SIZE 2048
 # endif
 
+typedef struct s_meta
+{
+	int	*pipe_fd;
+	int	fd_tmp;
+	int	cnt;
+}	t_meta;
+
 void	exit_error(void);
 void	exit_message(char *errmsg);
 void	err_message(char *errmsg);
 
 char	**list_envp(char **envp, char *cmd);
+char	*check_envp(char **list_envp, char *cmd);
 void	free_lst(char **lst);
 
-int		pipex_initial(int argc, char **argv, char **envp);
+void	pipex_initial(int argc, char **argv, char **envp);
+
+void	pipex_exec_parent(int argc, char **argv, char **envp, t_meta *meta);
+void	pipex_exec_child(int argc, char **argv, char **envp, t_meta *meta);
+void	pipex_execution(int argc, char **argv, char **envp, int fd);
+
+void	pipex_heredoc(int argc, char **argv, char **envp);
+void	pipex_normal(int argc, char **argv, char **envp);
+void	pipex_initial(int argc, char **argv, char **envp);
 
 #endif
