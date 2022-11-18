@@ -50,3 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+minishell
+pipex
+
+outfile
+infile
+fd_tmp
