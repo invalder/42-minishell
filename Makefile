@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+         #
+#    By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2022/10/30 19:38:38 by nnakarac         ###   ########.fr        #
+#    Updated: 2022/11/28 00:18:52 by sthitiku         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ SPONSOR3 = ./easter_egg/sponsor.sh
 NAME = minishell
 NAMEP = pipex
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g
+# CFLAGS	= -Wall -Wextra -Werror -g
+RL	= -lreadline
 RM		= /bin/rm -rf
 
 SRC_DIR	= srcs/
@@ -54,13 +55,15 @@ LIBS	= -L$(LIB_DIR) -lft
 INCS	= -I$(INC_DIR)\
 		-I$(LIB_DIR)includes \
 
-SRCS	= minishell.c \
+SRCS	= test.c \
 
-SRCS_P	= pipex.c \
-		pipex_error.c \
-		pipex_envp.c \
-		pipex_exec.c \
-		pipex_utils.c \
+# SRCS	= minishell.c \
+
+# SRCS_P	= pipex.c \
+# 		pipex_error.c \
+# 		pipex_envp.c \
+# 		pipex_exec.c \
+# 		pipex_utils.c \
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -72,7 +75,7 @@ all: $(NAME)
 
 $(NAME): $(addprefix $(OBJ_DIR),$(OBJS))
 	@make -C $(LIB_DIR) --silent
-	@$(CC) $(CFLAGS) $(addprefix $(OBJ_DIR),$(OBJS)) $(LIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(RL) $(addprefix $(OBJ_DIR),$(OBJS)) $(LIBS) -o $(NAME)
 
 $(NAMEP): $(addprefix $(OBJ_DIR),$(OBJP))
 	@make -C $(LIB_DIR) --silent
