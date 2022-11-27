@@ -101,11 +101,10 @@ char	**cmd_split(char *line)
 	int		char_count;
 	int		i;
 	int		j;
-	int		k;
 	char	**cmd;
 
+	// printf("hello\n");
 	cmd_count = ms_count_words(line);
-	printf("cmd_count = %d\n", cmd_count);
 	cmd = (char **)malloc(sizeof(char *) * (cmd_count + 1));
 	i = 0;
 	j = 0;
@@ -114,25 +113,26 @@ char	**cmd_split(char *line)
 		while (line[j] && ft_isspace(line[j]))
 			j++;
 		char_count = ms_count_chars(&line[j]);
-		// printf("%s\tcount{%d} = %d\n",&line[j], i, char_count);
 		cmd[i] = (char *)malloc(sizeof(char) * (char_count + 1));
-		// k = 0;
-		// printf("cmd[%d] addr = %p\n", i, &cmd[i]);
-		// while (k < char_count)
-		// {
-		// 	cmd[i][k] = line[j];
-		// 	// printf("%c\t%p\n", cmd[i][k], &cmd[i][k]);
-		// 	j++;
-		// 	k++;
-		// }
-		// cmd[i][k] = '\0';
 		ft_strlcpy(cmd[i], &line[j], char_count + 1);
-		// printf("cmd[%d] = %s\t%p\n", i, cmd[i], &cmd[i]);
 		i++;
 		j += char_count;
 	}
-	// cmd[cmd_count] = NULL;
+	cmd[i] = NULL;
 	return (cmd);
+}
+
+void	free_split(char **split)
+{
+	int		i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }
 
 int main(int argc, char **argv, char **envp)
@@ -141,23 +141,24 @@ int main(int argc, char **argv, char **envp)
 	char	**cmd;
 	int		i;
 
-	i = 0;
 	(void)argc;
 	(void)argv;
 	(void)envp;
 	while (1)
 	{
+		i = 0;
 		line = readline("minimini> ");
 		if (line == NULL)
 			break;
 		cmd = cmd_split(line);
-		// cmd_split = ft_split(line, ' ');
 		while (cmd[i])
 		{
 			printf("%s\n", cmd[i]);
 			i++;
 		}
 		// add_history(line);
+		free_split(cmd);
 		free(line);
+		line = NULL;
 	}
 }
