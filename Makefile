@@ -6,7 +6,7 @@
 #    By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2022/11/28 00:18:52 by sthitiku         ###   ########.fr        #
+#    Updated: 2022/11/28 01:04:38 by sthitiku         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,8 @@ LIBS	= -L$(LIB_DIR) -lft
 INCS	= -I$(INC_DIR)\
 		-I$(LIB_DIR)includes \
 
-SRCS	= test.c \
+SRCS	=	test.c \
+			ms_split.c \
 
 # SRCS	= minishell.c \
 
