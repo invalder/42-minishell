@@ -6,13 +6,13 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 01:00:44 by sthitiku          #+#    #+#             */
-/*   Updated: 2022/11/28 01:03:19 by sthitiku         ###   ########.fr       */
+/*   Updated: 2022/12/13 16:00:01 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/ms_input.h"
 
-static void	skip_token(char *line, int *i, int mode)
+void	skip_token(char *line, int *i, int mode)
 {
 	char	tmp;
 
@@ -45,7 +45,6 @@ static int	ms_count_words(char *line)
 {
 	int		words;
 	int		i;
-	char	tmp;
 
 	words = 0;
 	i = 0;
@@ -54,9 +53,10 @@ static int	ms_count_words(char *line)
 		if (ft_isspace(line[i]))
 		{
 			i++;
-			continue;
+			continue ;
 		}
-		else if (line[i] == '|' || line[i] == '<' || line[i] == '>' || line[i] == '&')
+		else if (line[i] == '|' || line[i] == '<' || line[i] == '>'
+			|| line[i] == '&')
 			skip_token(line, &i, 1);
 		else if (line[i] == '\'' || line[i] == '\"')
 			skip_token(line, &i, 2);
@@ -70,14 +70,9 @@ static int	ms_count_words(char *line)
 static int	ms_count_chars(char *str)
 {
 	int		i;
-	int		s_cmd;
-	int		e_cmd;
-	int		chars;
 	char	tmp;
 
-	chars = 0;
 	i = 0;
-	s_cmd = i;
 	tmp = str[i];
 	if (str[i] == '\'' || str[i] == '\"')
 		skip_token(str, &i, 2);
@@ -93,6 +88,9 @@ static int	ms_count_chars(char *str)
 	return (i);
 }
 
+/**
+ * Special split function to split char* into char** by tokens.
+ */
 char	**cmd_split(char *line)
 {
 	int		cmd_count;

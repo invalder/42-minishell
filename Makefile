@@ -6,7 +6,7 @@
 #    By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2022/11/28 01:04:38 by sthitiku         ###   ########.fr        #
+#    Updated: 2022/12/13 00:50:40 by sthitiku         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ SPONSOR3 = ./easter_egg/sponsor.sh
 NAME = minishell
 NAMEP = pipex
 CC		= gcc
-# CFLAGS	= -Wall -Wextra -Werror -g
+CFLAGS	= -Wall -Wextra -Werror
 RL	= -lreadline
 RM		= /bin/rm -rf
 
@@ -57,6 +57,7 @@ INCS	= -I$(INC_DIR)\
 
 SRCS	=	test.c \
 			ms_split.c \
+			ms_cmd_split.c \
 
 # SRCS	= minishell.c \
 

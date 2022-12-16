@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ms_environ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/16 15:01:34 by nnakarac          #+#    #+#             */
-/*   Updated: 2022/12/13 02:30:52 by sthitiku         ###   ########.fr       */
+/*   Created: 2022/12/17 01:28:26 by sthitiku          #+#    #+#             */
+/*   Updated: 2022/12/17 01:31:07 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/ms_input.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+char	**dup_environ(char **environ)
 {
-	char	*ps1;
-	char	*ps2;
+	int		i;
+	char	**new;
 
-	ps1 = (char *)s1;
-	ps2 = (char *)s2;
-	while (n > 0 && (*ps1 && *ps2))
+	i = 0;
+	while (environ[i])
+		i++;
+	new = (char **)malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (environ[i])
 	{
-		if (*ps1++ != *ps2++)
-			return ((unsigned char)*(--ps1) - (unsigned char)*(--ps2));
-		n--;
+		new[i] = ft_strdup(environ[i]);
+		i++;
 	}
-	if (n == 0)
-		return (0);
-	return ((unsigned char)*ps1 - (unsigned char)*ps2);
+	new[i] = NULL;
+	return (new);
+}
+
+void set_list(t_cmd *lst)
+{
+	lst->tmp_envp = environ;
+	lst->new_envp = dup_environ(environ);
+	environ = lst->new_envp;
+	lst->cmd = NULL;
 }
