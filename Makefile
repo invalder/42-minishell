@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+         #
+#    By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2022/10/30 19:38:38 by nnakarac         ###   ########.fr        #
+#    Updated: 2022/12/12 21:18:07 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,8 +40,12 @@ SPONSOR3 = ./easter_egg/sponsor.sh
 
 NAME = minishell
 NAMEP = pipex
+NAMET = testshell
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -g
+LDFLAGS	= -L/opt/homebrew/opt/readline/lib
+CPPFLAGS	= -I/opt/homebrew/opt/readline/include
+
 RM		= /bin/rm -rf
 
 SRC_DIR	= srcs/
@@ -62,9 +66,14 @@ SRCS_P	= pipex.c \
 		pipex_exec.c \
 		pipex_utils.c \
 
+SRCS_T	= test_sh.c \
+		test_util1.c \
+
 OBJS	= $(SRCS:.c=.o)
 
 OBJP	= $(SRCS_P:.c=.o)
+
+OBJT	= $(SRCS_T:.c=.o)
 
 .SILENT: credits anya norm
 
@@ -78,6 +87,10 @@ $(NAMEP): $(addprefix $(OBJ_DIR),$(OBJP))
 	@make -C $(LIB_DIR) --silent
 	@$(CC) $(CFLAGS) $(addprefix $(OBJ_DIR),$(OBJP)) $(LIBS) -o $(NAMEP)
 
+$(NAMET): $(addprefix $(OBJ_DIR),$(OBJT))
+	@make -C $(LIB_DIR) --silent
+	@$(CC) $(CFLAGS) -lreadline LDFLAGS CPPFLAGS $(addprefix $(OBJ_DIR),$(OBJT)) $(LIBS) -o $(NAMET)
+
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) -Ilibft $(CFLAGS) -c $< $(INCS) -o $@
@@ -87,8 +100,10 @@ clean:
 	@$(RM) $(OBJ_DIR)
 	@$(RM) $(NAME)
 	@$(RM) $(NAMEP)
+	@$(RM) $(NAMET)
 	@$(RM) "$(NAME).dSYM"
 	@$(RM) "$(NAMEP).dSYM"
+	@$(RM) "$(NAMET).dSYM"
 
 fclean: clean
 	@make -C $(LIB_DIR) fclean --silent
