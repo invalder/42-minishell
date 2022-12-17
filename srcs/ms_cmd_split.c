@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:09:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2022/12/13 15:59:56 by sthitiku         ###   ########.fr       */
+/*   Updated: 2022/12/17 17:02:11 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ int	count_block(char **cmd)
 	return (count);
 }
 
-static char	**create_blk(char **cmd, int begin, int end)
+static char	**create_blk(char **cmd, int begin, int *end)
 {
 	int		i;
 	int		blk;
 	char	**new_blk;
 
-	blk = count_cmd(cmd, &end);
+	blk = count_cmd(cmd, end);
 	new_blk = malloc(sizeof(char *) * (blk + 1));
 	i = 0;
 	while (i < blk)
@@ -92,7 +92,7 @@ char	***create_cmd(char **cmd)
 	while (i < len)
 	{
 		begin = end;
-		block[i++] = create_blk(cmd, begin, end);
+		block[i++] = create_blk(cmd, begin, &end);
 	}
 	block[i] = NULL;
 	return (block);
