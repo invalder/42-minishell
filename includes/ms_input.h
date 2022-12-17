@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2022/12/17 01:31:36 by sthitiku         ###   ########.fr       */
+/*   Updated: 2022/12/17 22:23:30 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
 
 extern char **environ;
 // test_cmd = echo $HOME '"hello""world"' test &&ls -la|cat -e
@@ -28,6 +29,7 @@ typedef struct s_cmd
 	char	***cmd;
 	char	**tmp_envp;
 	char	**new_envp;
+	int		cmd_len;
 }	t_cmd;
 
 // ms_split.c -> split from char* to char**
@@ -36,7 +38,9 @@ void	free_split(char **split);
 void	skip_token(char *line, int *i, int mode);
 
 // ms_cmd_split.c -> split from char** to char***
-char	***create_cmd(char **cmd);
+char	***create_cmd(char **cmd, t_cmd *lst);
 void	free_3star(char ***cmd);
+
+void	 init_list(t_cmd *lst);
 
 #endif

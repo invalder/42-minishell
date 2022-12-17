@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:09:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2022/12/17 17:02:11 by sthitiku         ###   ########.fr       */
+/*   Updated: 2022/12/17 22:23:22 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,18 @@ static char	**create_blk(char **cmd, int begin, int *end)
 /**
  * Takes a splited command line and returns a 3D array of strings.
  */
-char	***create_cmd(char **cmd)
+char	***create_cmd(char **cmd, t_cmd *lst)
 {
 	int		end;
 	int		i;
-	int		len;
 	int		begin;
 	char	***block;
 
 	end = 0;
 	i = 0;
-	len = count_block(cmd);
-	block = (char ***)malloc(sizeof(char **) * (len + 1));
-	while (i < len)
+	lst->cmd_len = count_block(cmd);
+	block = (char ***)malloc(sizeof(char **) * (lst->cmd_len + 1));
+	while (i < lst->cmd_len)
 	{
 		begin = end;
 		block[i++] = create_blk(cmd, begin, &end);

@@ -6,7 +6,7 @@
 #    By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2022/12/13 00:50:40 by sthitiku         ###   ########.fr        #
+#    Updated: 2022/12/17 22:11:38 by sthitiku         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,8 @@ SPONSOR3 = ./easter_egg/sponsor.sh
 NAME = minishell
 NAMEP = pipex
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
-RL	= -lreadline
+CFLAGS	= -Wall -Wextra -Werror -I/opt/homebrew/opt/readline/include
+RL	= -lreadline -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include
 RM		= /bin/rm -rf
 
 SRC_DIR	= srcs/
@@ -58,6 +58,7 @@ INCS	= -I$(INC_DIR)\
 SRCS	=	test.c \
 			ms_split.c \
 			ms_cmd_split.c \
+			ms_environ.c \
 
 # SRCS	= minishell.c \
 

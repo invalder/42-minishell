@@ -65,37 +65,64 @@ void	free_main_loop(char *line, char **cmd, char ***cmd_3star)
 	cmd_3star = NULL;
 }
 
-int	main_loop()
+void	int_handler(void)
+{
+	ft_putstr_fd("\n", STDOUT_FILENO);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+void	sig_handler(int signo, siginfo_t *s, void *old)
+{
+	(void) old;
+	(void) s;
+	if (signo == SIGINT)
+		int_handler();
+}
+
+int	main_loop(t_cmd *lst)
 {
 	char	*line;
 	char	**cmd;
-	t_cmd	lst;
+	struct sigaction	s_int;
+	struct sigaction	s_quit;
 
+	s_int.sa_sigaction = sig_handler;
+	s_int.sa_flags = SA_SIGINFO;
+	s_quit.sa_flags = SA_RESTART;
+	sigemptyset(&s_int.sa_mask);
+	sigemptyset(&s_quit.sa_mask);
+	sigaction(SIGINT, &s_int, NULL);
 	while (1)
 	{
 		line = readline("minimini> ");
 		if (line == NULL || ft_strncmp(line, "exit\0", 5) == 0)
 			return (0);
 		cmd = cmd_split(line);
-		lst.cmd = create_cmd(cmd);
-		print_3star(lst.cmd);
-		free_main_loop(line, cmd, lst.cmd);
+		lst->cmd = create_cmd(cmd, lst);
+		print_3star(lst->cmd);
+		free_main_loop(line, cmd, lst->cmd);
 	}
 }
 
 int main(void)
 {
 	int		ret;
-	struct	termios	old_tio;
-	struct	termios	new_tio;
+	struct termios	old_tio;
+	struct termios	new_tio;
+	t_cmd	lst;
 
 	tcgetattr(STDIN_FILENO, &old_tio);
 	new_tio = old_tio;
-	new_tio.c_lflag = 0;
+	new_tio.c_lflag = new_tio.c_lflag & (~ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, &new_tio);
-	ret = main_loop();
+	init_list(&lst);
+	ret = main_loop(&lst);
 	if (!ret)
 		printf("exit\n");
 	tcsetattr(STDIN_FILENO, TCSANOW, &old_tio);
+	environ = lst.tmp_envp;
+	free_split(lst.new_envp);
 	return (ret);
 }
