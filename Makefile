@@ -6,13 +6,14 @@
 #    By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2022/12/12 21:18:07 by nnakarac         ###   ########.fr        #
+#    Updated: 2022/12/17 10:38:04 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NORM = norminette -R CheckForbiddenSourceHeaderDefine
 
 UNAME = $(shell uname -s)
+ARCH = $(shell arch)
 ifeq ($(UNAME), Linux)
 	MEME = aplay easter_egg/meme2.mp3 &
 	ANYA = aplay easter_egg/anya.mp3 &
@@ -43,8 +44,14 @@ NAMEP = pipex
 NAMET = testshell
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -g
-LDFLAGS	= -L/opt/homebrew/opt/readline/lib
-CPPFLAGS	= -I/opt/homebrew/opt/readline/include
+
+ifeq ($(ARCH), arm64)
+	LDFLAGS	= -L${HOMEBREW_PREFIX}/opt/readline/lib
+	CPPFLAGS	= -I${HOMEBREW_PREFIX}/opt/readline/include
+else
+	LDFLAGS	= -L/usr/local/opt/readline/lib
+	CPPFLAGS	= -I/usr/local/opt/readline/include
+endif
 
 RM		= /bin/rm -rf
 
@@ -68,6 +75,7 @@ SRCS_P	= pipex.c \
 
 SRCS_T	= test_sh.c \
 		test_util1.c \
+		test_util2.c \
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -89,11 +97,11 @@ $(NAMEP): $(addprefix $(OBJ_DIR),$(OBJP))
 
 $(NAMET): $(addprefix $(OBJ_DIR),$(OBJT))
 	@make -C $(LIB_DIR) --silent
-	@$(CC) $(CFLAGS) -lreadline LDFLAGS CPPFLAGS $(addprefix $(OBJ_DIR),$(OBJT)) $(LIBS) -o $(NAMET)
+	@$(CC) $(CFLAGS) -lreadline $(LDFLAGS) $(CPPFLAGS) $(addprefix $(OBJ_DIR),$(OBJT)) $(LIBS) -o $(NAMET)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
-	@$(CC) -Ilibft $(CFLAGS) -c $< $(INCS) -o $@
+	@$(CC) -Ilibft $(CFLAGS) $(CPPFLAGS) -c $< $(INCS) -o $@
 
 clean:
 	@make -C $(LIB_DIR) clean --silent

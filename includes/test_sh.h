@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   testsh.h                                           :+:      :+:    :+:   */
+/*   test_sh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:17:08 by nnakarac          #+#    #+#             */
-/*   Updated: 2022/12/12 20:39:27 by nnakarac         ###   ########.fr       */
+/*   Updated: 2022/12/17 10:14:01 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/ucontext.h>
+# include <sys/stat.h>
 # include <signal.h>
 # include "color.h"
 # include "libft.h"
@@ -108,15 +109,18 @@ typedef struct s_main_meta
 	char	*line;
 	char	*subline;
 	char	*input;
+	char	*tinput;
 	char	*pmt;
+	t_cmd	cmd;
 }	t_main_meta;
 
 void	ft_dealloc_ptr(void **ptr);
 char	*ft_read_line(char **ptr, char *pmt);
+void	ft_multiline_cmd(t_main_meta *meta);
 
 int		fork_p(void);
 void	panic(char *err);
-void	runcmd(t_cmd *cmd);
+void	runcmd(t_cmd *cmd, char **envp);
 int		getcmd(char	*buf);
 
 t_cmd	*execcmd(void);
@@ -134,7 +138,19 @@ int		ft_gettoken(char **ps, char *es, char **q, char **eq);
 int		ft_peek(char **ps, char *es, char *toks);
 
 t_cmd	*parsecmd(char *s);
-t_cmd	*parseredirs(t_cmd *cmd, char **ps, char **es);
+t_cmd	*parseredirs(t_cmd *cmd, char **ps, char *es);
 t_cmd	*parseblock(char **ps, char *es);
+
+void	sigint_handler(t_main_meta *meta);
+void	sig_handler(int signo, siginfo_t *info, void *other);
+void	sa_initialize(void);
+
+int		is_comment_line(char *line);
+int		is_heredoc(char **line, char **input);
+void	exit_eof(t_main_meta *meta);
+
+void	meta_init(t_main_meta *meta);
+void	meta_dealloc_input(t_main_meta *meta);
+
 
 #endif
