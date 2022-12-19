@@ -59,3 +59,4 @@ infile
 fd_tmp
 
 *.pdf
+.vscode/
