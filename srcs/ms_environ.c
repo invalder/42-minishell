@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 01:28:26 by sthitiku          #+#    #+#             */
-/*   Updated: 2022/12/19 23:24:53 by sthitiku         ###   ########.fr       */
+/*   Updated: 2022/12/20 01:27:36 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ char	**dup_environ(char **environ)
 	while (environ[i])
 	{
 		new[i] = ft_strdup(environ[i]);
-		// printf("%s\n", new[i]);
 		i++;
 	}
 	new[i] = NULL;
