@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 01:28:26 by sthitiku          #+#    #+#             */
-/*   Updated: 2022/12/17 23:05:02 by sthitiku         ###   ########.fr       */
+/*   Updated: 2022/12/19 23:24:53 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char	**dup_environ(char **environ)
 	while (environ[i])
 	{
 		new[i] = ft_strdup(environ[i]);
+		// printf("%s\n", new[i]);
 		i++;
 	}
 	new[i] = NULL;
@@ -77,9 +78,9 @@ void	init_list(t_cmd *lst)
 	lst->new_envp = dup_environ(environ);
 	environ = lst->new_envp;
 	lst->cmd = NULL;
-	printf("%s\n", getenv("LOGNAME"));
-	unset_env("LOGNAME");
-	printf("%s\n", getenv("LOGNAME"));
-	export_env("LOGNAME=hello");
-	printf("%s\n", getenv("LOGNAME"));
+	// printf("%s\n", getenv("LOGNAME"));
+	// unset_env("LOGNAME");
+	// printf("%s\n", getenv("LOGNAME"));
+	// export_env("LOGNAME=hello");
+	// printf("%s\n", getenv("LOGNAME"));
 }

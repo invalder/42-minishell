@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2022/12/17 22:23:30 by sthitiku         ###   ########.fr       */
+/*   Updated: 2022/12/20 01:08:32 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,7 @@ char	***create_cmd(char **cmd, t_cmd *lst);
 void	free_3star(char ***cmd);
 
 void	 init_list(t_cmd *lst);
+
+void	parse_cmd(char ***cmd);
 
 #endif

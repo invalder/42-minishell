@@ -101,17 +101,18 @@ int	main_loop(t_cmd *lst)
 			return (0);
 		cmd = cmd_split(line);
 		lst->cmd = create_cmd(cmd, lst);
-		print_3star(lst->cmd);
+		parse_cmd(lst->cmd);
+		// print_3star(lst->cmd);
 		free_main_loop(line, cmd, lst->cmd);
 	}
 }
 
 int main(void)
 {
-	int		ret;
+	int				ret;
 	struct termios	old_tio;
 	struct termios	new_tio;
-	t_cmd	lst;
+	t_cmd			lst;
 
 	tcgetattr(STDIN_FILENO, &old_tio);
 	new_tio = old_tio;
