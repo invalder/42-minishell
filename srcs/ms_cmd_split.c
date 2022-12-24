@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:09:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2022/12/17 22:23:22 by sthitiku         ###   ########.fr       */
+/*   Updated: 2022/12/24 16:50:54 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,23 @@ int	count_block(char **cmd)
 	return (count);
 }
 
-static char	**create_blk(char **cmd, int begin, int *end)
+static char	**create_blk(char **cmd, int begin, int *end, int index)
 {
 	int		i;
 	int		blk;
 	char	**new_blk;
 
 	blk = count_cmd(cmd, end);
+	if (index == 0)
+		blk++;
 	new_blk = malloc(sizeof(char *) * (blk + 1));
 	i = 0;
 	while (i < blk)
+	{
+		if (index == 0 && i == 0)
+			new_blk[i++] = ft_strdup("(null)");
 		new_blk[i++] = ft_strdup(cmd[begin++]);
+	}
 	new_blk[i] = NULL;
 	return (new_blk);
 }
@@ -91,7 +97,8 @@ char	***create_cmd(char **cmd, t_cmd *lst)
 	while (i < lst->cmd_len)
 	{
 		begin = end;
-		block[i++] = create_blk(cmd, begin, &end);
+		block[i] = create_blk(cmd, begin, &end, i);
+		i++;
 	}
 	block[i] = NULL;
 	return (block);
