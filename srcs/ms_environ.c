@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 01:28:26 by sthitiku          #+#    #+#             */
-/*   Updated: 2022/12/20 01:27:36 by sthitiku         ###   ########.fr       */
+/*   Updated: 2022/12/24 23:05:09 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,19 @@ char	**dup_environ(char **environ)
 	}
 	new[i] = NULL;
 	return (new);
+}
+
+void	print_env(void)
+{
+	int	i;
+
+	i = 0;
+	while (environ[i])
+	{
+		ft_putstr_fd(environ[i], 1);
+		ft_putstr_fd("\n", 1);
+		i++;
+	}
 }
 
 void	init_list(t_cmd *lst)
