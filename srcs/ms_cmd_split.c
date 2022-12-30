@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:09:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2022/12/24 16:50:54 by sthitiku         ###   ########.fr       */
+/*   Updated: 2022/12/30 23:34:31 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,14 @@ int	count_block(char **cmd)
 		return (0);
 	i = 0;
 	count = 1;
+	if (!ft_isalnum(cmd[0][0]))
+		count--;
 	while (cmd[i])
 	{
 		j = 0;
 		if (cmd[i][j] == '|' || cmd[i][j] == '<' || cmd[i][j] == '>'
 			|| cmd[i][j] == '&')
-		{
-			if (cmd[i][j + 1] == cmd[i][j])
-				j++;
 			count++;
-		}
 		i++;
 	}
 	return (count);
