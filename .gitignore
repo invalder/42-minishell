@@ -57,3 +57,5 @@ pipex
 outfile
 infile
 fd_tmp
+
+srcs/temp/*

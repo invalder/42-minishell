@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 23:05:30 by nnakarac          #+#    #+#             */
-/*   Updated: 2022/10/30 19:21:29 by nnakarac         ###   ########.fr       */
+/*   Updated: 2022/12/29 21:42:41 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_meta
 	int	*pipe_fd;
 	int	fd_tmp;
 	int	cnt;
+	int	p[2];
 }	t_meta;
 
 void	exit_error(void);

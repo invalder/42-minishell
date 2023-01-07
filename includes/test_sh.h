@@ -6,12 +6,13 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:17:08 by nnakarac          #+#    #+#             */
-/*   Updated: 2022/12/17 10:14:01 by nnakarac         ###   ########.fr       */
+/*   Updated: 2022/12/30 15:09:29 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TESTSH_H
 # define TESTSH_H
+# include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -39,6 +40,7 @@
 # define HPROMPT "heredoc>"
 
 # define WHTSP " \t\r\n\v"
+# define DLM "<|>&; \t\r\n\v"
 # define SYMBOLS "<|>&;()"
 
 # define EXEC 1
@@ -46,6 +48,8 @@
 # define PIPE 3
 # define LIST 4
 # define BACK 5
+
+# define TOKENBUF 256
 
 typedef struct s_cmd
 {
@@ -111,35 +115,42 @@ typedef struct s_main_meta
 	char	*input;
 	char	*tinput;
 	char	*pmt;
-	t_cmd	cmd;
 }	t_main_meta;
 
+// int		fork_p(void);
+// void	panic(char *err);
+// void	runcmd(t_cmd *cmd, char **envp);
+// int		getcmd(char	*buf);
+
+// t_cmd	*execcmd(void);
+// t_cmd	*redircmd(t_cmd *subcmd, char *file, char *efile, int mode, int fd);
+// t_cmd	*pipecmd(t_cmd *left, t_cmd *right);
+// t_cmd	*listcmd(t_cmd *left, t_cmd *right);
+// t_cmd	*backcmd(t_cmd *subcmd);
+
+// t_cmd	*parseline(char **ps, char *es);
+// t_cmd	*parsepipe(char **ps, char *es);
+// t_cmd	*parseexec(char **ps, char *es);
+// t_cmd	*nullterminate(t_cmd *cmd);
+
+// int		ft_gettoken(char **ps, char *es, char **q, char **eq);
+// int		ft_peek(char **ps, char *es, char *toks);
+
+// t_cmd	*parsecmd(char *s);
+// t_cmd	*parseredirs(t_cmd *cmd, char **ps, char *es);
+// t_cmd	*parseblock(char **ps, char *es);
+
+void	*ft_realloc(void *ptr, size_t size);
+void	**ft_realloc_d(void **ptr, size_t size);
+char	**ft_realloc_tokens(char **ptr, size_t size);
+
+int		exit_err(char *msg, int err_code);
+
 void	ft_dealloc_ptr(void **ptr);
+void	ft_dealloc_dptr(void ***ptr);
+void	ft_dealloc_tptr(void ****ptr);
 char	*ft_read_line(char **ptr, char *pmt);
 void	ft_multiline_cmd(t_main_meta *meta);
-
-int		fork_p(void);
-void	panic(char *err);
-void	runcmd(t_cmd *cmd, char **envp);
-int		getcmd(char	*buf);
-
-t_cmd	*execcmd(void);
-t_cmd	*redircmd(t_cmd *subcmd, char *file, char *efile, int mode, int fd);
-t_cmd	*pipecmd(t_cmd *left, t_cmd *right);
-t_cmd	*listcmd(t_cmd *left, t_cmd *right);
-t_cmd	*backcmd(t_cmd *subcmd);
-
-t_cmd	*parseline(char **ps, char *es);
-t_cmd	*parsepipe(char **ps, char *es);
-t_cmd	*parseexec(char **ps, char *es);
-t_cmd	*nullterminate(t_cmd *cmd);
-
-int		ft_gettoken(char **ps, char *es, char **q, char **eq);
-int		ft_peek(char **ps, char *es, char *toks);
-
-t_cmd	*parsecmd(char *s);
-t_cmd	*parseredirs(t_cmd *cmd, char **ps, char *es);
-t_cmd	*parseblock(char **ps, char *es);
 
 void	sigint_handler(t_main_meta *meta);
 void	sig_handler(int signo, siginfo_t *info, void *other);
@@ -151,6 +162,8 @@ void	exit_eof(t_main_meta *meta);
 
 void	meta_init(t_main_meta *meta);
 void	meta_dealloc_input(t_main_meta *meta);
+
+int		cmd_loop(t_main_meta *meta, char **envp);
 
 
 #endif

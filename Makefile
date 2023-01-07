@@ -6,7 +6,7 @@
 #    By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2022/12/17 10:38:04 by nnakarac         ###   ########.fr        #
+#    Updated: 2023/01/07 15:07:17 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,8 @@ SPONSOR3 = ./easter_egg/sponsor.sh
 NAME = minishell
 NAMEP = pipex
 NAMET = testshell
+NAMEM = mini2
+
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -g
 
@@ -76,12 +78,30 @@ SRCS_P	= pipex.c \
 SRCS_T	= test_sh.c \
 		test_util1.c \
 		test_util2.c \
+		test_dealloc.c \
+		test_err.c \
+		test_meta.c \
+		test_signal.c \
+		ft_realloc.c \
+
+SRCS_M	= mini2_sh.c \
+		mini2_signal.c \
+		mini2_util1.c \
+		mini2_util2.c \
+		mini2_dealloc.c \
+		mini2_err.c \
+		mini2_meta.c \
+		mini2_terminal.c \
+		mini2_tokenizer.c \
+		mini2_realloc.c \
 
 OBJS	= $(SRCS:.c=.o)
 
 OBJP	= $(SRCS_P:.c=.o)
 
 OBJT	= $(SRCS_T:.c=.o)
+
+OBJM	= $(SRCS_M:.c=.o)
 
 .SILENT: credits anya norm
 
@@ -99,6 +119,10 @@ $(NAMET): $(addprefix $(OBJ_DIR),$(OBJT))
 	@make -C $(LIB_DIR) --silent
 	@$(CC) $(CFLAGS) -lreadline $(LDFLAGS) $(CPPFLAGS) $(addprefix $(OBJ_DIR),$(OBJT)) $(LIBS) -o $(NAMET)
 
+$(NAMEM): $(addprefix $(OBJ_DIR),$(OBJM))
+	@make -C $(LIB_DIR) --silent
+	@$(CC) $(CFLAGS) -lreadline $(LDFLAGS) $(CPPFLAGS) $(addprefix $(OBJ_DIR),$(OBJM)) $(LIBS) -o $(NAMEM)
+
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) -Ilibft $(CFLAGS) $(CPPFLAGS) -c $< $(INCS) -o $@
@@ -109,9 +133,11 @@ clean:
 	@$(RM) $(NAME)
 	@$(RM) $(NAMEP)
 	@$(RM) $(NAMET)
+	@$(RM) $(NAMEM)
 	@$(RM) "$(NAME).dSYM"
 	@$(RM) "$(NAMEP).dSYM"
 	@$(RM) "$(NAMET).dSYM"
+	@$(RM) "$(NAMEM).dSYM"
 
 fclean: clean
 	@make -C $(LIB_DIR) fclean --silent
@@ -147,4 +173,4 @@ sponsor:
 	@sleep 6
 	@$(SPONSOR7)
 
-.PHONY: fclean all clean re minishell norm credits anya sponsor
+.PHONY: fclean all clean re minishell norm credits anya sponsor mini2
