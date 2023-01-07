@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:09:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/08 01:43:23 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/08 01:50:47 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,6 @@ char	***create_cmd(char **cmd, t_cmd *lst)
 	end = 0;
 	i = 0;
 	lst->cmd_len = count_block(cmd);
-	printf("%d\n", lst->cmd_len);
 	block = (char ***)malloc(sizeof(char **) * (lst->cmd_len + 1));
 	while (i < lst->cmd_len)
 	{

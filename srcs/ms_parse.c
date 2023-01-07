@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 01:04:35 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/08 01:37:52 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/08 01:50:26 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ static char	*parse_env_get_env(char *str, int str_len, char first, char last)
 
 static char	*parse_env(char *str)
 {
-	printf("str = %s\n", str);
 	int		str_len;
 	char	*new;
 

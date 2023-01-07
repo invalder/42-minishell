@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 01:28:26 by sthitiku          #+#    #+#             */
-/*   Updated: 2022/12/24 23:13:40 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/08 01:51:05 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	export_env(char *exp)
 	i = 0;
 	arr = ft_split(exp, '=');
 	tmp = environ;
-	printf("split = %s\n", arr[1]);
 	while (environ[i])
 		i++;
 	new = malloc(sizeof(char *) * i + 2);
