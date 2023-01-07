@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 01:04:35 by sthitiku          #+#    #+#             */
-/*   Updated: 2022/12/30 23:18:07 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/07 17:19:24 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	parse_cmd(char ***cmd)
 	i = 0;
 	while (cmd[i])
 	{
+		printf("hello\n");
 		j = 0;
 		while (cmd[i][j])
 		{
@@ -69,7 +70,6 @@ void	parse_cmd(char ***cmd)
 				cmd[i][j] = cut_quote(cmd[i][j]);
 			if (cmd[i][j][0] == '\'' && ft_strchr(cmd[i][j], '$'))
 				cmd[i][j] = parse_env(cmd[i][j]);
-			// printf("%s\n", cmd[i][j]);
 			j++;
 		}
 		i++;

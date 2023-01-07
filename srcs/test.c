@@ -102,6 +102,14 @@ int	main_loop(t_cmd *lst)
 		if (!ft_strncmp(line, "env\0", 4))
 			print_env();
 		cmd = cmd_split(line);
+
+		int j = 0;
+		while (cmd[j])
+		{
+			printf("cmd[%d] = %s\n", j, cmd[j]);
+			j++;
+		}
+
 		lst->cmd = create_cmd(cmd, lst);
 		parse_cmd(lst->cmd);
 		print_3star(lst->cmd);
