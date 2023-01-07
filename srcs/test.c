@@ -78,7 +78,12 @@ void	sig_handler(int signo, siginfo_t *s, void *old)
 	(void) old;
 	(void) s;
 	if (signo == SIGINT)
-		int_handler();
+	{
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();	
+	}
 }
 
 int	main_loop(t_cmd *lst)
@@ -89,30 +94,25 @@ int	main_loop(t_cmd *lst)
 	struct sigaction	s_quit;
 
 	s_int.sa_sigaction = sig_handler;
+	s_quit.sa_handler = SIG_IGN;
 	s_int.sa_flags = SA_SIGINFO;
 	s_quit.sa_flags = SA_RESTART;
 	sigemptyset(&s_int.sa_mask);
 	sigemptyset(&s_quit.sa_mask);
 	sigaction(SIGINT, &s_int, NULL);
+	sigaction(SIGQUIT, &s_quit, NULL);
 	while (1)
 	{
 		line = readline("minimini> ");
+		add_history(line);
 		if (line == NULL || !ft_strncmp(line, "exit\0", 5))
 			return (0);
 		if (!ft_strncmp(line, "env\0", 4))
 			print_env();
 		cmd = cmd_split(line);
-
-		int j = 0;
-		while (cmd[j])
-		{
-			printf("cmd[%d] = %s\n", j, cmd[j]);
-			j++;
-		}
-
 		lst->cmd = create_cmd(cmd, lst);
 		parse_cmd(lst->cmd);
-		print_3star(lst->cmd);
+		// print_3star(lst->cmd);
 		free_main_loop(line, cmd, lst->cmd);
 	}
 }
@@ -135,5 +135,6 @@ int main(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &old_tio);
 	environ = lst.tmp_envp;
 	free_split(lst.new_envp);
+	rl_clear_history();
 	return (ret);
 }

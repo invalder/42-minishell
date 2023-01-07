@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 01:00:44 by sthitiku          #+#    #+#             */
-/*   Updated: 2022/12/13 16:00:01 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/07 18:32:34 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,16 @@ void	skip_token(char *line, int *i, int mode)
 	{
 		(*i)++;
 		while (line[*i] && line[*i] != tmp)
+		{
 			(*i)++;
+			// printf("line[%d] = %c\n", *i, line[*i]);
+			// printf("line[%d + 1] = %c\n", *i, line[*i + 1]);
+			// printf("line[%d + 2] = %c\n", *i, line[*i + 2]);
+			if (line[*i] == tmp && (line[*i + 1] == '\'' || line[*i + 1] == '\"'))
+				(*i) += 2;
+			else if (line[*i] == tmp && line[*i + 1] != ' ')
+				break ;
+		}
 		if (line[*i])
 			(*i)++;
 	}

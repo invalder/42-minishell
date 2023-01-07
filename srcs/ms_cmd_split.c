@@ -6,33 +6,78 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:09:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/07 17:18:36 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/08 01:43:23 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ms_input.h"
+
+// int	count_cmd(char **cmd, int *i)
+// {
+// 	int		count;
+
+// 	count = 0;
+// 	if (cmd[*i][0] == '|' || cmd[*i][0] == '<' || cmd[*i][0] == '>'
+// 		|| cmd[*i][0] == '&')
+// 	{
+// 		count++;
+// 		(*i)++;
+// 	}
+// 	while (cmd[*i])
+// 	{
+// 		if (cmd[*i][0] == '|' || cmd[*i][0] == '<' || cmd[*i][0] == '>'
+// 			|| cmd[*i][0] == '&')
+// 			break ;
+// 		count++;
+// 		(*i)++;
+// 	}
+// 	return (count);
+// }
 
 int	count_cmd(char **cmd, int *i)
 {
 	int		count;
 
 	count = 0;
-	if (cmd[*i][0] == '|' || cmd[*i][0] == '<' || cmd[*i][0] == '>'
-		|| cmd[*i][0] == '&')
+	if (cmd[*i][0] == '|' || cmd[*i][0] == '&')
 	{
 		count++;
 		(*i)++;
 	}
 	while (cmd[*i])
 	{
-		if (cmd[*i][0] == '|' || cmd[*i][0] == '<' || cmd[*i][0] == '>'
-			|| cmd[*i][0] == '&')
+		if (cmd[*i][0] == '|'|| cmd[*i][0] == '&')
 			break ;
 		count++;
 		(*i)++;
 	}
 	return (count);
 }
+
+// int	count_block(char **cmd)
+// {
+// 	int		i;
+// 	int		j;
+// 	int		count;
+
+// 	if (!cmd[0])
+// 		return (0);
+// 	i = 0;
+// 	count = 1;
+// 	if (!ft_isalnum(cmd[0][0]) && cmd[0][0] != '\'' && cmd[0][0] != '\"' && \
+// 		cmd[0][0] != '$' && cmd[0][0] != '|' && cmd[0][0] != '<' && \
+// 		cmd[0][0] != '>' && cmd[0][0] != '&')
+// 		count--;
+// 	while (cmd[i])
+// 	{
+// 		j = 0;
+// 		if (cmd[i][j] == '|' || cmd[i][j] == '<' || cmd[i][j] == '>'
+// 			|| cmd[i][j] == '&')
+// 			count++;
+// 		i++;
+// 	}
+// 	return (count);
+// }
 
 int	count_block(char **cmd)
 {
@@ -44,13 +89,14 @@ int	count_block(char **cmd)
 		return (0);
 	i = 0;
 	count = 1;
-	if (!ft_isalnum(cmd[0][0]) && cmd[0][0] != '\'' && cmd[0][0] != '\"')
-		count--;
+	if (!ft_isalnum(cmd[0][0]) && cmd[0][0] != '\'' && cmd[0][0] != '\"' && \
+		cmd[0][0] != '$' && cmd[0][0] != '|' && cmd[0][0] != '&' && \
+		cmd[0][0] != '>' && cmd[0][0] != '<')
+			count--;
 	while (cmd[i])
 	{
 		j = 0;
-		if (cmd[i][j] == '|' || cmd[i][j] == '<' || cmd[i][j] == '>'
-			|| cmd[i][j] == '&')
+		if (cmd[i][j] == '|' || cmd[i][j] == '&')
 			count++;
 		i++;
 	}

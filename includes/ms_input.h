@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/07 16:13:08 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/08 01:36:01 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@ typedef struct s_cmd
 	char	**new_envp;
 	int		cmd_len;
 }	t_cmd;
+
+typedef struct s_parse
+{
+	int		start;
+	int		end;
+	char	*sub;
+	char	*env;
+}	t_parse;
+
 
 // ms_split.c -> split from char* to char**
 char	**cmd_split(char *line);
