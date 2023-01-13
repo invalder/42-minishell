@@ -6,7 +6,7 @@
 #    By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2023/01/07 15:07:17 by nnakarac         ###   ########.fr        #
+#    Updated: 2023/01/08 16:03:58 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ NAME = minishell
 NAMEP = pipex
 NAMET = testshell
 NAMEM = mini2
+NAMEMM = minimini
 
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -g
@@ -95,6 +96,16 @@ SRCS_M	= mini2_sh.c \
 		mini2_tokenizer.c \
 		mini2_realloc.c \
 
+SRCS_MM = ms_cmd_split.c \
+		ms_environ.c \
+		ms_envp.c \
+		ms_exec.c \
+		ms_execve.c \
+		ms_implement.c \
+		ms_parse.c \
+		ms_split.c \
+		test.c \
+
 OBJS	= $(SRCS:.c=.o)
 
 OBJP	= $(SRCS_P:.c=.o)
@@ -103,9 +114,11 @@ OBJT	= $(SRCS_T:.c=.o)
 
 OBJM	= $(SRCS_M:.c=.o)
 
+OBJMM	= $(SRCS_MM:.c=.o)
+
 .SILENT: credits anya norm
 
-all: $(NAME)
+all: $(NAMEMM)
 
 $(NAME): $(addprefix $(OBJ_DIR),$(OBJS))
 	@make -C $(LIB_DIR) --silent
@@ -123,6 +136,10 @@ $(NAMEM): $(addprefix $(OBJ_DIR),$(OBJM))
 	@make -C $(LIB_DIR) --silent
 	@$(CC) $(CFLAGS) -lreadline $(LDFLAGS) $(CPPFLAGS) $(addprefix $(OBJ_DIR),$(OBJM)) $(LIBS) -o $(NAMEM)
 
+$(NAMEMM): $(addprefix $(OBJ_DIR),$(OBJMM))
+	@make -C $(LIB_DIR) --silent
+	@$(CC) $(CFLAGS) -lreadline $(LDFLAGS) $(CPPFLAGS) $(addprefix $(OBJ_DIR),$(OBJMM)) $(LIBS) -o $(NAMEMM)
+
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) -Ilibft $(CFLAGS) $(CPPFLAGS) -c $< $(INCS) -o $@
@@ -134,10 +151,12 @@ clean:
 	@$(RM) $(NAMEP)
 	@$(RM) $(NAMET)
 	@$(RM) $(NAMEM)
+	@$(RM) $(NAMEMM)
 	@$(RM) "$(NAME).dSYM"
 	@$(RM) "$(NAMEP).dSYM"
 	@$(RM) "$(NAMET).dSYM"
 	@$(RM) "$(NAMEM).dSYM"
+	@$(RM) "$(NAMEMM).dSYM"
 
 fclean: clean
 	@make -C $(LIB_DIR) fclean --silent
