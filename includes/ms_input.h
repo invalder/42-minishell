@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/08 01:36:01 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/14 23:21:34 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/param.h>
+# include <dirent.h>
 # include <signal.h>
 
 extern char **environ;
@@ -54,5 +56,9 @@ void	 init_list(t_cmd *lst);
 
 void	parse_cmd(char ***cmd);
 int		print_env(void);
+
+// ms_directory.c
+char	*get_pwd();
+void	ms_cd(char *path_str);
 
 #endif
