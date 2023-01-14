@@ -6,49 +6,11 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 01:00:44 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/07 18:32:34 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/15 00:55:43 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ms_input.h"
-
-void	skip_token(char *line, int *i, int mode)
-{
-	char	tmp;
-
-	tmp = line[*i];
-	if (mode == 1)
-	{
-		if (line[*i + 1] == tmp)
-			*i += 2;
-		else
-			(*i)++;
-	}
-	else if (mode == 2)
-	{
-		(*i)++;
-		while (line[*i] && line[*i] != tmp)
-		{
-			(*i)++;
-			// printf("line[%d] = %c\n", *i, line[*i]);
-			// printf("line[%d + 1] = %c\n", *i, line[*i + 1]);
-			// printf("line[%d + 2] = %c\n", *i, line[*i + 2]);
-			if (line[*i] == tmp && (line[*i + 1] == '\'' || line[*i + 1] == '\"'))
-				(*i) += 2;
-			else if (line[*i] == tmp && line[*i + 1] != ' ')
-				break ;
-		}
-		if (line[*i])
-			(*i)++;
-	}
-	else if (mode == 3)
-	{
-		while (line[*i] && !ft_isspace(line[*i]) && line[*i] != '|' && \
-				line[*i] != '<' && line[*i] != '>' && line[*i] != '&' && \
-				line[*i] != '\'' && line[*i] != '\"')
-			(*i)++;
-	}
-}
 
 static int	ms_count_words(char *line)
 {

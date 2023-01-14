@@ -57,9 +57,12 @@ void	print_3star(char ***cmd)
 
 void	free_main_loop(char *line, char **cmd, char ***cmd_3star)
 {
-	free(line);
-	free_split(cmd);
-	free_3star(cmd_3star);
+	if (line)
+		free(line);
+	if (cmd)
+		free_split(cmd);
+	if (cmd_3star)
+		free_3star(cmd_3star);
 	line = NULL;
 	cmd = NULL;
 	cmd_3star = NULL;
@@ -110,11 +113,24 @@ int	main_loop(t_cmd *lst)
 		if (!ft_strncmp(line, "env\0", 4))
 			print_env();
 		cmd = cmd_split(line);
-		lst->cmd = create_cmd(cmd, lst);
-		parse_cmd(lst->cmd);
+		
+		printf("cmd = %p\n", cmd);
+		if (cmd != NULL)
+		{
+			int i = 0;
+			while (cmd[i])
+			{
+				printf("cmd[%d] = %s\n", i, cmd[i]);
+				i++;
+			}
+
+			lst->cmd = create_cmd(cmd, lst);
+			parse_cmd(lst->cmd);
+		}
 		// print_3star(lst->cmd);
 		free_main_loop(line, cmd, lst->cmd);
 	}
+	return (0);
 }
 
 int main(void)
@@ -129,8 +145,6 @@ int main(void)
 	new_tio.c_lflag = new_tio.c_lflag & (~ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, &new_tio);
 	init_list(&lst);
-	// printf("before = %s\n", get_pwd());
-	// printf("after = %s\n", get_pwd());
 	ret = main_loop(&lst);
 	if (!ret)
 		printf("exit\n");

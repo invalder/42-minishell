@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/14 23:21:34 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/15 00:56:08 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ int		print_env(void);
 
 // ms_directory.c
 char	*get_pwd();
-void	ms_cd(char *path_str);
+int		ms_cd(char *path_str);
+
+// ms_token.c
+void	skip_token(char *line, int *i, int mode);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2023/01/14 23:27:56 by sthitiku         ###   ########.fr        #
+#    Updated: 2023/01/14 23:54:46 by sthitiku         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRCS	=	test.c \
 			ms_cmd_split.c \
 			ms_environ.c \
 			ms_parse.c \
+			ms_token.c \
 
 # SRCS	= minishell.c \
 
