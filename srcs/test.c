@@ -107,14 +107,17 @@ int	main_loop(t_cmd *lst)
 		if (line && ft_strlen(line))
 			add_history(line);
 		if (line == NULL || !ft_strncmp(line, "exit\0", 5))
+		{
+			free_main_loop(line, cmd, lst->cmd);
 			return (0);
+		}
 		if (!ft_strncmp(line, "env\0", 4))
 			print_env();
 		cmd = cmd_split(line);
 		lst->cmd = create_cmd(cmd, lst);
 		parse_cmd(lst->cmd);
 		exec_main(lst);
-		// print_3star(lst->cmd);
+		print_3star(lst->cmd);
 		free_main_loop(line, cmd, lst->cmd);
 	}
 }
