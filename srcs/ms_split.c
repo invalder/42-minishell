@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 01:00:44 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/15 00:55:43 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/15 19:48:29 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,27 @@ static int	ms_count_chars(char *str)
 	return (i);
 }
 
+char	*cmd_cpy(char *curr_cmd, int char_count)
+{
+	char	*cmd;
+	int		i;
+
+	cmd = (char *)malloc(sizeof(char) * (char_count + 1));
+	i = 0;
+	while (i < char_count)
+	{
+		cmd[i] = curr_cmd[i];
+		i++;
+	}
+	cmd[i] = '\0';
+	return (cmd);
+}
+
 /**
  * Special split function to split char* into char** by tokens.
+ * 
+ * @param line: char* to be split
+ * @return: char** of split char*
  */
 char	**cmd_split(char *line)
 {
@@ -81,22 +100,11 @@ char	**cmd_split(char *line)
 		char_count = ms_count_chars(&line[j]);
 		cmd[i] = (char *)malloc(sizeof(char) * (char_count + 1));
 		ft_strlcpy(cmd[i], &line[j], char_count + 1);
+		if (!check_close_quote(cmd[i]))
+			return(free_split(cmd));
 		i++;
 		j += char_count;
 	}
 	cmd[i] = NULL;
 	return (cmd);
-}
-
-void	free_split(char **split)
-{
-	int		i;
-
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
 }

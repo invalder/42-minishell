@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/15 00:56:08 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/15 19:46:39 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,10 @@ typedef struct s_parse
 
 // ms_split.c -> split from char* to char**
 char	**cmd_split(char *line);
-void	free_split(char **split);
 void	skip_token(char *line, int *i, int mode);
 
 // ms_cmd_split.c -> split from char** to char***
 char	***create_cmd(char **cmd, t_cmd *lst);
-void	free_3star(char ***cmd);
 
 void	 init_list(t_cmd *lst);
 
@@ -63,5 +61,10 @@ int		ms_cd(char *path_str);
 
 // ms_token.c
 void	skip_token(char *line, int *i, int mode);
+int		check_close_quote(char *cmd);
+
+void	free_main_loop(char *line, char **cmd, char ***cmd_3star);
+void	*free_split(char **split);
+void	free_3star(char ***cmd);
 
 #endif

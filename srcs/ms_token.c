@@ -6,35 +6,31 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 23:44:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/15 01:02:19 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/15 19:53:01 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ms_input.h"
 
 // return 1 if quote is not closed, 0 otherwise
-int	check_quote(char **cmd)
+int check_close_quote(char *cmd)
 {
 	int		i;
-	int		j;
-	char	quote;
+	int		close;
+	char	first_quote;
 
-	i = 0;
+	close = 0;
+	first_quote = cmd[0];
+	i = 1;
+	if (first_quote != '\'' && first_quote != '\"')
+		return (-1);
 	while (cmd[i])
 	{
-		quote = cmd[i][0];
-		j = 1;
-		while (cmd[i][j])
-		{
-			if (cmd[i][j] == quote)
-				break ;
-			j++;
-		}
+		if (cmd[i] == first_quote)
+			close = 1;
 		i++;
 	}
-	if (quote != 0)
-		return (1);
-	return (0);
+	return (close);
 }
 
 static void	skip_token_2(char *line, int *i, int mode, char tmp)

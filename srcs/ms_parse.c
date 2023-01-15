@@ -6,37 +6,11 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 01:04:35 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/08 01:50:26 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/15 19:53:41 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ms_input.h"
-
-// static char	*cut_quote(char *str)
-// {
-// 	int		start;
-// 	int		end;
-// 	char	*new;
-// 	char	tmp;
-
-// 	start = 0;
-// 	end = 0;
-// 	while (str[end])
-// 	{
-// 		if (str[end] == '\'' || str[end] == '\"')
-// 		{
-// 			tmp = str[end];
-// 			start = end + 1;
-// 			while (str[++end] != tmp);
-// 			break ;
-// 		}
-// 		end++;
-// 	}
-// 	new = malloc(sizeof(char) * end - start + 1);
-// 	ft_strlcpy(new, &str[start], end - start + 1);
-// 	free(str);
-// 	return (new);
-// }
 
 static char	*cut_quote(char *str, char quote)
 {
@@ -65,48 +39,6 @@ static char	*cut_quote(char *str, char quote)
 	free(str);
 	return (new);
 }
-
-// static char	*parse_env(char *str)
-// {
-// 	int		tmp_len;
-// 	int		str_len;
-// 	int		i;
-// 	char	*new;
-// 	char	*tmp;
-
-// 	i = 0;
-// 	while (str[i] && (str[i] == '\'' || str[i] == '\"'))
-// 		i++;
-// 	printf("str = %s\n", &str[i + 1]);
-// 	printf("%d\n", i);
-// 	tmp = getenv(&str[i + 1]);
-// 	tmp_len = ft_strlen(tmp);
-// 	str_len = ft_strlen(str);
-// 	if (str[0] == '\"' && str[str_len - 1] == '\"')
-// 		new = malloc(sizeof(char) * str_len + 1);
-// 	else
-// 		new = malloc(sizeof(char) * tmp_len + 3);
-// 	if (str[0] == '\'' && str[str_len - 1] == '\'')
-// 	{
-// 		ft_strlcpy(new, "\'", 2);
-// 		printf("1 new = %s\n", new);
-// 		printf("tmp = %s\n", tmp);
-// 		ft_strlcpy(&new[1], tmp, tmp_len + 1);
-// 		printf("2 new = %s\n", new);
-// 		ft_strlcpy(&new[tmp_len + 1], "\'", 2);
-// 		printf("3 new = %s\n", new);
-// 	}
-// 	else if (str[0] == '\"' && str[str_len - 1] == '\"')
-// 	{
-// 	// 	ft_strlcpy(new, "\"", 2);
-// 		ft_strlcpy(new, str, str_len + 1);
-// 	// 	ft_strlcpy(&new[str_len + 1], "\"", 2);
-// 	}
-// 	else
-// 		ft_strlcpy(new, tmp, tmp_len + 1);
-// 	free(str);
-// 	return (new);
-// }
 
 static char	*parse_env_get_env(char *str, int str_len, char first, char last)
 {
