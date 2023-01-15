@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/08 16:18:44 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/14 15:24:36 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <errno.h>
+# include <fcntl.h>
 
 extern char **environ;
 // test_cmd = echo $HOME '"hello""world"' test &&ls -la|cat -e
@@ -42,11 +43,14 @@ typedef struct s_cmd_lst
 	int					p[2];
 	char				**infile;
 	int					*in_fd;
+	int					*is_heredoc;
 	char				**outfile;
 	int					*out_fd;
 	int					*out_mode;
+	int					*markout;
 	char				*path;
 	char				**argv;
+	int					argc;
 	char				**envp;
 	struct s_cmd_lst	*left;
 	struct s_cmd_lst	*right;
@@ -78,6 +82,8 @@ void	free_split(char **split);
 void	skip_token(char *line, int *i, int mode);
 
 // ms_cmd_split.c -> split from char** to char***
+size_t	arr2dsize(char **ptr);
+
 char	***create_cmd(char **cmd, t_cmd *lst);
 void	free_3star(char ***cmd);
 
@@ -96,8 +102,21 @@ void	**ft_realloc_d(void **ptr, size_t size);
 void	ft_tokencpy(char **dest, char **src, size_t n);
 char	**ft_realloc_tokens(char **ptr, size_t size);
 
+void	dstrcpy(char **dest, char **src, int n);
+char	**ft_realloc_dstr(char **ptr, size_t n);
+
 char	*check_envp(char **list_envp, char *cmd);
 char	**list_envp(char **envp, char *cmd);
 void	free_lst(char **lst);
+
+void	print2d(char **ptr);
+
+void	print_cmd_lst(t_cmd_lst *cmd);
+t_cmd_lst	*cmd_lst_new(t_cmd *lst, int idx);
+t_cmd_lst	*cmd_lst_last(t_cmd_lst *cmd_lst);
+t_cmd_lst	*cmd_lst_add_front(t_cmd_lst *cmd_lst, t_cmd_lst *new);
+t_cmd_lst	*cmd_lst_add_back(t_cmd_lst *cmd_lst, t_cmd_lst *new);
+
+size_t	arr2dsize(char **ptr);
 
 #endif

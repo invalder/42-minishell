@@ -6,7 +6,7 @@
 #    By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2023/01/08 16:03:58 by nnakarac         ###   ########.fr        #
+#    Updated: 2023/01/14 02:23:22 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,6 +97,7 @@ SRCS_M	= mini2_sh.c \
 		mini2_realloc.c \
 
 SRCS_MM = ms_cmd_split.c \
+		ms_realloc.c \
 		ms_environ.c \
 		ms_envp.c \
 		ms_exec.c \
