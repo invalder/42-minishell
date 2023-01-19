@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 01:04:35 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/15 19:53:41 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/20 00:28:47 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,24 +87,38 @@ static char	*parse_env(char *str)
 	return (new);
 }
 
+static void	parse_cmd_one_pair(char ***cmd, int i, int j, char first_char)
+{
+	if (first_char == '\"' || first_char == '\'')
+		cmd[i][j] = cut_quote(cmd[i][j], first_char);
+	if (first_char == '\'')
+		return ;
+	if (ft_strchr(cmd[i][j], '$') && cmd[i][j][0] != '\"')
+		cmd[i][j] = parse_env(cmd[i][j]);
+}
+
 void	parse_cmd(char ***cmd)
 {
 	int		i;
 	int		j;
-	char	tmp;
+	char	first_char;
 
 	i = 0;
 	while (cmd[i])
 	{
 		j = 0;
-		while (cmd[i][j])
+		while (cmd[i][++j])
 		{
-			tmp = cmd[i][j][0];
-			if (tmp == '\'' || tmp == '\"')
-				cmd[i][j] = cut_quote(cmd[i][j], tmp);
-			if (ft_strchr(cmd[i][j], '$'))
-				cmd[i][j] = parse_env(cmd[i][j]);
-			j++;
+			first_char = cmd[i][j][0];
+			if (cmd[i][j][1] == '\'' || cmd[i][j][1] == '\"')
+			{
+				if ((first_char == '\'' || first_char == '\"'))
+					cmd[i][j] = cut_quote(cmd[i][j], first_char);
+				if (ft_strchr(cmd[i][j], '$') && cmd[i][j][0] != '\"')
+					cmd[i][j] = parse_env(cmd[i][j]);
+			}
+			else
+				parse_cmd_one_pair(cmd, i, j, first_char);
 		}
 		i++;
 	}

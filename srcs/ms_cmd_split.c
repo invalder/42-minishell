@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:09:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/15 19:45:10 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/20 01:40:45 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,37 @@
 // 	return (count);
 // }
 
+int	is_empty_quote(char *str)
+{
+	// loop through the string
+	// if find a open quote, loop to check for the close quote
+	// if close quote is open quote + 1, return 1
+	int		i;
+	int		j;
+
+	i = 0;
+	printf("str = %s\n", str);
+	while (str[i])
+	{
+		j = i + 1;
+		if (str[i] == '\'' || str[i] == '\"')
+		{
+			while (str[j])
+			{
+				if (str[j] == str[i])
+				{
+					if (i == j - 1)
+						return (1);
+					break ;
+				}
+				j++;
+			}
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	count_cmd(char **cmd, int *i)
 {
 	int		count;
@@ -49,6 +80,9 @@ int	count_cmd(char **cmd, int *i)
 		if (cmd[*i][0] == '|'|| cmd[*i][0] == '&')
 			break ;
 		count++;
+		// trying to check if there is an empty quote
+		// if (cmd[*i][0]== '\' )
+		// 	count--;
 		(*i)++;
 	}
 	return (count);
@@ -115,17 +149,30 @@ static char	**create_blk(char **cmd, int begin, int *end, int index)
 	char	**new_blk;
 
 	blk = count_cmd(cmd, end);
+	printf("blk = %d\n", blk);
 	if (index == 0 && (cmd[index][0] != '>' && cmd[index][0] != '<'))
 		blk++;
 	new_blk = malloc(sizeof(char *) * (blk + 1));
 	i = 0;
 	while (i < blk)
 	{
-		if (index == 0 && i == 0 && (cmd[index][0] != '>' && cmd[index][0] != '<'))
-			new_blk[i++] = ft_strdup("(null)");
-		new_blk[i++] = ft_strdup(cmd[begin++]);
+		if (index == 0 && i == 0 && (cmd[index][0] != '>' && \
+			cmd[index][0] != '<'))
+				new_blk[i++] = ft_strdup("(null)");
+		// if (!ft_strncmp(cmd[begin], "\'\'\0", 3) || \
+		// 	!ft_strncmp(cmd[begin], "\"\"\0", 3))
+		// 	begin++;
+		else
+			new_blk[i++] = ft_strdup(cmd[begin++]);
 	}
 	new_blk[i] = NULL;
+	
+	i = 0;
+	while (new_blk[i])
+	{
+		printf("new_blk[%d] = %s\n", i, new_blk[i]);
+		i++;
+	}
 	return (new_blk);
 }
 
