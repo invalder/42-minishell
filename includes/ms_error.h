@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 15:53:04 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/15 16:00:43 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/21 12:19:21 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,15 @@
 # define MSG_ENOMEM	"minishell: malloc: out of memory\n"
 # define MSG_EPIPE	"minishell: write error: Broken pipe\n"
 # define MSG_EFORK	"minishell: fork: cannot create child process\n"
+# define MSG_EEXEC	": command not found\n"
+# define MSG_ENOENT	"no such file or directory: "
 
 void	err_message(int err_code, int is_exit);
 void	err_enomem(void);
 void	err_epipe(void);
 void	err_efork(void);
+void	err_eexec(char *msg, int is_exit);
+void	err_eenoent(char *msg, int is_exit);
+void	err_general(char *msg, int is_exit);
 
 #endif

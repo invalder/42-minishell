@@ -57,9 +57,12 @@ void	print_3star(char ***cmd)
 
 void	free_main_loop(char *line, char **cmd, char ***cmd_3star)
 {
-	free(line);
-	free_split(cmd);
-	free_3star(cmd_3star);
+	if (line)
+		free(line);
+	if (cmd)
+		free_split(cmd);
+	if (cmd_3star)
+		free_3star(cmd_3star);
 	line = NULL;
 	cmd = NULL;
 	cmd_3star = NULL;
@@ -103,12 +106,17 @@ int	main_loop(t_cmd *lst)
 	sigaction(SIGQUIT, &s_quit, NULL);
 	while (1)
 	{
+		line = NULL;
+		cmd = NULL;
+		lst->cmd = NULL;
 		line = readline("minimini> ");
+		// dprintf(2,"line: %s\n", line);
 		if (line && ft_strlen(line))
 			add_history(line);
 		if (line == NULL || !ft_strncmp(line, "exit\0", 5))
 		{
 			free_main_loop(line, cmd, lst->cmd);
+			// printf("return\n");
 			return (0);
 		}
 		if (!ft_strncmp(line, "env\0", 4))
@@ -117,7 +125,7 @@ int	main_loop(t_cmd *lst)
 		lst->cmd = create_cmd(cmd, lst);
 		parse_cmd(lst->cmd);
 		exec_main(lst);
-		print_3star(lst->cmd);
+		// print_3star(lst->cmd);
 		free_main_loop(line, cmd, lst->cmd);
 	}
 }
@@ -135,8 +143,8 @@ int main(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &new_tio);
 	init_list(&lst);
 	ret = main_loop(&lst);
-	if (!ret)
-		printf("exit\n");
+	// if (!ret)
+	// 	printf("exit\n");
 	tcsetattr(STDIN_FILENO, TCSANOW, &old_tio);
 	environ = lst.tmp_envp;
 	free_split(lst.new_envp);

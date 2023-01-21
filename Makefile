@@ -6,7 +6,7 @@
 #    By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2023/01/15 15:48:13 by nnakarac         ###   ########.fr        #
+#    Updated: 2023/01/21 22:51:06 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,6 +109,7 @@ SRCS_MM = ms_cmd_split.c \
 		ms_split.c \
 		ms_debug.c \
 		ms_err.c \
+		ms_err2.c \
 		test.c \
 
 OBJS	= $(SRCS:.c=.o)

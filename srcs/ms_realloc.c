@@ -6,59 +6,11 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:07:03 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/14 09:32:13 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/21 23:14:17 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_input.h"
-
-void	*ft_realloc(void *ptr, size_t size)
-{
-	void	*nptr;
-	size_t	old_size;
-
-	nptr = NULL;
-	old_size = sizeof(ptr);
-	if (!ptr)
-		return (malloc(size));
-	if (!size)
-	{
-		free(ptr);
-		return (NULL);
-	}
-	nptr = malloc(size);
-	if (!nptr)
-		return (NULL);
-	if (old_size < size)
-		size = old_size;
-	ft_memcpy(nptr, ptr, size);
-	return (nptr);
-}
-
-void	**ft_realloc_d(void **ptr, size_t size)
-{
-	void	**nptr;
-	size_t	old_size;
-
-	nptr = NULL;
-	old_size = sizeof(ptr);
-	if (!ptr)
-	{
-		return (malloc(size));
-	}
-	if (!size)
-	{
-		free(ptr);
-		return (NULL);
-	}
-	nptr = malloc(sizeof(void **) * size);
-	if (!nptr)
-		return (NULL);
-	if (old_size < size)
-		size = old_size;
-	ft_memcpy(nptr, ptr, size);
-	return (nptr);
-}
 
 void	ft_tokencpy(char **dest, char **src, size_t n)
 {
@@ -72,33 +24,6 @@ void	ft_tokencpy(char **dest, char **src, size_t n)
 	if (n)
 		while (n-- > 0)
 			*(ptr_d++) = *(ptr_s++);
-}
-
-char	**ft_realloc_tokens(char **ptr, size_t size)
-{
-	char	**nptr;
-	size_t	old_size;
-
-	nptr = NULL;
-	old_size = arr2dsize(ptr);
-	if (!ptr)
-	{
-		return (malloc(size));
-	}
-	if (!size)
-	{
-		free(ptr);
-		return (NULL);
-	}
-	nptr = malloc(sizeof(char **) * size);
-	if (!nptr)
-		return (NULL);
-	if (old_size < size)
-		size = old_size;
-	ft_tokencpy(nptr, ptr, size);
-	if (ptr)
-		free(ptr);
-	return (nptr);
 }
 
 void	dstrcpy(char **dest, char **src, int n)

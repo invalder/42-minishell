@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 01:00:44 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/13 20:45:35 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/19 22:04:59 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,10 +128,14 @@ void	free_split(char **split)
 	int		i;
 
 	i = 0;
-	while (split[i])
+	if (split)
 	{
-		free(split[i]);
-		i++;
+		while (split[i])
+		{
+			if (split[i])
+				free(split[i]);
+			i++;
+		}
+		free(split);
 	}
-	free(split);
 }
