@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2023/01/15 19:51:27 by sthitiku         ###   ########.fr        #
+#    Updated: 2023/01/22 00:16:12 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,20 @@ SRCS	=	test.c \
 			ms_parse.c \
 			ms_token.c \
 			ms_free_input.c \
+			ms_exec.c \
+			ms_envp.c \
+			ms_heredoc.c \
+			ms_infile.c \
+			ms_outfile.c \
+			ms_expander.c \
+			ms_exec_cmd_lst.c \
+			ms_exec_cmd_prep.c \
+			ms_cmd_lst_utils.c \
+			ms_realloc.c \
+			ms_debug.c \
+			ms_err.c \
+			ms_err2.c \
+			ms_arr_utils.c \
 
 # SRCS	= minishell.c \
 
