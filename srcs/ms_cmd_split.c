@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_cmd_split.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:09:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/20 01:40:45 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/22 00:41:10 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ static char	**create_blk(char **cmd, int begin, int *end, int index)
 	char	**new_blk;
 
 	blk = count_cmd(cmd, end);
-	printf("blk = %d\n", blk);
+	// printf("blk = %d\n", blk);
 	if (index == 0 && (cmd[index][0] != '>' && cmd[index][0] != '<'))
 		blk++;
 	new_blk = malloc(sizeof(char *) * (blk + 1));
@@ -166,13 +166,13 @@ static char	**create_blk(char **cmd, int begin, int *end, int index)
 			new_blk[i++] = ft_strdup(cmd[begin++]);
 	}
 	new_blk[i] = NULL;
-	
-	i = 0;
-	while (new_blk[i])
-	{
-		printf("new_blk[%d] = %s\n", i, new_blk[i]);
-		i++;
-	}
+
+	// i = 0;
+	// while (new_blk[i])
+	// {
+	// 	printf("new_blk[%d] = %s\n", i, new_blk[i]);
+	// 	i++;
+	// }
 	return (new_blk);
 }
 

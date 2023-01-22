@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 21:01:52 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/22 00:02:08 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/22 00:42:42 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		exec(t_cmd_lst *cmd, int *fd)
 		execve(*cmd->argv, cmd->argv, cmd->envp);
 		err_eexec(*cmd->argv, 1);
 	}
-	waitpid(cmd->pid, &cmd->status, 0);
+	waitpid(cmd->pid, &cmd->status, WNOHANG);
 	if (!cmd->right)
 	{
 		dup2(0, *fd);
@@ -69,7 +69,7 @@ void	executor(t_cmd *lst)
 		cmd = cmd->right;
 	}
 	while (wait(0) != -1 || errno != ECHILD) ;
-	dprintf(2, "status: %d\n",lst->status);
+	// dprintf(2, "status: %d\n",lst->status);
 	dup2(0, fd);
 }
 

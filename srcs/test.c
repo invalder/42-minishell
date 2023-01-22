@@ -99,7 +99,7 @@ void	sig_handler(int signo, siginfo_t *s, void *old)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		rl_redisplay();	
+		rl_redisplay();
 	}
 }
 
@@ -127,13 +127,14 @@ int	main_loop(t_cmd *lst)
 		if (!ft_strncmp(line, "env\0", 4))
 			print_env();
 		cmd = cmd_split(line);
-		print_2star(cmd);
+		// print_2star(cmd);
 		// cmd != NULL when quote is closed correctly
 		if (cmd != NULL)
 		{
-			lst->cmd = create_cmd(cmd, lst); 
-			print_3star(lst->cmd);
+			lst->cmd = create_cmd(cmd, lst);
+			// print_3star(lst->cmd);
 			parse_cmd(lst->cmd);
+			// exec_main(lst);
 			print_3star(lst->cmd);
 		}
 		else

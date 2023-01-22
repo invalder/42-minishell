@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_environ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 01:28:26 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/08 01:51:05 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/22 00:28:18 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	init_list(t_cmd *lst)
 	lst->new_envp = dup_environ(environ);
 	environ = lst->new_envp;
 	lst->cmd = NULL;
+	lst->cmd_lst = NULL;
+	lst->cmd_len = 0;
 	// printf("%s\n", getenv("LOGNAME"));
 	// unset_env("LOGNAME");
 	// printf("%s\n", getenv("LOGNAME"));
