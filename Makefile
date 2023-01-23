@@ -6,7 +6,7 @@
 #    By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2023/01/22 08:29:39 by nnakarac         ###   ########.fr        #
+#    Updated: 2023/01/22 08:39:51 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,7 @@ SRCS	=	test.c \
 			ms_realloc.c \
 			ms_builtin_cmd_parent.c \
 			ms_builtin_cmd_child.c \
+			ms_signals.c \
 			ms_debug.c \
 			ms_err.c \
 			ms_err2.c \

@@ -34,6 +34,8 @@
 // 	t_logic		*logic;
 // }	t_block;
 
+int	g_status;
+
 void	print_3star(char ***cmd)
 {
 	int	i;
@@ -82,42 +84,11 @@ void	free_main_loop(char *line, char **cmd, char ***cmd_3star)
 	cmd_3star = NULL;
 }
 
-void	int_handler(void)
-{
-	ft_putstr_fd("\n", STDOUT_FILENO);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
-
-void	sig_handler(int signo, siginfo_t *s, void *old)
-{
-	(void) old;
-	(void) s;
-	if (signo == SIGINT)
-	{
-		ft_putstr_fd("\n", STDOUT_FILENO);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-}
-
 int	main_loop(t_cmd *lst)
 {
 	char	*line;
 	char	**cmd;
-	struct sigaction	s_int;
-	struct sigaction	s_quit;
 
-	s_int.sa_sigaction = sig_handler;
-	s_quit.sa_handler = SIG_IGN;
-	s_int.sa_flags = SA_SIGINFO;
-	s_quit.sa_flags = SA_RESTART;
-	sigemptyset(&s_int.sa_mask);
-	sigemptyset(&s_quit.sa_mask);
-	sigaction(SIGINT, &s_int, NULL);
-	sigaction(SIGQUIT, &s_quit, NULL);
 	while (1)
 	{
 		line = readline("minimini> ");
@@ -134,8 +105,8 @@ int	main_loop(t_cmd *lst)
 			lst->cmd = create_cmd(cmd, lst);
 			// print_3star(lst->cmd);
 			parse_cmd(lst->cmd);
-			// exec_main(lst);
-			print_3star(lst->cmd);
+			exec_main(lst);
+			// print_3star(lst->cmd);
 		}
 		else
 			// if quote is not closed lst->cmd should not to create and set to NULL for free

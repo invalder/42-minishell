@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/22 00:18:01 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/22 09:58:51 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/param.h>
+# include <sys/wait.h>
 # include <dirent.h>
 # include <signal.h>
 # include <errno.h>
@@ -158,6 +159,9 @@ void	get_cmd_envp(t_cmd *lst, t_cmd_lst *cmd, int idx);
 void	ft_tokencpy(char **dest, char **src, size_t n);
 void	dstrcpy(char **dest, char **src, int n);
 char	**ft_realloc_dstr(char **ptr, size_t n);
+
+// ms_signals.c
+void	sig_handler_main(void);
 
 // ms_err.c & ms_err2.c
 void	err_message(int err_code, int is_exit);
