@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:28:00 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 16:28:25 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/28 17:28:34 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,16 @@ void	get_cmd_pipe(t_cmd *lst, t_cmd_lst *cmd, int idx)
 
 void	get_cmd_envp(t_cmd *lst, t_cmd_lst *cmd, int idx)
 {
+	char	**lst_envp;
+
+	lst_envp = NULL;
 	(void) lst;
 	(void) idx;
 	if (cmd->argv && cmd->argv[0])
-		cmd->path = check_envp(list_envp(environ, cmd->argv[0]), cmd->argv[0]);
+	{
+		lst_envp = list_envp(environ, cmd->argv[0]);
+		cmd->path = check_envp(lst_envp, cmd->argv[0]);
+		if (lst_envp)
+			free_split(lst_envp);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 16:30:32 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/28 17:55:00 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <errno.h>
 # include <fcntl.h>
 
-extern char **environ;
+extern char	**environ;
 // test_cmd = echo $HOME '"hello""world"' test &&ls -la|cat -e
 
 # define EXEC 1
@@ -83,73 +83,75 @@ typedef struct s_parse
 	char	*env;
 }	t_parse;
 
-
 // ms_split.c -> split from char* to char**
-char	**cmd_split(char *line);
-void	skip_token(char *line, int *i, int mode);
+char		**cmd_split(char *line);
+void		skip_token(char *line, int *i, int mode);
 
 // ms_cmd_split.c -> split from char** to char***
-char	***create_cmd(char **cmd, t_cmd *lst);
+char		***create_cmd(char **cmd, t_cmd *lst);
 
-void	init_list(t_cmd *lst);
+void		init_list(t_cmd *lst);
 
-void	parse_cmd(char ***cmd);
-int		print_env(void);
-void	parse_env_exit_status(t_parse *p, int str_len);
+void		parse_cmd(char ***cmd);
+int			print_env(void);
+void		parse_env_exit_status(t_parse *p, int str_len);
 
 // ms_directory.c
-char	*get_pwd();
-int		ms_cd(char *path_str);
+char		*get_pwd(void);
+int			ms_cd(char *path_str);
 
 // ms_token.c
-void	skip_token(char *line, int *i, int mode);
-int		check_close_quote(char *cmd);
+void		skip_token(char *line, int *i, int mode);
+int			check_close_quote(char *cmd);
 
-void	free_main_loop(char *line, char **cmd, char ***cmd_3star);
-void	*free_split(char **split);
-void	free_3star(char ***cmd);
+void		free_main_loop(char *line, char **cmd, char ***cmd_3star);
+void		*free_split(char **split);
+void		free_3star(char ***cmd);
 
 // ms_envp.c
-char	*check_envp(char **list_envp, char *cmd);
-char	**list_envp(char **envp, char *cmd);
-void	free_lst(char **lst);
+char		*check_envp(char **list_envp, char *cmd);
+char		**list_envp(char **envp, char *cmd);
+void		free_lst(char **lst);
 
 // ms_exec_cmd_prep.c
-void	chk_cmd_type(t_cmd *lst, t_cmd_lst *cmd, int idx, int *i);
-void	get_cmd_argv(t_cmd *lst, t_cmd_lst *cmd, int idx);
-void	get_cmd_pipe(t_cmd *lst, t_cmd_lst *cmd, int idx);
-void	get_cmd_envp(t_cmd *lst, t_cmd_lst *cmd, int idx);
-char	**rd_in_mark(t_cmd_lst *cmd, char **rd_in, int i, char *meta);
-char	**get_rd_in(t_cmd *lst, t_cmd_lst *cmd, int idx);
-char	**rd_out_mark(t_cmd_lst *cmd, char **rd_out, int i, char *meta);
-char	**get_rd_out(t_cmd *lst, t_cmd_lst *cmd, int idx);
+void		chk_cmd_type(t_cmd *lst, t_cmd_lst *cmd, int idx, int *i);
+void		get_cmd_argv(t_cmd *lst, t_cmd_lst *cmd, int idx);
+void		get_cmd_pipe(t_cmd *lst, t_cmd_lst *cmd, int idx);
+void		get_cmd_envp(t_cmd *lst, t_cmd_lst *cmd, int idx);
+char		**rd_in_mark(t_cmd_lst *cmd, char **rd_in, int i, char *meta);
+char		**get_rd_in(t_cmd *lst, t_cmd_lst *cmd, int idx);
+char		**rd_out_mark(t_cmd_lst *cmd, char **rd_out, int i, char *meta);
+char		**get_rd_out(t_cmd *lst, t_cmd_lst *cmd, int idx);
+
+// ms_exec_child.c
+void		child(t_cmd_lst *cmd, int *fd);
 
 // ms_exec.c
-void	exec_main(t_cmd *lst);
-void	executor(t_cmd *lst);
-int		exec(t_cmd_lst *cmd, int *fd);
+void		exec_main(t_cmd *lst);
+void		executor(t_cmd *lst);
+void		exec(t_cmd_lst *cmd, int *fd);
 
 // ms_heredoc.c
-void	unlink_heredoc(void);
-int		heredoc(t_cmd_lst *cmd, int cnt);
-char	*read_here_doc(void);
+void		unlink_heredoc(void);
+int			heredoc(t_cmd_lst *cmd, int cnt);
+char		*read_here_doc(void);
 
 // ms_expander.c
-void	expander(t_cmd *lst, int idx, int is_pipe);
+void		expander(t_cmd *lst, int idx, int is_pipe);
 
 // ms_infile.c
-void	infile(t_cmd_lst *cmd);
-void	open_infile(t_cmd_lst *cmd);
+void		infile(t_cmd_lst *cmd);
+void		open_infile(t_cmd_lst *cmd);
 
 // ms_outfile.c
-void	open_outfile(t_cmd_lst *cmd);
-void	outfile(t_cmd_lst *cmd);
+void		open_outfile(t_cmd_lst *cmd);
+void		outfile(t_cmd_lst *cmd);
 
 // ms_arr_uitls.c
-size_t	arr2dsize(char **ptr);
+size_t		arr2dsize(char **ptr);
 
 // ms_cmd_lst_utils.c
-void	free_cmd_lst(t_cmd_lst *cmd);
+void		free_cmd_lst(t_cmd_lst *cmd);
 
 // ms_exec_cmd_lst.c and ms_exec_cmd_lst_2.c
 t_cmd_lst	*cmd_lst_new(t_cmd *lst, int idx);
@@ -160,31 +162,31 @@ t_cmd_lst	*cmd_lst_add_front(t_cmd_lst *cmd_lst, t_cmd_lst *new);
 t_cmd_lst	*cmd_lst_add_back(t_cmd_lst *cmd_lst, t_cmd_lst *new);
 
 // ms_exec_cmd_prep.c
-char	**get_rd_in(t_cmd *lst, t_cmd_lst *cmd, int idx);
-char	**get_rd_out(t_cmd *lst, t_cmd_lst *cmd, int idx);
-void	get_cmd_argv(t_cmd *lst, t_cmd_lst *cmd, int idx);
-void	get_cmd_pipe(t_cmd *lst, t_cmd_lst *cmd, int idx);
-void	get_cmd_envp(t_cmd *lst, t_cmd_lst *cmd, int idx);
+char		**get_rd_in(t_cmd *lst, t_cmd_lst *cmd, int idx);
+char		**get_rd_out(t_cmd *lst, t_cmd_lst *cmd, int idx);
+void		get_cmd_argv(t_cmd *lst, t_cmd_lst *cmd, int idx);
+void		get_cmd_pipe(t_cmd *lst, t_cmd_lst *cmd, int idx);
+void		get_cmd_envp(t_cmd *lst, t_cmd_lst *cmd, int idx);
 
 // ms_realloc.c
-void	ft_tokencpy(char **dest, char **src, size_t n);
-void	dstrcpy(char **dest, char **src, int n);
-char	**ft_realloc_dstr(char **ptr, size_t n);
+void		ft_tokencpy(char **dest, char **src, size_t n);
+void		dstrcpy(char **dest, char **src, int n);
+char		**ft_realloc_dstr(char **ptr, size_t n);
 
 // ms_signals.c
-void	sig_handler_main(void);
+void		sig_handler_main(void);
 
 // ms_err.c & ms_err2.c
-void	err_message(int err_code, int is_exit);
-void	err_enomem(void);
-void	err_epipe(void);
-void	err_efork(void);
-void	err_eexec(char *msg, int is_exit);
-void	err_eenoent(char *msg, int is_exit);
-void	err_general(char *msg, int is_exit);
+void		err_message(int err_code, int is_exit);
+void		err_enomem(void);
+void		err_epipe(void);
+void		err_efork(void);
+void		err_eexec(char *msg, int is_exit);
+void		err_eenoent(char *msg, int is_exit);
+void		err_general(char *msg, int is_exit);
 
 // ms_debug.c
-void	print_cmd_lst(t_cmd_lst *cmd);
-void	print2d(char **ptr);
+void		print_cmd_lst(t_cmd_lst *cmd);
+void		print2d(char **ptr);
 
 #endif

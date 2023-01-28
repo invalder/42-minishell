@@ -1,4 +1,16 @@
-#include "../includes/ms_input.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/28 17:40:04 by nnakarac          #+#    #+#             */
+/*   Updated: 2023/01/28 17:41:29 by nnakarac         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ms_input.h"
 
 // typedef struct s_pipe
 // {
@@ -98,25 +110,20 @@ int	main_loop(t_cmd *lst)
 		if (!ft_strncmp(line, "env\0", 4))
 			print_env();
 		cmd = cmd_split(line);
-		// print_2star(cmd);
-		// cmd != NULL when quote is closed correctly
 		if (cmd != NULL)
 		{
 			lst->cmd = create_cmd(cmd, lst);
-			// print_3star(lst->cmd);
 			parse_cmd(lst->cmd);
 			exec_main(lst);
-			// print_3star(lst->cmd);
 		}
 		else
-			// if quote is not closed lst->cmd should not to create and set to NULL for free
 			lst->cmd = NULL;
 		free_main_loop(line, cmd, lst->cmd);
 	}
 	return (0);
 }
 
-int main(void)
+int	main(void)
 {
 	int				ret;
 	struct termios	old_tio;

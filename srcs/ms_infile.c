@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 23:43:49 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 13:11:35 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/28 19:35:02 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	infile(t_cmd_lst *cmd)
 			fd = cmd->in_fd[cnt];
 			if (fd == -1)
 				err_eenoent(cmd->infile[cnt], 1);
-			dup2(fd, 0);
+			dup2(fd, STDIN_FILENO);
 			close(fd);
 			cnt++;
 		}

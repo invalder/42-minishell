@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 23:45:11 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 15:18:17 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/28 18:04:10 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	expander(t_cmd *lst, int idx, int is_pipe)
 		new_lst = cmd_lst_new(lst, idx);
 		get_rd_in(lst, new_lst, idx);
 		get_rd_out(lst, new_lst, idx);
+		get_cmd_bltn(lst, new_lst, idx);
 		get_cmd_argv(lst, new_lst, idx);
 		get_cmd_envp(lst, new_lst, idx);
 		get_cmd_pipe(lst, new_lst, idx);

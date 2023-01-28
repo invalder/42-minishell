@@ -6,7 +6,7 @@
 #    By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2023/01/28 16:43:22 by nnakarac         ###   ########.fr        #
+#    Updated: 2023/01/28 17:53:34 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,7 @@ SRCS	=	test.c \
 			ms_token.c \
 			ms_free_input.c \
 			ms_exec.c \
+			ms_exec_child.c \
 			ms_envp.c \
 			ms_heredoc.c \
 			ms_implement.c \
@@ -112,11 +113,7 @@ all: $(NAME)
 
 $(NAME): $(addprefix $(OBJ_DIR),$(OBJS))
 	@make -C $(LIB_DIR) --silent
-	@$(CC) $(CFLAGS) $(RL) $(addprefix $(OBJ_DIR),$(OBJS)) $(LIBS) -o $(NAME)
-
-$(NAMEP): $(addprefix $(OBJ_DIR),$(OBJP))
-	@make -C $(LIB_DIR) --silent
-	@$(CC) $(CFLAGS) $(addprefix $(OBJ_DIR),$(OBJP)) $(LIBS) -o $(NAMEP)
+	@$(CC) $(CFLAGS) -lreadline $(LDFLAGS) $(CPPFLAGS) $(addprefix $(OBJ_DIR),$(OBJS)) $(LIBS) -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)

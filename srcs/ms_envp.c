@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 16:03:07 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/08 16:04:59 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/28 17:28:18 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*check_envp(char **list_envp, char *cmd)
 	while (*lst_tmp)
 	{
 		if (access(*lst_tmp, R_OK | F_OK | X_OK) == 0)
-			return (*lst_tmp);
+			return (ft_strdup(*lst_tmp));
 		lst_tmp++;
 	}
 	if (access(cmd, R_OK | F_OK | X_OK) == 0)
