@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 11:15:01 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/28 16:30:32 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	init_list(t_cmd *lst);
 
 void	parse_cmd(char ***cmd);
 int		print_env(void);
+void	parse_env_exit_status(t_parse *p, int str_len);
 
 // ms_directory.c
 char	*get_pwd();
@@ -112,6 +113,16 @@ void	free_3star(char ***cmd);
 char	*check_envp(char **list_envp, char *cmd);
 char	**list_envp(char **envp, char *cmd);
 void	free_lst(char **lst);
+
+// ms_exec_cmd_prep.c
+void	chk_cmd_type(t_cmd *lst, t_cmd_lst *cmd, int idx, int *i);
+void	get_cmd_argv(t_cmd *lst, t_cmd_lst *cmd, int idx);
+void	get_cmd_pipe(t_cmd *lst, t_cmd_lst *cmd, int idx);
+void	get_cmd_envp(t_cmd *lst, t_cmd_lst *cmd, int idx);
+char	**rd_in_mark(t_cmd_lst *cmd, char **rd_in, int i, char *meta);
+char	**get_rd_in(t_cmd *lst, t_cmd_lst *cmd, int idx);
+char	**rd_out_mark(t_cmd_lst *cmd, char **rd_out, int i, char *meta);
+char	**get_rd_out(t_cmd *lst, t_cmd_lst *cmd, int idx);
 
 // ms_exec.c
 void	exec_main(t_cmd *lst);

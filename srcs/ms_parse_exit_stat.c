@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_expander.c                                      :+:      :+:    :+:   */
+/*   ms_parse_exit_stat.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/21 23:45:11 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 15:18:17 by nnakarac         ###   ########.fr       */
+/*   Created: 2023/01/28 15:10:15 by nnakarac          #+#    #+#             */
+/*   Updated: 2023/01/28 15:11:59 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_input.h"
 
-void	expander(t_cmd *lst, int idx, int is_pipe)
-{
-	t_cmd_lst	*new_lst;
-	char		**cmd;
+extern int	g_status;
 
-	(void) is_pipe;
-	(void) cmd;
-	while (idx < lst->cmd_len)
-	{
-		new_lst = cmd_lst_new(lst, idx);
-		get_rd_in(lst, new_lst, idx);
-		get_rd_out(lst, new_lst, idx);
-		get_cmd_argv(lst, new_lst, idx);
-		get_cmd_envp(lst, new_lst, idx);
-		get_cmd_pipe(lst, new_lst, idx);
-		lst->cmd_lst = cmd_lst_add_back(lst->cmd_lst, new_lst);
-		idx++;
-	}
+void	parse_env_exit_status(t_parse *p, int str_len)
+{
+	if (str_len == 2 && !ft_strncmp(p->sub, "?", 1))
+		p->env = ft_itoa(g_status);
+	else
+		p->env = getenv(p->sub);
 }

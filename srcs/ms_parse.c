@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 01:04:35 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/23 09:49:41 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/28 15:10:32 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,7 @@ static char	*parse_env_get_env(char *str, int str_len, char first, char last)
 	else
 	{
 		p.sub = ft_substr(str, p.start + 1, str_len - p.start - 1);
-		// get previous exit status "$?"
-		if (str_len == 2 && !ft_strncmp(p.sub, "?", 1))
-			p.env = ft_itoa(g_status);
-		else
-			p.env = getenv(p.sub);
+		parse_env_exit_status(&p, str_len);
 		new = malloc(sizeof(char) * ft_strlen(p.env) + 1);
 		ft_strlcpy(new, p.env, ft_strlen(p.env) + 1);
 	}

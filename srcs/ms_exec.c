@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 21:01:52 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 14:01:17 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/28 15:49:10 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,16 @@ void	child(t_cmd_lst *cmd, int *fd)
 			outfile(cmd);
 			write(cmd->pfd[1], NULL, 1);
 		}
-		else if (cmd->right)
-		{
-			dup2(cmd->pfd[1], STDOUT_FILENO);
-			close(cmd->pfd[0]);
-		}
 		else
-			dup2(cmd->pfd[1], *fd);
+		{
+			if (cmd->right)
+			{
+				dup2(cmd->pfd[1], STDOUT_FILENO);
+				close(cmd->pfd[0]);
+			}
+			else
+				dup2(cmd->pfd[1], *fd);
+		}
 		close(cmd->pfd[1]);
 		if (cmd->path)
 			execve(cmd->path, cmd->argv, cmd->envp);

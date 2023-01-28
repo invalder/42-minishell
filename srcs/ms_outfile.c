@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 23:44:07 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 14:01:28 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/28 15:12:22 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	outfile(t_cmd_lst *cmd)
 			fd = cmd->out_fd[cnt];
 			cnt++;
 		}
-		// printf("here\n");
-		// printf("%d %d\n", cmd->pfd[1], fd);
 		dup2(fd, STDOUT_FILENO);
 		close(cmd->pfd[1]);
 	}

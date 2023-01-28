@@ -1,0 +1,71 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ms_exec_cmd_prep_2.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/28 16:28:00 by nnakarac          #+#    #+#             */
+/*   Updated: 2023/01/28 16:28:25 by nnakarac         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ms_input.h"
+
+void	chk_cmd_type(t_cmd *lst, t_cmd_lst *cmd, int idx, int *i)
+{
+	cmd->type = EXEC;
+	if ((!ft_strncmp(lst->cmd[idx][*i], "(null)", 6)) || \
+		(!ft_strncmp(lst->cmd[idx][*i], "||", 2)) || \
+		(!ft_strncmp(lst->cmd[idx][*i], "&&", 2)) || \
+		(!ft_strncmp(lst->cmd[idx][*i], "|", 1)))
+	{
+		if (!ft_strncmp(lst->cmd[idx][*i], "(null)", 6))
+			cmd->type = EXEC;
+		else if (!ft_strncmp(lst->cmd[idx][*i], "||", 2))
+			cmd->type = OR;
+		else if (!ft_strncmp(lst->cmd[idx][*i], "&&", 2))
+			cmd->type = AND;
+		else if (!ft_strncmp(lst->cmd[idx][*i], "|", 1))
+			cmd->type = PIPE;
+		*i += 1;
+	}
+}
+
+void	get_cmd_argv(t_cmd *lst, t_cmd_lst *cmd, int idx)
+{
+	int		i;
+	char	**argv;
+	int		argc;
+
+	i = 0;
+	argv = NULL;
+	chk_cmd_type(lst, cmd, idx, &i);
+	while (lst->cmd[idx][i])
+	{
+		argc = arr2dsize(argv);
+		if (!cmd->markout[i])
+		{
+			argv = ft_realloc_dstr(argv, argc + 1);
+			argv[argc] = lst->cmd[idx][i];
+			argv[argc + 1] = NULL;
+		}
+		i++;
+	}
+	cmd->argv = argv;
+}
+
+void	get_cmd_pipe(t_cmd *lst, t_cmd_lst *cmd, int idx)
+{
+	(void) lst;
+	(void) idx;
+	pipe(cmd->pfd);
+}
+
+void	get_cmd_envp(t_cmd *lst, t_cmd_lst *cmd, int idx)
+{
+	(void) lst;
+	(void) idx;
+	if (cmd->argv && cmd->argv[0])
+		cmd->path = check_envp(list_envp(environ, cmd->argv[0]), cmd->argv[0]);
+}

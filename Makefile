@@ -6,7 +6,7 @@
 #    By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2023/01/28 11:14:12 by nnakarac         ###   ########.fr        #
+#    Updated: 2023/01/28 16:43:22 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,18 @@ SPONSOR3 = ./easter_egg/sponsor.sh
 NAME = minishell
 NAMEP = pipex
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g -I/opt/homebrew/opt/readline/include
-RL	= -lreadline -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include
+CFLAGS	= -Wall -Wextra -Werror -g
+
+ifeq ($(ARCH), arm64)
+	LDFLAGS	= -L${HOMEBREW_PREFIX}/opt/readline/lib
+	CPPFLAGS	= -I${HOMEBREW_PREFIX}/opt/readline/include
+else
+	LDFLAGS	= -L/usr/local/opt/readline/lib
+	CPPFLAGS	= -I/usr/local/opt/readline/include
+endif
+
+# CFLAGS	= -Wall -Wextra -Werror -g -I/opt/homebrew/opt/readline/include
+# RL	= -lreadline -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include
 RM		= /bin/rm -rf
 
 SRC_DIR	= srcs/
@@ -60,17 +70,20 @@ SRCS	=	test.c \
 			ms_cmd_split.c \
 			ms_environ.c \
 			ms_parse.c \
+			ms_parse_exit_stat.c \
 			ms_token.c \
 			ms_free_input.c \
 			ms_exec.c \
 			ms_envp.c \
 			ms_heredoc.c \
+			ms_implement.c \
 			ms_infile.c \
 			ms_outfile.c \
 			ms_expander.c \
 			ms_exec_cmd_lst.c \
 			ms_exec_cmd_lst_2.c \
 			ms_exec_cmd_prep.c \
+			ms_exec_cmd_prep_2.c \
 			ms_cmd_lst_utils.c \
 			ms_realloc.c \
 			ms_builtin_cmd_parent.c \
@@ -107,15 +120,13 @@ $(NAMEP): $(addprefix $(OBJ_DIR),$(OBJP))
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
-	@$(CC) -Ilibft $(CFLAGS) -c $< $(INCS) -o $@
+	@$(CC) -Ilibft $(CFLAGS) $(CPPFLAGS) -c $< $(INCS) -o $@
 
 clean:
 	@make -C $(LIB_DIR) clean --silent
 	@$(RM) $(OBJ_DIR)
 	@$(RM) $(NAME)
-	@$(RM) $(NAMEP)
 	@$(RM) "$(NAME).dSYM"
-	@$(RM) "$(NAMEP).dSYM"
 
 fclean: clean
 	@make -C $(LIB_DIR) fclean --silent
