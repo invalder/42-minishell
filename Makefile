@@ -6,7 +6,7 @@
 #    By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2023/01/22 08:39:51 by nnakarac         ###   ########.fr        #
+#    Updated: 2023/01/28 11:14:12 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,7 @@ SRCS	=	test.c \
 			ms_outfile.c \
 			ms_expander.c \
 			ms_exec_cmd_lst.c \
+			ms_exec_cmd_lst_2.c \
 			ms_exec_cmd_prep.c \
 			ms_cmd_lst_utils.c \
 			ms_realloc.c \

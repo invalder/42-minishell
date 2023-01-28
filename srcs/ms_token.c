@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ms_token.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 23:44:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/15 19:53:01 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/01/28 11:12:47 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ms_input.h"
 
 // return 1 if quote is not closed, 0 otherwise
-int check_close_quote(char *cmd)
+int	check_close_quote(char *cmd)
 {
 	int		i;
 	int		close;
@@ -41,7 +41,8 @@ static void	skip_token_2(char *line, int *i, int mode, char tmp)
 		while (line[*i] && line[*i] != tmp)
 		{
 			(*i)++;
-			if (line[*i] == tmp && (line[*i + 1] == '\'' || line[*i + 1] == '\"'))
+			if (line[*i] == tmp && (line[*i + 1] == '\'' \
+				|| line[*i + 1] == '\"'))
 				(*i) += 2;
 			else if (line[*i] == tmp && line[*i + 1] != ' ')
 				break ;

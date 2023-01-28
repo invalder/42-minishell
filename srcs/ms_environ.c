@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 01:28:26 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/22 00:28:18 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/27 23:24:54 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,4 @@ void	init_list(t_cmd *lst)
 	lst->cmd = NULL;
 	lst->cmd_lst = NULL;
 	lst->cmd_len = 0;
-	// printf("%s\n", getenv("LOGNAME"));
-	// unset_env("LOGNAME");
-	// printf("%s\n", getenv("LOGNAME"));
-	// export_env("LOGNAME=hello");
-	// printf("%s\n", getenv("LOGNAME"));
 }

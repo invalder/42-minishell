@@ -6,11 +6,33 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 00:00:45 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/22 00:01:33 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/27 23:05:34 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_input.h"
+
+void	free_cmd_lst_params(t_cmd_lst *cmd)
+{
+	if (cmd->infile)
+		free(cmd->infile);
+	if (cmd->in_fd)
+		free(cmd->in_fd);
+	if (cmd->is_heredoc)
+		free(cmd->is_heredoc);
+	if (cmd->outfile)
+		free(cmd->outfile);
+	if (cmd->out_fd)
+		free(cmd->out_fd);
+	if (cmd->o_mode)
+		free(cmd->o_mode);
+	if (cmd->markout)
+		free(cmd->markout);
+	if (cmd->path)
+		free(cmd->path);
+	if (cmd->argv)
+		free(cmd->argv);
+}
 
 void	free_cmd_lst(t_cmd_lst *cmd)
 {
@@ -24,24 +46,7 @@ void	free_cmd_lst(t_cmd_lst *cmd)
 		while (last)
 		{
 			p_last = last->left;
-			if (last->infile)
-				free(last->infile);
-			if (last->in_fd)
-				free(last->in_fd);
-			if (last->is_heredoc)
-				free(last->is_heredoc);
-			if (last->outfile)
-				free(last->outfile);
-			if (last->out_fd)
-				free(last->out_fd);
-			if (last->o_mode)
-				free(last->o_mode);
-			if (last->markout)
-				free(last->markout);
-			if (last->path)
-				free(last->path);
-			if (last->argv)
-				free(last->argv);
+			free_cmd_lst_params(last);
 			free(last);
 			last = NULL;
 			if (p_last)

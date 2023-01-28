@@ -128,6 +128,7 @@ int main(void)
 	new_tio.c_lflag = new_tio.c_lflag & (~ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, &new_tio);
 	init_list(&lst);
+	sig_handler_main();
 	ret = main_loop(&lst);
 	if (!ret)
 		printf("exit\n");

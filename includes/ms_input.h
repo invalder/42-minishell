@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/22 09:58:51 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/28 11:15:01 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ size_t	arr2dsize(char **ptr);
 // ms_cmd_lst_utils.c
 void	free_cmd_lst(t_cmd_lst *cmd);
 
-// ms_exec_cmd_lst.c
+// ms_exec_cmd_lst.c and ms_exec_cmd_lst_2.c
 t_cmd_lst	*cmd_lst_new(t_cmd *lst, int idx);
 void		cmd_lst_new_2(t_cmd_lst *new_lst, t_cmd *lst, int idx);
 void		cmd_lst_new_util1(t_cmd *lst, t_cmd_lst *cmd, int idx);

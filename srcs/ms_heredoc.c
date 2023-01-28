@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 23:40:54 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/21 23:58:35 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/28 11:11:58 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,23 @@ void	unlink_heredoc(void)
 	}
 }
 
+void	heredoc_loop(char **line, char **line_lim, int *fd_tmp)
+{
+	while (1)
+	{
+		write(1, ">", 1);
+		*line = get_next_line(0);
+		if (!ft_strncmp(*line, *line_lim, ft_strlen(*line_lim)))
+		{
+			free(*line);
+			*line = NULL;
+			break ;
+		}
+		write(*fd_tmp, *line, ft_strlen(*line));
+		free(*line);
+	}
+}
+
 int	heredoc(t_cmd_lst *cmd, int cnt)
 {
 	int		fd_tmp;
@@ -43,18 +60,7 @@ int	heredoc(t_cmd_lst *cmd, int cnt)
 	line_lim = ft_strjoin(cmd->infile[cnt], "\n");
 	if (fd_tmp < 0)
 		err_general("can not open file!!!\n", 1);
-	while (1)
-	{
-		write(1, ">", 1);
-		line = get_next_line(0);
-		if (!ft_strncmp(line, line_lim, ft_strlen(line_lim)))
-		{
-			free(line);
-			break ;
-		}
-		write(fd_tmp, line, ft_strlen(line));
-		free(line);
-	}
+	heredoc_loop(&line, &line_lim, &fd_tmp);
 	close(fd_tmp);
 	free(line_lim);
 	fd_tmp = open(fd_tmp_path, O_RDWR | O_CREAT, 0644);
