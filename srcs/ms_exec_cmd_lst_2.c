@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 11:13:31 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 11:14:00 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/28 22:06:21 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_cmd_lst	*cmd_lst_new(t_cmd *lst, int idx)
 	new_lst->out_fd = NULL;
 	new_lst->path = NULL;
 	new_lst->argv = NULL;
+	new_lst->bargv = NULL;
 	new_lst->envp = environ;
 	new_lst->left = NULL;
 	new_lst->right = NULL;

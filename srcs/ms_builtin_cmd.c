@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 18:04:39 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 21:55:04 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/28 22:13:49 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 char	**get_bltn_child(t_cmd_lst *cmd, char **rd_in, int i, char **metas)
 {
-	// create get_bltn_child to support builtin commands which are running in child process
+	cmd->bargv = metas;
+	return (cmd->bargv);
 }
 
-char	**get_bltn_parent(t_cmd_lst *cmd, char **bltn, int i, char *meta)
+char	**get_bltn_parent(t_cmd_lst *cmd, char **bltn, int i, char **metas)
 {
-
+	cmd->bargv = metas;
+	return (cmd->bargv);
 }
 
 /// @brief check for the builtins

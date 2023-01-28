@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 17:55:00 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/28 22:05:42 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_cmd_lst
 	int					argc;
 	char				**envp;
 	int					status;
+	char				**bargv;
 	struct s_cmd_lst	*left;
 	struct s_cmd_lst	*right;
 }	t_cmd_lst;

@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:40:04 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 21:58:50 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/01/28 22:33:43 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,3 @@ int	main(void)
 	rl_clear_history();
 	return (ret);
 }
-
-// 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
