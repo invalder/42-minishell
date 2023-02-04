@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_cmd_lst_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 00:00:45 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/04 03:26:01 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/04 19:51:38 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	free_cmd_lst_params(t_cmd_lst *cmd)
 		free(cmd->path);
 	if (cmd->argv)
 		free(cmd->argv);
+	if (cmd->bargv)
+		free(cmd->bargv);
 }
 
 void	free_cmd_lst(t_cmd_lst *cmd)

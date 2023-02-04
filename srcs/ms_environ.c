@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_environ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 01:28:26 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/27 23:24:54 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/04 21:59:11 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,11 @@ int	print_env(void)
 	i = 0;
 	while (environ[i])
 	{
-		ft_putstr_fd(environ[i], 1);
-		ft_putstr_fd("\n", 1);
+		if (ft_strncmp(environ[i], "\0", 1))
+		{
+			ft_putstr_fd(environ[i], 1);
+			ft_putstr_fd("\n", 1);
+		}
 		i++;
 	}
 	return (0);

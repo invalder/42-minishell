@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ms_builtin_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 18:04:39 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/04 05:23:40 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/04 19:50:27 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_input.h"
+
+void	get_cmd_bargv(t_cmd_lst *cmd, int i, char **metas)
+{
+	// int		i;
+	char	**argv;
+	int		argc;
+
+	// i = 0;
+	argv = NULL;
+	while (metas[i])
+	{
+		argc = arr2dsize(argv);
+		if (!cmd->markout[i])
+		{
+			argv = ft_realloc_dstr(argv, argc + 1);
+			argv[argc] = metas[i];
+			argv[argc + 1] = NULL;
+		}
+		i++;
+	}
+	cmd->bargv = argv;
+}
 
 int		cmd_bltn_exec(t_cmd_lst *cmd)
 {
@@ -33,7 +55,8 @@ char	**get_bltn_child(t_cmd_lst *cmd, char **bltn, int i, char **metas)
 {
 	(void) bltn;
 	cmd->btype = 0;
-	cmd->bargv = &metas[i];
+	// cmd->bargv = &metas[i];
+	get_cmd_bargv(cmd, i, metas);
 	cmd->blen = arr2dsize(&metas[i]);
 	cmd_bltn_markout(cmd, i, metas);
 	return (cmd->bargv);
@@ -43,7 +66,8 @@ char	**get_bltn_parent(t_cmd_lst *cmd, char **bltn, int i, char **metas)
 {
 	(void) bltn;
 	cmd->btype = 1;
-	cmd->bargv = &metas[i];
+	// cmd->bargv = &metas[i];
+	get_cmd_bargv(cmd, i, metas);
 	cmd->blen = arr2dsize(&metas[i]);
 	cmd_bltn_markout(cmd, i, metas);
 	return (cmd->bargv);

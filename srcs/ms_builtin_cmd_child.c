@@ -39,10 +39,10 @@ int	cmd_bltn_child_exec(t_cmd_lst *cmd)
 				is_newline = 0;
 			}
 		}
-		while (i < cmd->blen)
+		while (cmd->bargv[i])
 		{
 			ft_putstr_fd(cmd->bargv[i++], 1);
-			if (i <= cmd->blen - 1)
+			if (cmd->bargv[i])
 				ft_putstr_fd(" ", 1);
 		}
 		if (is_newline)
@@ -51,10 +51,6 @@ int	cmd_bltn_child_exec(t_cmd_lst *cmd)
 	if (!ft_strncmp(cmd->bargv[0], "env\0", 4))
 	{
 		print_env();
-	}
-	if (!ft_strncmp(cmd->bargv[0], "export\0", 4))
-	{
-
 	}
 	return (0);
 }

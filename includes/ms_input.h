@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/04 11:29:53 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/04 21:41:21 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,9 @@ int			check_close_quote(char *cmd);
 void		free_main_loop(char *line, char **cmd, char ***cmd_3star);
 void		*free_split(char **split);
 void		free_3star(char ***cmd);
+
+// ms_environ.c
+void		unset_env(char *name);
 
 // ms_envp.c
 char		*check_envp(char **list_envp, char *cmd);
