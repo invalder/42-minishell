@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 23:40:54 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 11:11:58 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/04 11:31:04 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	heredoc(t_cmd_lst *cmd, int cnt)
 	fd_tmp = open(fd_tmp_path, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	line_lim = ft_strjoin(cmd->infile[cnt], "\n");
 	if (fd_tmp < 0)
-		err_general("can not open file!!!\n", 1);
+		err_general("can not open file!!!\n", 1, 1);
 	heredoc_loop(&line, &line_lim, &fd_tmp);
 	close(fd_tmp);
 	free(line_lim);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_input.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/04 05:22:53 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/04 11:29:53 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,26 +188,12 @@ char		**ft_realloc_dstr(char **ptr, size_t n);
 // ms_signals.c
 void		sig_handler_main(void);
 
-// ms_err.c & ms_err2.c
-void		err_message(int err_code, int is_exit);
-void		err_enomem(void);
-void		err_epipe(void);
-void		err_efork(void);
-void		err_eexec(char *msg, int is_exit);
-void		err_eenoent(char *msg, int is_exit);
-void		err_general(char *msg, int is_exit);
-
 // ms_debug.c
 void		print_cmd_lst(t_cmd_lst *cmd);
 void		print_cmd(t_cmd_lst *cmd);
 void		print2d(char **ptr);
 
-// ms_experiments.c
-void		exp_get_cmd_pipe(t_cmd *lst, t_cmd_lst *cmd, int idx);
-void		exp_expander(t_cmd *lst, int idx, int is_pipe);
-void		exp_outfile(t_cmd_lst *cmd);
-void		exp_child(t_cmd_lst *cmd, int *fd);
-void		exp_exec(t_cmd_lst	*cmd, int *fd);
-void		exp_executor(t_cmd *lst);
+// ms_string_utils.c
+int			is_string_numeric(char *num_str);
 
 #endif

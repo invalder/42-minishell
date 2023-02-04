@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:40:04 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 22:33:43 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/04 11:55:26 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ int	main_loop(t_cmd *lst)
 		add_history(line);
 		if (line == NULL || !ft_strncmp(line, "exit\0", 5))
 			return (0);
-		if (!ft_strncmp(line, "env\0", 4))
-			print_env();
+		// if (!ft_strncmp(line, "env\0", 4))
+		// 	print_env();
 		cmd = cmd_split(line);
 		if (cmd != NULL)
 		{

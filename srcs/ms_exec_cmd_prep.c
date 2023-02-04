@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exec_cmd_prep.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 15:13:37 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 16:28:49 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/04 11:16:08 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ char	**get_rd_in(t_cmd *lst, t_cmd_lst *cmd, int idx)
 	while (lst->cmd[idx][i])
 	{
 		rd_size = arr2dsize(rd_in);
-		if ((!ft_strncmp(lst->cmd[idx][i], "<<", 2) && lst->cmd[idx][i + 1]) \
-			|| (!ft_strncmp(lst->cmd[idx][i], "<", 1) && lst->cmd[idx][i + 1]))
+		if ((!ft_strncmp(lst->cmd[idx][i], "<<\0", 3) && lst->cmd[idx][i + 1]) \
+			|| (!ft_strncmp(lst->cmd[idx][i], "<\0", 2) && lst->cmd[idx][i + 1]))
 		{
 			rd_in = rd_in_mark(cmd, rd_in, i, lst->cmd[idx][i + 1]);
 			if (!ft_strncmp(lst->cmd[idx][i], "<<", 2))
@@ -80,13 +80,13 @@ char	**get_rd_out(t_cmd *lst, t_cmd_lst *cmd, int idx)
 	while (lst->cmd[idx][i])
 	{
 		rd_size = arr2dsize(rd_out);
-		if ((!ft_strncmp(lst->cmd[idx][i], ">", 1) || \
-			!ft_strncmp(lst->cmd[idx][i], ">>", 2)) && lst->cmd[idx][i + 1])
+		if ((!ft_strncmp(lst->cmd[idx][i], ">\0", 2) || \
+			!ft_strncmp(lst->cmd[idx][i], ">>\0", 3)) && lst->cmd[idx][i + 1])
 		{
 			rd_out = rd_out_mark(cmd, rd_out, i, lst->cmd[idx][i + 1]);
-			if (!ft_strncmp(lst->cmd[idx][i], ">>", 2))
+			if (!ft_strncmp(lst->cmd[idx][i], ">>\0", 3))
 				cmd->o_mode[rd_size] = O_CREAT | O_RDWR | O_APPEND;
-			else if (!ft_strncmp(lst->cmd[idx][i], ">", 1))
+			else if (!ft_strncmp(lst->cmd[idx][i], ">\0", 2))
 				cmd->o_mode[rd_size] = O_CREAT | O_RDWR | O_TRUNC;
 			i++;
 		}

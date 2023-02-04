@@ -43,5 +43,9 @@ int	cmd_bltn_child_exec(t_cmd_lst *cmd)
 			ft_putstr_fd("\n", 1);
 		}
 	}
+	if (!ft_strncmp(cmd->bargv[0], "env\0", 4))
+	{
+		print_env();
+	}
 	return (0);
 }

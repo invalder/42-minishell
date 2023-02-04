@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exec_cmd_prep_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:28:00 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/03 20:06:41 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/04 11:15:35 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 void	chk_cmd_type(t_cmd *lst, t_cmd_lst *cmd, int idx, int *i)
 {
 	cmd->type = EXEC;
-	if ((!ft_strncmp(lst->cmd[idx][*i], "(null)", 6)) || \
-		(!ft_strncmp(lst->cmd[idx][*i], "||", 2)) || \
-		(!ft_strncmp(lst->cmd[idx][*i], "&&", 2)) || \
-		(!ft_strncmp(lst->cmd[idx][*i], "|", 1)))
+	if ((!ft_strncmp(lst->cmd[idx][*i], "(null)\0", 7)) || \
+		(!ft_strncmp(lst->cmd[idx][*i], "||\0", 3)) || \
+		(!ft_strncmp(lst->cmd[idx][*i], "&&\0", 3)) || \
+		(!ft_strncmp(lst->cmd[idx][*i], "|\0", 2)))
 	{
-		if (!ft_strncmp(lst->cmd[idx][*i], "(null)", 6))
+		if (!ft_strncmp(lst->cmd[idx][*i], "(null)\0", 7))
 			cmd->type = EXEC;
-		else if (!ft_strncmp(lst->cmd[idx][*i], "||", 2))
+		else if (!ft_strncmp(lst->cmd[idx][*i], "||\0", 3))
 			cmd->type = OR;
-		else if (!ft_strncmp(lst->cmd[idx][*i], "&&", 2))
+		else if (!ft_strncmp(lst->cmd[idx][*i], "&&\0", 3))
 			cmd->type = AND;
-		else if (!ft_strncmp(lst->cmd[idx][*i], "|", 1))
+		else if (!ft_strncmp(lst->cmd[idx][*i], "|\0", 2))
 			cmd->type = PIPE;
 		*i += 1;
 	}

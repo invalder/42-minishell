@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+         #
+#    By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2023/02/04 03:09:21 by nnakarac         ###   ########.fr        #
+#    Updated: 2023/02/04 11:26:59 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,6 +95,7 @@ SRCS	=	test.c \
 			ms_err.c \
 			ms_err2.c \
 			ms_arr_utils.c \
+			ms_string_utils.c \
 
 # SRCS	= minishell.c \
 
