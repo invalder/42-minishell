@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 22:05:42 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/04 05:22:53 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct s_cmd_lst
 	char				**envp;
 	int					status;
 	char				**bargv;
+	int					btype;
+	int					blen;
 	struct s_cmd_lst	*left;
 	struct s_cmd_lst	*right;
 }	t_cmd_lst;
@@ -126,8 +128,10 @@ char		**get_rd_out(t_cmd *lst, t_cmd_lst *cmd, int idx);
 
 // ms_exec_child.c
 void		child(t_cmd_lst *cmd, int *fd);
+void		close_other_pipes(t_cmd_lst *cmd);
 
 // ms_exec.c
+void		parent(t_cmd_lst *cmd, int *fd);
 void		exec_main(t_cmd *lst);
 void		executor(t_cmd *lst);
 void		exec(t_cmd_lst *cmd, int *fd);
@@ -162,6 +166,13 @@ t_cmd_lst	*cmd_lst_last(t_cmd_lst *cmd_lst);
 t_cmd_lst	*cmd_lst_add_front(t_cmd_lst *cmd_lst, t_cmd_lst *new);
 t_cmd_lst	*cmd_lst_add_back(t_cmd_lst *cmd_lst, t_cmd_lst *new);
 
+// ms_builtin_cmd.c
+void		get_cmd_bltn(t_cmd *lst, t_cmd_lst *cmd, int idx);
+int			cmd_bltn_exec(t_cmd_lst *cmd);
+
+int			cmd_bltn_child_exec(t_cmd_lst *cmd);
+int			cmd_bltn_parent_exec(t_cmd_lst *cmd);
+
 // ms_exec_cmd_prep.c
 char		**get_rd_in(t_cmd *lst, t_cmd_lst *cmd, int idx);
 char		**get_rd_out(t_cmd *lst, t_cmd_lst *cmd, int idx);
@@ -188,6 +199,15 @@ void		err_general(char *msg, int is_exit);
 
 // ms_debug.c
 void		print_cmd_lst(t_cmd_lst *cmd);
+void		print_cmd(t_cmd_lst *cmd);
 void		print2d(char **ptr);
+
+// ms_experiments.c
+void		exp_get_cmd_pipe(t_cmd *lst, t_cmd_lst *cmd, int idx);
+void		exp_expander(t_cmd *lst, int idx, int is_pipe);
+void		exp_outfile(t_cmd_lst *cmd);
+void		exp_child(t_cmd_lst *cmd, int *fd);
+void		exp_exec(t_cmd_lst	*cmd, int *fd);
+void		exp_executor(t_cmd *lst);
 
 #endif

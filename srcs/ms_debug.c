@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 14:47:09 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/21 23:58:58 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/04 03:24:23 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,31 @@ void	print_cmd_lst(t_cmd_lst *cmd)
 {
 	while (cmd)
 	{
-		printf("==========\n");
-		printf("type: %d\n", cmd->type);
-		printf("pid: %d\n", cmd->pid);
-		printf("ppid: %d\n", cmd->ppid);
-		printf("infile: \n");
-		print2d(cmd->infile);
-		printf(":::::\n");
-		printf("outfile: \n");
-		print2d(cmd->outfile);
-		printf(":::::\n");
-		printf("path: %s\n", cmd->path);
-		printf("argv: \n");
-		print2d(cmd->argv);
-		printf(":::::\n");
-		printf("==========\n");
+		print_cmd(cmd);
 		cmd = cmd->right;
 	}
+}
+
+void	print_cmd(t_cmd_lst *cmd)
+{
+	dprintf(2, "==========\n");
+	dprintf(2, "type: %d\n", cmd->type);
+	dprintf(2, "pid: %d\n", cmd->pid);
+	dprintf(2, "ppid: %d\n", cmd->ppid);
+	dprintf(2, "infile: \n");
+	print2d(cmd->infile);
+	dprintf(2, ":::::\n");
+	dprintf(2, "outfile: \n");
+	print2d(cmd->outfile);
+	dprintf(2, ":::::\n");
+	dprintf(2, "path: %s\n", cmd->path);
+	dprintf(2, "argv: \n");
+	print2d(cmd->argv);
+	dprintf(2, ":::::\n");
+	dprintf(2, "bargv: \n");
+	print2d(cmd->bargv);
+	dprintf(2, ":::::\n");
+	dprintf(2, "==========\n");
 }
 
 void	print2d(char **ptr)
@@ -44,8 +52,27 @@ void	print2d(char **ptr)
 	{
 		while (ptr[cnt])
 		{
-			printf(">>>%s\n", ptr[cnt]);
+			dprintf(2, ">>>|%s|<<<\n", ptr[cnt]);
 			cnt++;
 		}
+	}
+}
+
+void	print_form_begin(t_cmd_lst *cmd)
+{
+	t_cmd_lst	*p_cmd;
+
+	p_cmd = cmd;
+	while (p_cmd)
+	{
+		if (p_cmd->left)
+			p_cmd = p_cmd->left;
+		else
+			break ;
+	}
+	while (p_cmd)
+	{
+		print2d(p_cmd->argv);
+		p_cmd = p_cmd->right;
 	}
 }

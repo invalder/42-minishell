@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 21:01:52 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 17:52:03 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/04 04:40:45 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void	executor(t_cmd *lst)
 		parent(cmd, &fd);
 		cmd = cmd->right;
 	}
-	while (wait(0) != -1 || errno != ECHILD)
-		;
 	dup2(0, fd);
 }
 
@@ -61,6 +59,7 @@ void	exec_main(t_cmd *lst)
 	if (lst->cmd[0])
 	{
 		expander(lst, 0, 0);
+		// print_cmd_lst(lst->cmd_lst);
 		executor(lst);
 		free_cmd_lst(lst->cmd_lst);
 		lst->cmd_lst = NULL;

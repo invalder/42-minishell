@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 11:13:31 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 22:06:21 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/03 22:16:53 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_cmd_lst	*cmd_lst_new(t_cmd *lst, int idx)
 	new_lst->ppid = getpid();
 	new_lst->pid = -1;
 	new_lst->type = 0;
+	new_lst->btype = -1;
 	cmd_lst_new_2(new_lst, lst, idx);
 	return (new_lst);
 }

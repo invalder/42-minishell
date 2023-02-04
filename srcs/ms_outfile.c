@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 23:44:07 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 15:12:22 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/04 03:09:39 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,5 @@ void	outfile(t_cmd_lst *cmd)
 			cnt++;
 		}
 		dup2(fd, STDOUT_FILENO);
-		close(cmd->pfd[1]);
 	}
 }
