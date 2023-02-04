@@ -26,26 +26,35 @@ int	cmd_bltn_child_exec(t_cmd_lst *cmd)
 	}
 	if (!ft_strncmp(cmd->bargv[0], "echo\0", 5))
 	{
-		int		i;
+		int	i;
+		int	is_newline;
 
-		i = 0;
-		if (cmd->bargv[1] && !ft_strncmp(cmd->bargv[1], "-n\0", 3))
+		i = 1;
+		is_newline = 1;
+		if (cmd->bargv[1])
 		{
-			i += 2;
-			while (i < cmd->blen)
-				ft_putstr_fd(cmd->bargv[i++], 1);
+			while (!ft_strncmp(cmd->bargv[i], "-n\0", 3))
+			{
+				i++;
+				is_newline = 0;
+			}
 		}
-		else
+		while (i < cmd->blen)
 		{
-			i += 1;
-			while (i < cmd->blen)
-				ft_putstr_fd(cmd->bargv[i++], 1);
+			ft_putstr_fd(cmd->bargv[i++], 1);
+			if (i <= cmd->blen - 1)
+				ft_putstr_fd(" ", 1);
+		}
+		if (is_newline)
 			ft_putstr_fd("\n", 1);
-		}
 	}
 	if (!ft_strncmp(cmd->bargv[0], "env\0", 4))
 	{
 		print_env();
+	}
+	if (!ft_strncmp(cmd->bargv[0], "export\0", 4))
+	{
+
 	}
 	return (0);
 }
