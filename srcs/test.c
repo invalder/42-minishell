@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:40:04 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/06 01:29:52 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/06 01:38:54 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,10 @@ int	main_loop(t_cmd *lst)
 	while (1)
 	{
 		line = readline("minimini> ");
-		if (*line && *line != '\0')
-			add_history(line);
 		if (line == NULL || !ft_strncmp(line, "exit\0", 5))
 			return (0);
+		if (*line && *line != '\0')
+			add_history(line);
 		cmd = cmd_split(line);
 		if (cmd != NULL)
 		{
