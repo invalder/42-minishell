@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/15 19:46:39 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/06 00:23:45 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,17 @@ int		check_close_quote(char *cmd);
 void	free_main_loop(char *line, char **cmd, char ***cmd_3star);
 void	*free_split(char **split);
 void	free_3star(char ***cmd);
+
+// ms_parser_helper.c
+char	*cut_quote(char *str, char quote);
+char	*get_env_from_string(char *env);
+char	*parse_env_get_env(char *str, int str_len, char first, char last);
+
+// ms_expander_helper.c
+char	find_sep(char *str);
+char	*ms_join_char(char *str, char c);
+char	*ms_join_str(char *str1, char *str2);
+char	*expand_env(char *env);
+int		find_sep_index(char *str, char sep);
 
 #endif

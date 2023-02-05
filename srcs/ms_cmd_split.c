@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:09:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/20 01:40:45 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:06:46 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,10 @@
 
 int	is_empty_quote(char *str)
 {
-	// loop through the string
-	// if find a open quote, loop to check for the close quote
-	// if close quote is open quote + 1, return 1
 	int		i;
 	int		j;
 
 	i = 0;
-	printf("str = %s\n", str);
 	while (str[i])
 	{
 		j = i + 1;

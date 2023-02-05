@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 01:28:26 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/08 01:51:05 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/04 16:49:45 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	export_env(char *exp)
 	tmp = environ;
 	while (environ[i])
 		i++;
-	new = malloc(sizeof(char *) * i + 2);
+	new = malloc(sizeof(char *) * (i + 2));
 	i = 0;
 	while (environ[i])
 	{
@@ -93,6 +93,6 @@ void	init_list(t_cmd *lst)
 	// printf("%s\n", getenv("LOGNAME"));
 	// unset_env("LOGNAME");
 	// printf("%s\n", getenv("LOGNAME"));
-	// export_env("LOGNAME=hello");
-	// printf("%s\n", getenv("LOGNAME"));
+	// export_env("aaa=$HOME:aaa/bbb");
+	// printf("%s\n", getenv("aaa"));
 }
