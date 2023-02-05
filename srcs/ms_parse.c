@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 01:04:35 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/05 02:50:23 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/05 17:45:48 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static char	*parse_env_get_env(char *str, int str_len, char first, char last)
 
 	p.start = 0;
 	p.end = 0;
-	new = NULL;
 	if (first == '\'' && last == '\'')
 	{
 		p.start = 2;

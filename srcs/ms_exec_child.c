@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:51:17 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/04 05:08:58 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/05 18:41:21 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,24 @@ void	child_before_out(t_cmd_lst *cmd, int *fd)
 	}
 }
 
+void	parent_piping(t_cmd_lst *cmd, int *fd)
+{
+	(void) fd;
+	if (cmd->pid)
+	{
+		if (cmd->bargv)
+		{
+			if (cmd->btype)
+				g_status = cmd_bltn_exec(cmd);
+		}
+		if (cmd->left)
+		{
+			close(cmd->left->pfd[0]);
+			close(cmd->left->pfd[1]);
+		}
+	}
+}
+
 void	child(t_cmd_lst *cmd, int *fd)
 {
 	static int	i = 0;
@@ -108,16 +126,5 @@ void	child(t_cmd_lst *cmd, int *fd)
 		}
 	}
 	else
-	{
-		if (cmd->bargv)
-		{
-			if (cmd->btype)
-				g_status = cmd_bltn_exec(cmd);
-		}
-		if (cmd->left)
-		{
-			close(cmd->left->pfd[0]);
-			close(cmd->left->pfd[1]);
-		}
-	}
+		parent_piping(cmd, fd);
 }

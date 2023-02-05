@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_builtin_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 18:04:39 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/04 19:50:27 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/05 17:55:13 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 void	get_cmd_bargv(t_cmd_lst *cmd, int i, char **metas)
 {
-	// int		i;
 	char	**argv;
 	int		argc;
 
-	// i = 0;
 	argv = NULL;
 	while (metas[i])
 	{
@@ -34,7 +32,7 @@ void	get_cmd_bargv(t_cmd_lst *cmd, int i, char **metas)
 	cmd->bargv = argv;
 }
 
-int		cmd_bltn_exec(t_cmd_lst *cmd)
+int	cmd_bltn_exec(t_cmd_lst *cmd)
 {
 	if (!cmd->btype)
 		return (cmd_bltn_child_exec(cmd));
@@ -44,7 +42,7 @@ int		cmd_bltn_exec(t_cmd_lst *cmd)
 
 void	cmd_bltn_markout(t_cmd_lst *cmd, int i, char **metas)
 {
-	while(metas[i])
+	while (metas[i])
 	{
 		cmd->markout[i] = 1;
 		i++;
@@ -55,7 +53,6 @@ char	**get_bltn_child(t_cmd_lst *cmd, char **bltn, int i, char **metas)
 {
 	(void) bltn;
 	cmd->btype = 0;
-	// cmd->bargv = &metas[i];
 	get_cmd_bargv(cmd, i, metas);
 	cmd->blen = arr2dsize(&metas[i]);
 	cmd_bltn_markout(cmd, i, metas);
@@ -66,7 +63,6 @@ char	**get_bltn_parent(t_cmd_lst *cmd, char **bltn, int i, char **metas)
 {
 	(void) bltn;
 	cmd->btype = 1;
-	// cmd->bargv = &metas[i];
 	get_cmd_bargv(cmd, i, metas);
 	cmd->blen = arr2dsize(&metas[i]);
 	cmd_bltn_markout(cmd, i, metas);
@@ -87,14 +83,12 @@ char	**get_bltn_parent(t_cmd_lst *cmd, char **bltn, int i, char **metas)
 void	get_cmd_bltn(t_cmd *lst, t_cmd_lst *cmd, int idx)
 {
 	char	**bltn;
-	int		bltn_size;
 	int		i;
 
 	bltn = NULL;
 	i = 1;
 	while (lst->cmd[idx][i])
 	{
-		bltn_size = arr2dsize(bltn);
 		if ((!ft_strncmp(lst->cmd[idx][i], "export\0", 7)) || \
 			(!ft_strncmp(lst->cmd[idx][i], "unset\0", 6)) || \
 			(!ft_strncmp(lst->cmd[idx][i], "cd\0", 3)) || \
@@ -106,7 +100,7 @@ void	get_cmd_bltn(t_cmd *lst, t_cmd_lst *cmd, int idx)
 			bltn = get_bltn_child(cmd, bltn, i, lst->cmd[idx]);
 		else
 			if (!cmd->markout[i])
-				break;
+				break ;
 		i++;
 	}
 }

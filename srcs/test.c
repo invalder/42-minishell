@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:40:04 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/05 02:30:26 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/05 18:45:05 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	main_loop(t_cmd *lst)
 	while (1)
 	{
 		line = readline("minimini> ");
-		if (line)
+		if (*line && *line != '\0')
 			add_history(line);
 		if (line == NULL || !ft_strncmp(line, "exit\0", 5))
 			return (0);

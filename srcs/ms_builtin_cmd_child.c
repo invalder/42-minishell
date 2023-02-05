@@ -12,45 +12,57 @@
 
 #include "ms_input.h"
 
-int	cmd_bltn_child_exec(t_cmd_lst *cmd)
+int	cmd_bltn_pwd(t_cmd_lst *cmd)
+{
+	char	*pwd;
+
+	(void) cmd;
+	pwd = get_pwd();
+	write(1, pwd, ft_strlen(pwd));
+	write(1, "\n", 1);
+	return (0);
+}
+
+int	cmd_bltn_echo(t_cmd_lst *cmd)
+{
+	int	i;
+	int	is_newline;
+
+	i = 1;
+	is_newline = 1;
+	if (cmd->bargv[1])
+	{
+		while (!ft_strncmp(cmd->bargv[i], "-n\0", 3))
+		{
+			i++;
+			is_newline = 0;
+		}
+	}
+	while (cmd->bargv[i])
+	{
+		ft_putstr_fd(cmd->bargv[i++], 1);
+		if (cmd->bargv[i])
+			ft_putstr_fd(" ", 1);
+	}
+	if (is_newline)
+		ft_putstr_fd("\n", 1);
+	return (0);
+}
+
+int	cmd_bltn_env(t_cmd_lst *cmd)
 {
 	(void) cmd;
+	print_env();
+	return (0);
+}
+
+int	cmd_bltn_child_exec(t_cmd_lst *cmd)
+{
 	if (!ft_strncmp(cmd->bargv[0], "pwd\0", 4))
-	{
-		char	*pwd;
-
-		pwd = get_pwd();
-		write(1, pwd, ft_strlen(pwd));
-		write(1, "\n", 1);
-		return (0);
-	}
+		return (cmd_bltn_pwd(cmd));
 	if (!ft_strncmp(cmd->bargv[0], "echo\0", 5))
-	{
-		int	i;
-		int	is_newline;
-
-		i = 1;
-		is_newline = 1;
-		if (cmd->bargv[1])
-		{
-			while (!ft_strncmp(cmd->bargv[i], "-n\0", 3))
-			{
-				i++;
-				is_newline = 0;
-			}
-		}
-		while (cmd->bargv[i])
-		{
-			ft_putstr_fd(cmd->bargv[i++], 1);
-			if (cmd->bargv[i])
-				ft_putstr_fd(" ", 1);
-		}
-		if (is_newline)
-			ft_putstr_fd("\n", 1);
-	}
+		return (cmd_bltn_echo(cmd));
 	if (!ft_strncmp(cmd->bargv[0], "env\0", 4))
-	{
-		print_env();
-	}
+		return (cmd_bltn_env(cmd));
 	return (0);
 }

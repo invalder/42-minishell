@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 21:01:52 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/05 02:47:56 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/05 19:24:40 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	parent(t_cmd_lst *cmd, int *fd)
 
 void	exec(t_cmd_lst *cmd, int *fd)
 {
+	struct sigaction	s_int;
+
 	(void) fd;
 	if (cmd->pid)
 		cmd->pid = fork();

@@ -3,16 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+         #
+#    By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2023/02/04 11:26:59 by nnakarac         ###   ########.fr        #
+#    Updated: 2023/02/05 19:32:51 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NORM = norminette -R CheckForbiddenSourceHeaderDefine
 
 UNAME = $(shell uname -s)
+ARCH = $(shell arch)
 ifeq ($(UNAME), Linux)
 	MEME = aplay easter_egg/meme2.mp3 &
 	ANYA = aplay easter_egg/anya.mp3 &
@@ -41,7 +42,7 @@ SPONSOR3 = ./easter_egg/sponsor.sh
 NAME = minishell
 NAMEP = pipex
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g
+CFLAGS	= -g -Wall -Wextra -Werror
 
 ifeq ($(ARCH), arm64)
 	LDFLAGS	= -L${HOMEBREW_PREFIX}/opt/readline/lib
@@ -115,7 +116,7 @@ all: $(NAME)
 
 $(NAME): $(addprefix $(OBJ_DIR),$(OBJS))
 	@make -C $(LIB_DIR) --silent
-	@$(CC) $(CFLAGS) -lreadline $(LDFLAGS) $(CPPFLAGS) $(addprefix $(OBJ_DIR),$(OBJS)) $(LIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -lreadline $(LDFLAGS) $(addprefix $(OBJ_DIR),$(OBJS)) $(LIBS) -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
