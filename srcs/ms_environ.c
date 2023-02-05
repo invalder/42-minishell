@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_environ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 01:28:26 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/04 21:59:11 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/06 01:12:28 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	export_env(char *exp)
 	tmp = environ;
 	while (environ[i])
 		i++;
-	new = malloc(sizeof(char *) * i + 2);
+	new = malloc(sizeof(char *) * (i + 2));
 	i = 0;
 	while (environ[i])
 	{

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+         #
+#    By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2023/02/05 19:39:05 by nnakarac         ###   ########.fr        #
+#    Updated: 2023/02/06 01:15:11 by sthitiku         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ SRCS	=	test.c \
 			ms_split.c \
 			ms_cmd_split.c \
 			ms_environ.c \
-			ms_parse.c \
+			ms_parser.c \
 			ms_parse_exit_stat.c \
 			ms_token.c \
 			ms_free_input.c \
@@ -99,6 +99,8 @@ SRCS	=	test.c \
 			ms_err2.c \
 			ms_arr_utils.c \
 			ms_string_utils.c \
+			ms_parser_helper.c \
+			ms_expander_helper.c \
 
 # SRCS	= minishell.c \
 

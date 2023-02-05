@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_input.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/05 19:45:25 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/06 01:12:12 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,5 +213,17 @@ void		print2d(char **ptr);
 
 // ms_string_utils.c
 int			is_string_numeric(char *num_str);
+
+// ms_parser_helper.c
+char	*cut_quote(char *str, char quote);
+char	*get_env_from_string(char *env);
+char	*parse_env_get_env(char *str, int str_len, char first, char last);
+
+// ms_expander_helper.c
+char	find_sep(char *str);
+char	*ms_join_char(char *str, char c);
+char	*ms_join_str(char *str1, char *str2);
+char	*expand_env(char *env);
+int		find_sep_index(char *str, char sep);
 
 #endif
