@@ -123,7 +123,8 @@ int	main_loop(t_cmd *lst)
 		line = readline("minimini> ");
 		if (line == NULL || !ft_strncmp(line, "exit\0", 5))
 			return (0);
-		add_history(line);
+		if (*line && *line != '\0')
+			add_history(line);
 		if (!ft_strncmp(line, "env\0", 4))
 			print_env();
 		cmd = cmd_split(line);
