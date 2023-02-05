@@ -121,9 +121,9 @@ int	main_loop(t_cmd *lst)
 	while (1)
 	{
 		line = readline("minimini> ");
-		add_history(line);
 		if (line == NULL || !ft_strncmp(line, "exit\0", 5))
 			return (0);
+		add_history(line);
 		if (!ft_strncmp(line, "env\0", 4))
 			print_env();
 		cmd = cmd_split(line);
