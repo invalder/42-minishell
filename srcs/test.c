@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:40:04 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/04 11:55:26 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/05 02:30:26 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,10 @@ int	main_loop(t_cmd *lst)
 	while (1)
 	{
 		line = readline("minimini> ");
-		add_history(line);
+		if (line)
+			add_history(line);
 		if (line == NULL || !ft_strncmp(line, "exit\0", 5))
 			return (0);
-		// if (!ft_strncmp(line, "env\0", 4))
-		// 	print_env();
 		cmd = cmd_split(line);
 		if (cmd != NULL)
 		{

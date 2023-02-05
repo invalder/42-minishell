@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 01:04:35 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/01/28 15:10:32 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/05 02:50:23 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static char	*cut_quote(char *str, char quote)
 
 	i = 0;
 	len = 0;
+	new = NULL;
 	while (str[i])
 	{
 		if (str[i] != quote)
@@ -49,13 +50,14 @@ static char	*parse_env_get_env(char *str, int str_len, char first, char last)
 
 	p.start = 0;
 	p.end = 0;
+	new = NULL;
 	if (first == '\'' && last == '\'')
 	{
 		p.start = 2;
 		p.end = str_len - 2;
 		p.sub = ft_substr(str, p.start, p.end - p.start + 1);
 		p.env = getenv(p.sub);
-		new = malloc(sizeof(char) * ft_strlen(p.env) + 3);
+		new = malloc(sizeof(char) * (ft_strlen(p.env) + 3));
 		ft_strlcpy(new, "\'", 2);
 		ft_strlcpy(&new[1], p.env, ft_strlen(p.env) + 1);
 		ft_strlcpy(&new[ft_strlen(p.env) + 1], "\'", 2);
@@ -64,7 +66,7 @@ static char	*parse_env_get_env(char *str, int str_len, char first, char last)
 	{
 		p.sub = ft_substr(str, p.start + 1, str_len - p.start - 1);
 		parse_env_exit_status(&p, str_len);
-		new = malloc(sizeof(char) * ft_strlen(p.env) + 1);
+		new = malloc(sizeof(char) * (ft_strlen(p.env) + 1));
 		ft_strlcpy(new, p.env, ft_strlen(p.env) + 1);
 	}
 	free(p.sub);

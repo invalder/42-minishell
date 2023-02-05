@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 22:50:29 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/04 11:35:14 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/05 02:33:16 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	err_eenoent(char *msg, int is_exit)
 
 void	err_general(char *msg, int is_exit, int err_code)
 {
-	ft_putstr_fd(msg, 2);
+	if (*msg)
+		ft_putstr_fd(msg, 2);
 	if (is_exit)
 		exit(err_code);
 }

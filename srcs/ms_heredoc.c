@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 23:40:54 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/04 11:31:04 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/05 01:02:14 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	unlink_heredoc(void)
 	int		i;
 
 	i = 1;
-	while (i < 65535)
+	while (i < 1024)
 	{
 		number = ft_itoa(i);
 		ft_strlcpy(pathname, "/tmp/mini-", 20);
@@ -76,7 +76,7 @@ char	*read_here_doc(void)
 	int		i;
 
 	i = 1;
-	while (i < 65535)
+	while (i < 1024)
 	{
 		number = ft_itoa(i);
 		ft_strlcpy(pathname, "/tmp/mini-", 20);

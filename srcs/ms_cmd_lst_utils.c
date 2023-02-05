@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 00:00:45 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/04 19:51:38 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/05 02:44:18 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	free_cmd_lst_params(t_cmd_lst *cmd)
 		free(cmd->o_mode);
 	if (cmd->markout)
 		free(cmd->markout);
-	if (cmd->path)
-		free(cmd->path);
 	if (cmd->argv)
 		free(cmd->argv);
 	if (cmd->bargv)

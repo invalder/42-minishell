@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 15:53:04 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/04 11:34:14 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/05 01:17:13 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define MSG_EPIPE	"minishell: write error: Broken pipe\n"
 # define MSG_EFORK	"minishell: fork: cannot create child process\n"
 # define MSG_EEXEC	": command not found\n"
+# define MSG_EEXEC_DIR	": is a directory\n"
+# define MSG_EEXEC_ENOENT	": no such file or directory\n"
 # define MSG_ENOENT	"no such file or directory: "
 
 void	err_message(int err_code, int is_exit);

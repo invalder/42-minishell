@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 21:01:52 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/04 04:40:45 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/05 02:47:56 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	exec_main(t_cmd *lst)
 	if (lst->cmd[0])
 	{
 		expander(lst, 0, 0);
-		// print_cmd_lst(lst->cmd_lst);
 		executor(lst);
 		free_cmd_lst(lst->cmd_lst);
 		lst->cmd_lst = NULL;
