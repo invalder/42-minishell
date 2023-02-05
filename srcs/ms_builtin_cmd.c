@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 18:04:39 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/05 17:55:13 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/05 19:42:06 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,35 +38,6 @@ int	cmd_bltn_exec(t_cmd_lst *cmd)
 		return (cmd_bltn_child_exec(cmd));
 	else
 		return (cmd_bltn_parent_exec(cmd));
-}
-
-void	cmd_bltn_markout(t_cmd_lst *cmd, int i, char **metas)
-{
-	while (metas[i])
-	{
-		cmd->markout[i] = 1;
-		i++;
-	}
-}
-
-char	**get_bltn_child(t_cmd_lst *cmd, char **bltn, int i, char **metas)
-{
-	(void) bltn;
-	cmd->btype = 0;
-	get_cmd_bargv(cmd, i, metas);
-	cmd->blen = arr2dsize(&metas[i]);
-	cmd_bltn_markout(cmd, i, metas);
-	return (cmd->bargv);
-}
-
-char	**get_bltn_parent(t_cmd_lst *cmd, char **bltn, int i, char **metas)
-{
-	(void) bltn;
-	cmd->btype = 1;
-	get_cmd_bargv(cmd, i, metas);
-	cmd->blen = arr2dsize(&metas[i]);
-	cmd_bltn_markout(cmd, i, metas);
-	return (cmd->bargv);
 }
 
 /// @brief check for the builtins

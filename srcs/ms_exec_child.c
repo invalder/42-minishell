@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:51:17 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/05 18:41:21 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/05 19:43:58 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,6 @@ void	parent_piping(t_cmd_lst *cmd, int *fd)
 
 void	child(t_cmd_lst *cmd, int *fd)
 {
-	static int	i = 0;
-
-	(void) fd;
-	(void) i;
 	if (!cmd->pid)
 	{
 		child_pipe_in(cmd, fd);

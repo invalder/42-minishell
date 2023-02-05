@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_input.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/04 21:41:21 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/05 19:45:25 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,21 @@ int			cmd_bltn_exec(t_cmd_lst *cmd);
 
 int			cmd_bltn_child_exec(t_cmd_lst *cmd);
 int			cmd_bltn_parent_exec(t_cmd_lst *cmd);
+
+char		**get_bltn_child(t_cmd_lst *cmd, char **bltn, int i, char **metas);
+char		**get_bltn_parent(t_cmd_lst *cmd, char **bltn, int i, char **metas);
+
+void		get_cmd_bargv(t_cmd_lst *cmd, int i, char **metas);
+
+// ms_builtin_cmd_utils
+int			cmd_bltn_pwd(t_cmd_lst *cmd);
+int			cmd_bltn_echo(t_cmd_lst *cmd);
+int			cmd_bltn_env(t_cmd_lst *cmd);
+int			cmd_bltn_cd(t_cmd_lst *cmd);
+int			cmd_bltn_exit(t_cmd_lst *cmd);
+int			cmd_bltn_unset(t_cmd_lst *cmd);
+int			cmd_bltn_export(t_cmd_lst *cmd);
+void		cmd_bltn_markout(t_cmd_lst *cmd, int i, char **metas);
 
 // ms_exec_cmd_prep.c
 char		**get_rd_in(t_cmd *lst, t_cmd_lst *cmd, int idx);
