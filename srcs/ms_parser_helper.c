@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 00:19:39 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/07 00:54:41 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/07 01:18:57 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,31 +42,31 @@ char	*cut_quote(char *str, char quote)
 
 char	*get_env_from_string(char *env)
 {
-	int		start;
-	int		stop;
+	int		st;
+	int		sp;
 	char	sep;
-	char	*ret;
+	char	*rt;
 
-	ret = malloc(1);
-	start = -1;
+	rt = malloc(1);
+	st = -1;
 	sep = 0;
-	while (env[++start])
+	while (env[++st])
 	{
-		stop = start;
-		if (env[start] != '$')
+		sp = st;
+		if (env[st] != '$')
 		{
-			if (env[start] == '\'' || env[start] == '\"')
-				start++;
-			if (env[start])
-				ret = ms_join_char(ret, env[start]);
+			if (env[st] == '\'' || env[st] == '\"')
+				st++;
+			if (env[st])
+				rt = ms_join_char(rt, env[st]);
 			continue ;
 		}
-		sep = find_sep(&env[start]);
-		stop = start + find_sep_index(&env[start], sep);
-		ret = ms_join_str(ret, expand_env(ft_substr(env, start + 1, stop - start - 1)));
-		start = stop - 1;
+		sep = find_sep(&env[st]);
+		sp = st + find_sep_index(&env[st], sep);
+		rt = ms_join_str(rt, expand_env(ft_substr(env, st + 1, sp - st - 1)));
+		st = sp - 1;
 	}
-	return (ret);
+	return (rt);
 }
 
 char	*parse_env_get_env(char *str, int str_len, char first, char last)

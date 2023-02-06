@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:09:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/07 00:34:29 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/07 01:13:08 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,41 +95,13 @@ int	count_cmd(char **cmd, int *i)
 	}
 	while (cmd[*i])
 	{
-		if (cmd[*i][0] == '|'|| cmd[*i][0] == '&')
+		if (cmd[*i][0] == '|' || cmd[*i][0] == '&')
 			break ;
 		count++;
-		// trying to check if there is an empty quote
-		// if (cmd[*i][0]== '\' )
-		// 	count--;
 		(*i)++;
 	}
 	return (count);
 }
-
-// int	count_block(char **cmd)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		count;
-
-// 	if (!cmd[0])
-// 		return (0);
-// 	i = 0;
-// 	count = 1;
-// 	if (!ft_isalnum(cmd[0][0]) && cmd[0][0] != '\'' && cmd[0][0] != '\"' && \
-// 		cmd[0][0] != '$' && cmd[0][0] != '|' && cmd[0][0] != '<' && \
-// 		cmd[0][0] != '>' && cmd[0][0] != '&')
-// 		count--;
-// 	while (cmd[i])
-// 	{
-// 		j = 0;
-// 		if (cmd[i][j] == '|' || cmd[i][j] == '<' || cmd[i][j] == '>'
-// 			|| cmd[i][j] == '&')
-// 			count++;
-// 		i++;
-// 	}
-// 	return (count);
-// }
 
 int	count_block(char **cmd)
 {
@@ -176,20 +148,10 @@ static char	**create_blk(char **cmd, int begin, int *end, int index)
 		if (index == 0 && i == 0 && (cmd[index][0] != '>' && \
 			cmd[index][0] != '<'))
 				new_blk[i++] = ft_strdup("(null)");
-		// if (!ft_strncmp(cmd[begin], "\'\'\0", 3) || \
-		// 	!ft_strncmp(cmd[begin], "\"\"\0", 3))
-		// 	begin++;
 		else
 			new_blk[i++] = ft_strdup(cmd[begin++]);
 	}
 	new_blk[i] = NULL;
-	
-	i = 0;
-	// while (new_blk[i])
-	// {
-	// 	printf("new_blk[%d] = %s\n", i, new_blk[i]);
-	// 	i++;
-	// }
 	return (new_blk);
 }
 
