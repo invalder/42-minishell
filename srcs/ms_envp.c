@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 16:03:07 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 17:28:18 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/05 19:54:31 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*check_envp(char **list_envp, char *cmd)
 		lst_tmp++;
 	}
 	if (access(cmd, R_OK | F_OK | X_OK) == 0)
-		return (cmd);
+		return (ft_strdup(cmd));
 	return (NULL);
 }
 
