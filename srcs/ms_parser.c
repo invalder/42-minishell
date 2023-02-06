@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 01:04:35 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/06 00:21:56 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/07 00:33:48 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	parse_cmd_one_pair(char ***cmd, int i, int j, char first_char)
 {
 	if (first_char == '\"' || first_char == '\'')
 		cmd[i][j] = cut_quote(cmd[i][j], first_char);
-	if (first_char == '\'')
+	if (cmd[i][j][0] == '\'')
 		return ;
 	if (ft_strchr(cmd[i][j], '$') && cmd[i][j][0] != '\"')
 		cmd[i][j] = parse_env(cmd[i][j]);

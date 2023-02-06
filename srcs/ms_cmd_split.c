@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:09:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/05 16:06:46 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/07 00:34:29 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,30 +34,52 @@
 // 	return (count);
 // }
 
-int	is_empty_quote(char *str)
+// int	is_empty_quote(char *str)
+// {
+// 	int		i;
+// 	int		j;
+
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		j = i + 1;
+// 		if (str[i] == '\'' || str[i] == '\"')
+// 		{
+// 			while (str[j])
+// 			{
+// 				if (str[j] == str[i])
+// 				{
+// 					if (i == j - 1)
+// 						return (1);
+// 					break ;
+// 				}
+// 				j++;
+// 			}
+// 		}
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
+int	ms_check_full_quotes(char *line)
 {
-	int		i;
-	int		j;
+	int	d_quote;
+	int	s_quote;
+	int	i;
 
 	i = 0;
-	while (str[i])
+	d_quote = 0;
+	s_quote = 0;
+	while (line[i])
 	{
-		j = i + 1;
-		if (str[i] == '\'' || str[i] == '\"')
-		{
-			while (str[j])
-			{
-				if (str[j] == str[i])
-				{
-					if (i == j - 1)
-						return (1);
-					break ;
-				}
-				j++;
-			}
-		}
+		if (line[i] == '\"')
+			d_quote++;
+		else if (line[i] == '\'')
+			s_quote++;
 		i++;
 	}
+	if (d_quote % 2 == 0 && s_quote % 2 == 0)
+		return (1);
 	return (0);
 }
 
@@ -145,7 +167,6 @@ static char	**create_blk(char **cmd, int begin, int *end, int index)
 	char	**new_blk;
 
 	blk = count_cmd(cmd, end);
-	printf("blk = %d\n", blk);
 	if (index == 0 && (cmd[index][0] != '>' && cmd[index][0] != '<'))
 		blk++;
 	new_blk = malloc(sizeof(char *) * (blk + 1));
@@ -164,11 +185,11 @@ static char	**create_blk(char **cmd, int begin, int *end, int index)
 	new_blk[i] = NULL;
 	
 	i = 0;
-	while (new_blk[i])
-	{
-		printf("new_blk[%d] = %s\n", i, new_blk[i]);
-		i++;
-	}
+	// while (new_blk[i])
+	// {
+	// 	printf("new_blk[%d] = %s\n", i, new_blk[i]);
+	// 	i++;
+	// }
 	return (new_blk);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/06 00:23:45 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/06 23:37:45 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ void	skip_token(char *line, int *i, int mode);
 
 // ms_cmd_split.c -> split from char** to char***
 char	***create_cmd(char **cmd, t_cmd *lst);
+int		ms_check_full_quotes(char *line);
 
-void	 init_list(t_cmd *lst);
+void	init_list(t_cmd *lst);
 
 void	parse_cmd(char ***cmd);
 int		print_env(void);
@@ -61,7 +62,7 @@ int		ms_cd(char *path_str);
 
 // ms_token.c
 void	skip_token(char *line, int *i, int mode);
-int		check_close_quote(char *cmd);
+// int		check_close_quote(char *cmd);
 
 void	free_main_loop(char *line, char **cmd, char ***cmd_3star);
 void	*free_split(char **split);

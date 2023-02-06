@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 00:17:59 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/06 00:44:42 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/07 00:39:38 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ char	*ms_join_str(char *str1, char *str2)
 
 	i = 0;
 	j = 0;
+	printf("JOIN STR: str1 = %s\tstr2 = %s\n", str1, str2);
 	new = malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2) + 1));
 	if (str1)
 	{

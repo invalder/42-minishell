@@ -125,6 +125,13 @@ int	main_loop(t_cmd *lst)
 			return (0);
 		if (*line && *line != '\0')
 			add_history(line);
+		// check quotes are closed, if not print error message free line and continue
+		if (!ms_check_full_quotes(line))
+		{
+			printf("minishell: syntax error: quotes are not closed\n");
+			free(line);
+			continue ;
+		}
 		if (!ft_strncmp(line, "env\0", 4))
 			print_env();
 		cmd = cmd_split(line);

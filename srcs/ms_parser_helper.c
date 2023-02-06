@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 00:19:39 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/06 00:45:55 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/07 00:54:41 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ char	*get_env_from_string(char *env)
 		stop = start;
 		if (env[start] != '$')
 		{
-			ret = ms_join_char(ret, env[start]);
+			if (env[start] == '\'' || env[start] == '\"')
+				start++;
+			if (env[start])
+				ret = ms_join_char(ret, env[start]);
 			continue ;
 		}
 		sep = find_sep(&env[start]);
@@ -63,7 +66,6 @@ char	*get_env_from_string(char *env)
 		ret = ms_join_str(ret, expand_env(ft_substr(env, start + 1, stop - start - 1)));
 		start = stop - 1;
 	}
-	free(env);
 	return (ret);
 }
 
@@ -92,5 +94,6 @@ char	*parse_env_get_env(char *str, int str_len, char first, char last)
 		new = malloc(sizeof(char) * ft_strlen(p.env) + 1);
 		new = ms_join_str(new, p.env);
 	}
+	free(p.sub);
 	return (new);
 }
