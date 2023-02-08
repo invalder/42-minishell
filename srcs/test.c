@@ -134,6 +134,8 @@ int	main_loop(t_cmd *lst)
 		}
 		if (!ft_strncmp(line, "env\0", 4))
 			print_env();
+
+		// dak $?
 		cmd = cmd_split(line);
 		print_2star(cmd);
 		// cmd != NULL when quote is closed correctly

@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 01:28:26 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/07 01:16:23 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/09 02:07:51 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,25 @@ char	**dup_environ(char **environ)
 	while (environ[i])
 	{
 		new[i] = ft_strdup(environ[i]);
+		i++;
+	}
+	new[i] = NULL;
+	return (new);
+}
+
+char	**dup_str_array(char **env)
+{
+	int		i;
+	char	**new;
+
+	i = 0;
+	while (env[i])
+		i++;
+	new = (char **)malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (env[i])
+	{
+		new[i] = ft_strdup(env[i]);
 		i++;
 	}
 	new[i] = NULL;
@@ -82,12 +101,7 @@ void	init_list(t_cmd *lst)
 }
 
 // This part is for printing the env after sorting USED FOR `export` command
+// before using this part, dup with dup_str_array first!!
 // sort_str(lst->new_envp);
 // for (int i = 0; lst->new_envp[i]; i++)
 // 	printf("%s\n", lst->new_envp[i]);
-
-// printf("%s\n", getenv("LOGNAME"));
-// unset_env("LOGNAME");
-// printf("%s\n", getenv("LOGNAME"));
-// export_env("aaa=$HOME:aaa/bbb");
-// printf("%s\n", getenv("aaa"));

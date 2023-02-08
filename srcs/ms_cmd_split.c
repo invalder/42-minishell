@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:09:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/07 01:13:08 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/09 01:35:12 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ int	count_block(char **cmd)
 	count = 1;
 	if (!ft_isalnum(cmd[0][0]) && cmd[0][0] != '\'' && cmd[0][0] != '\"' && \
 		cmd[0][0] != '$' && cmd[0][0] != '|' && cmd[0][0] != '&' && \
-		cmd[0][0] != '>' && cmd[0][0] != '<')
+		cmd[0][0] != '>' && cmd[0][0] != '<' && cmd[0][0] != '(' && \
+		cmd[0][0] != '/')
 			count--;
 	while (cmd[i])
 	{
@@ -149,7 +150,7 @@ static char	**create_blk(char **cmd, int begin, int *end, int index)
 			cmd[index][0] != '<'))
 				new_blk[i++] = ft_strdup("(null)");
 		else
-			new_blk[i++] = ft_strdup(cmd[begin++]);
+			new_blk[i++] = ft_strtrim(cmd[begin++], " ");
 	}
 	new_blk[i] = NULL;
 	return (new_blk);

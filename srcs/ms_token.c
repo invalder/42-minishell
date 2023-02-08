@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 23:44:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/07 01:19:36 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/09 01:36:22 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 
 static void	skip_token_2(char *line, int *i, int mode, char tmp)
 {
+	printf("line: %s, i: %d, mode: %d, tmp: %c\n", line, *i, mode, tmp);
 	if (mode == 2)
 	{
 		(*i)++;
@@ -50,7 +51,8 @@ static void	skip_token_2(char *line, int *i, int mode, char tmp)
 	else if (mode == 3)
 	{
 		while (line[*i] && !ft_isspace(line[*i]) && line[*i] != '|' && \
-				line[*i] != '<' && line[*i] != '>' && line[*i] != '&')
+				line[*i] != '<' && line[*i] != '>' && line[*i] != '&' && \
+				line[*i] != '\'' && line[*i] != '\"')
 			(*i)++;
 	}
 }

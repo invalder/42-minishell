@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 00:19:39 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/07 01:18:57 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/09 01:13:35 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ char	*parse_env_get_env(char *str, int str_len, char first, char last)
 		p.end = str_len - 1;
 		p.sub = ft_substr(str, p.start, p.end - p.start);
 		p.env = get_env_from_string(p.sub);
-		new = malloc(sizeof(char) * ft_strlen(p.env) + 3);
-		ft_strlcpy(new, "\'", 2);
+		new = malloc(1);
+		new = ms_join_char(new, '\'');
 		new = ms_join_str(new, p.env);
-		ft_strlcpy(&new[ft_strlen(p.env) + 1], "\'", 2);
+		new = ms_join_char(new, '\'');
 	}
 	else
 	{
