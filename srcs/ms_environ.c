@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 01:28:26 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/09 02:07:51 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/09 02:15:23 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	init_list(t_cmd *lst)
 }
 
 // This part is for printing the env after sorting USED FOR `export` command
-// before using this part, dup with dup_str_array first!!
+// before using this part, dup with dup_str_arra first!!
 // sort_str(lst->new_envp);
 // for (int i = 0; lst->new_envp[i]; i++)
 // 	printf("%s\n", lst->new_envp[i]);
