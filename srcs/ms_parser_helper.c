@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 00:19:39 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/09 01:13:35 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/09 23:00:17 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,19 @@ char	*cut_quote(char *str, char quote)
 	return (new);
 }
 
-char	*get_env_from_string(char *env)
+static char	get_char_to_join(char *env, int *st)
+{
+	if (env[*st] == '\'' || env[*st] == '\"')
+		(*st)++;
+	return (env[*st]);
+}
+
+static char	*get_env_from_string(char *env, char *rt) 
 {
 	int		st;
 	int		sp;
 	char	sep;
-	char	*rt;
-
-	rt = malloc(1);
+	
 	st = -1;
 	sep = 0;
 	while (env[++st])
@@ -55,10 +60,7 @@ char	*get_env_from_string(char *env)
 		sp = st;
 		if (env[st] != '$')
 		{
-			if (env[st] == '\'' || env[st] == '\"')
-				st++;
-			if (env[st])
-				rt = ms_join_char(rt, env[st]);
+			rt = ms_join_char(rt, get_char_to_join(env, &st));
 			continue ;
 		}
 		sep = find_sep(&env[st]);
@@ -81,7 +83,7 @@ char	*parse_env_get_env(char *str, int str_len, char first, char last)
 		p.start = 1;
 		p.end = str_len - 1;
 		p.sub = ft_substr(str, p.start, p.end - p.start);
-		p.env = get_env_from_string(p.sub);
+		p.env = get_env_from_string(p.sub, malloc(1));
 		new = malloc(1);
 		new = ms_join_char(new, '\'');
 		new = ms_join_str(new, p.env);
@@ -90,7 +92,7 @@ char	*parse_env_get_env(char *str, int str_len, char first, char last)
 	else
 	{
 		p.sub = ft_substr(str, p.start, str_len - p.start);
-		p.env = get_env_from_string(p.sub);
+		p.env = get_env_from_string(p.sub, malloc(1));
 		new = malloc(sizeof(char) * ft_strlen(p.env) + 1);
 		new = ms_join_str(new, p.env);
 	}

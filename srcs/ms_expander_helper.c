@@ -6,7 +6,7 @@
 /*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 00:17:59 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/09 01:35:50 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/09 22:02:42 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ char	find_sep(char *str)
 	while (str[++i])
 	{
 		if (ft_isalnum(str[i]) || str[i] == '$')
-			continue ;
+		{
+			if (i != 0 && str[i] == '$')
+				break ;
+			else
+				continue ;
+		}
 		else
 			break ;
 		i++;
@@ -37,7 +42,7 @@ int	find_sep_index(char *str, char sep)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == sep)
+		if (str[i] == sep && i != 0)
 			break ;
 		i++;
 	}
