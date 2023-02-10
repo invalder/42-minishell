@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/11 01:01:22 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 01:31:30 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void		free_3star(char ***cmd);
 
 // ms_environ.c
 void		unset_env(char *name);
+void		export_env(char *exp);
 char		**dup_environ(char **environ);
 void		sort_str(char **str);
 
