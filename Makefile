@@ -3,16 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2023/02/06 00:25:47 by sthitiku         ###   ########.fr        #
+#    Updated: 2023/02/11 01:37:51 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NORM = norminette -R CheckForbiddenSourceHeaderDefine
 
 UNAME = $(shell uname -s)
+ARCH = $(shell arch)
 ifeq ($(UNAME), Linux)
 	MEME = aplay easter_egg/meme2.mp3 &
 	ANYA = aplay easter_egg/anya.mp3 &
@@ -41,9 +42,18 @@ SPONSOR3 = ./easter_egg/sponsor.sh
 NAME = minishell
 NAMEP = pipex
 CC		= gcc
-# CFLAGS	= -g -I/opt/homebrew/opt/readline/include
-CFLAGS	= -g -Wall -Wextra -Werror -I/opt/homebrew/opt/readline/include
-RL	= -lreadline -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include
+CFLAGS	= -g -Wall -Wextra -Werror
+
+ifeq ($(ARCH), arm64)
+	LDFLAGS	= -L${HOMEBREW_PREFIX}/opt/readline/lib
+	CPPFLAGS	= -I${HOMEBREW_PREFIX}/opt/readline/include
+else
+	LDFLAGS	= -L/usr/local/opt/readline/lib
+	CPPFLAGS	= -I/usr/local/opt/readline/include
+endif
+
+# CFLAGS	= -Wall -Wextra -Werror -g -I/opt/homebrew/opt/readline/include
+# RL	= -lreadline -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include
 RM		= /bin/rm -rf
 
 SRC_DIR	= srcs/
@@ -84,23 +94,17 @@ all: $(NAME)
 
 $(NAME): $(addprefix $(OBJ_DIR),$(OBJS))
 	@make -C $(LIB_DIR) --silent
-	@$(CC) $(CFLAGS) $(RL) $(addprefix $(OBJ_DIR),$(OBJS)) $(LIBS) -o $(NAME)
-
-$(NAMEP): $(addprefix $(OBJ_DIR),$(OBJP))
-	@make -C $(LIB_DIR) --silent
-	@$(CC) $(CFLAGS) $(addprefix $(OBJ_DIR),$(OBJP)) $(LIBS) -o $(NAMEP)
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -lreadline $(LDFLAGS) $(addprefix $(OBJ_DIR),$(OBJS)) $(LIBS) -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
-	@$(CC) -Ilibft $(CFLAGS) -c $< $(INCS) -o $@
+	@$(CC) -Ilibft $(CFLAGS) $(CPPFLAGS) -c $< $(INCS) -o $@
 
 clean:
 	@make -C $(LIB_DIR) clean --silent
 	@$(RM) $(OBJ_DIR)
 	@$(RM) $(NAME)
-	@$(RM) $(NAMEP)
 	@$(RM) "$(NAME).dSYM"
-	@$(RM) "$(NAMEP).dSYM"
 
 fclean: clean
 	@make -C $(LIB_DIR) fclean --silent
