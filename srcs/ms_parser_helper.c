@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parser_helper.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sthitiku <sthitiku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 00:19:39 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/09 23:00:17 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/11 02:19:44 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	*parse_env_get_env(char *str, int str_len, char first, char last)
 	{
 		p.sub = ft_substr(str, p.start, str_len - p.start);
 		p.env = get_env_from_string(p.sub, malloc(1));
-		new = malloc(sizeof(char) * ft_strlen(p.env) + 1);
+		new = ft_calloc(1, ft_strlen(p.env) + 1);
 		new = ms_join_str(new, p.env);
 	}
 	free(p.sub);
