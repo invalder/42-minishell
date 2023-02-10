@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:40:04 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/06 01:38:54 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/11 00:39:57 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 // 	t_logic		*logic;
 // }	t_block;
 
-int	g_status;
+int	g_status = 0;
 
 void	print_3star(char ***cmd)
 {
@@ -108,6 +108,17 @@ int	main_loop(t_cmd *lst)
 			return (0);
 		if (*line && *line != '\0')
 			add_history(line);
+		// check quotes are closed, if not print error message free line and continue
+		if (!ms_check_full_quotes(line))
+		{
+			printf("minishell: syntax error: quotes are not closed\n");
+			free(line);
+			continue ;
+		}
+		if (!ft_strncmp(line, "env\0", 4))
+			print_env();
+
+		// dak $?
 		cmd = cmd_split(line);
 		if (cmd != NULL)
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_input.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/06 10:22:50 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/10 23:59:04 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ char		**cmd_split(char *line);
 void		skip_token(char *line, int *i, int mode);
 
 // ms_cmd_split.c -> split from char** to char***
-char		***create_cmd(char **cmd, t_cmd *lst);
-
-void		init_list(t_cmd *lst);
+char	***create_cmd(char **cmd, t_cmd *lst);
+int		ms_check_full_quotes(char *line);
+void	init_list(t_cmd *lst);
 
 void		parse_cmd(char ***cmd);
 int			print_env(void);
@@ -211,13 +211,14 @@ void		sig_handler_main(void);
 void		print_cmd_lst(t_cmd_lst *cmd);
 void		print_cmd(t_cmd_lst *cmd);
 void		print2d(char **ptr);
+void	skip_token(char *line, int *i, int mode);
+// int		check_close_quote(char *cmd);
 
 // ms_string_utils.c
 int			is_string_numeric(char *num_str);
 
 // ms_parser_helper.c
 char	*cut_quote(char *str, char quote);
-char	*get_env_from_string(char *env);
 char	*parse_env_get_env(char *str, int str_len, char first, char last);
 
 // ms_expander_helper.c

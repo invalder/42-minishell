@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 01:04:35 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/06 01:25:46 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/10 23:55:12 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,15 @@ static char	*parse_env(char *str)
 static void	parse_cmd_one_pair(char ***cmd, int i, int j, char first_char)
 {
 	if (first_char == '\"' || first_char == '\'')
+	{
 		cmd[i][j] = cut_quote(cmd[i][j], first_char);
-	if (first_char == '\'')
+		if (cmd[i][j][0] == '$')
+		{
+			cmd[i][j] = ft_substr(cmd[i][j], 0, ft_strlen(cmd[i][j]));
+			return ;
+		}
+	}
+	if (cmd[i][j][0] == '\'')
 		return ;
 	if (ft_strchr(cmd[i][j], '$') && cmd[i][j][0] != '\"')
 		cmd[i][j] = parse_env(cmd[i][j]);

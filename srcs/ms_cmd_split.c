@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_cmd_split.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:09:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/06 01:12:20 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/10 23:55:19 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,52 @@
 // 	return (count);
 // }
 
-// loop through the string
-// if find a open quote, loop to check for the close quote
-// if close quote is open quote + 1, return 1
-int	is_empty_quote(char *str)
+// int	is_empty_quote(char *str)
+// {
+// 	int		i;
+// 	int		j;
+
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		j = i + 1;
+// 		if (str[i] == '\'' || str[i] == '\"')
+// 		{
+// 			while (str[j])
+// 			{
+// 				if (str[j] == str[i])
+// 				{
+// 					if (i == j - 1)
+// 						return (1);
+// 					break ;
+// 				}
+// 				j++;
+// 			}
+// 		}
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
+int	ms_check_full_quotes(char *line)
 {
-	int		i;
-	int		j;
+	int	d_quote;
+	int	s_quote;
+	int	i;
 
 	i = 0;
-	while (str[i])
+	d_quote = 0;
+	s_quote = 0;
+	while (line[i])
 	{
-		j = i + 1;
-		if (str[i] == '\'' || str[i] == '\"')
-		{
-			while (str[j])
-			{
-				if (str[j] == str[i])
-				{
-					if (i == j - 1)
-						return (1);
-					break ;
-				}
-				j++;
-			}
-		}
+		if (line[i] == '\"')
+			d_quote++;
+		else if (line[i] == '\'')
+			s_quote++;
 		i++;
 	}
+	if (d_quote % 2 == 0 && s_quote % 2 == 0)
+		return (1);
 	return (0);
 }
 
@@ -99,7 +118,8 @@ int	count_block(char **cmd)
 	count = 1;
 	if (!ft_isalnum(cmd[0][0]) && cmd[0][0] != '\'' && cmd[0][0] != '\"' && \
 		cmd[0][0] != '$' && cmd[0][0] != '|' && cmd[0][0] != '&' && \
-		cmd[0][0] != '>' && cmd[0][0] != '<')
+		cmd[0][0] != '>' && cmd[0][0] != '<' && cmd[0][0] != '(' && \
+		cmd[0][0] != '/' && cmd[0][0] != '.' && cmd[0][0] != '~')
 			count--;
 	while (cmd[i])
 	{
@@ -133,7 +153,7 @@ static char	**create_blk(char **cmd, int begin, int *end, int index)
 			cmd[index][0] != '<'))
 				new_blk[i++] = ft_strdup("(null)");
 		else
-			new_blk[i++] = ft_strdup(cmd[begin++]);
+			new_blk[i++] = ft_strtrim(cmd[begin++], " ");
 	}
 	new_blk[i] = NULL;
 	return (new_blk);

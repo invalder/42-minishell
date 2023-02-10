@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parser_helper.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 00:19:39 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/06 00:45:55 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/11 00:40:25 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,31 +40,35 @@ char	*cut_quote(char *str, char quote)
 	return (new);
 }
 
-char	*get_env_from_string(char *env)
+static char	get_char_to_join(char *env, int *st)
 {
-	int		start;
-	int		stop;
-	char	sep;
-	char	*ret;
+	if (env[*st] == '\'' || env[*st] == '\"')
+		(*st)++;
+	return (env[*st]);
+}
 
-	ret = malloc(1);
-	start = -1;
+static char	*get_env_from_string(char *env, char *rt)
+{
+	int		st;
+	int		sp;
+	char	sep;
+
+	st = -1;
 	sep = 0;
-	while (env[++start])
+	while (env[++st])
 	{
-		stop = start;
-		if (env[start] != '$')
+		sp = st;
+		if (env[st] != '$')
 		{
-			ret = ms_join_char(ret, env[start]);
+			rt = ms_join_char(rt, get_char_to_join(env, &st));
 			continue ;
 		}
-		sep = find_sep(&env[start]);
-		stop = start + find_sep_index(&env[start], sep);
-		ret = ms_join_str(ret, expand_env(ft_substr(env, start + 1, stop - start - 1)));
-		start = stop - 1;
+		sep = find_sep(&env[st]);
+		sp = st + find_sep_index(&env[st], sep);
+		rt = ms_join_str(rt, expand_env(ft_substr(env, st + 1, sp - st - 1)));
+		st = sp - 1;
 	}
-	free(env);
-	return (ret);
+	return (rt);
 }
 
 char	*parse_env_get_env(char *str, int str_len, char first, char last)
@@ -79,18 +83,20 @@ char	*parse_env_get_env(char *str, int str_len, char first, char last)
 		p.start = 1;
 		p.end = str_len - 1;
 		p.sub = ft_substr(str, p.start, p.end - p.start);
-		p.env = get_env_from_string(p.sub);
-		new = malloc(sizeof(char) * ft_strlen(p.env) + 3);
-		ft_strlcpy(new, "\'", 2);
+		p.env = get_env_from_string(p.sub, malloc(1));
+		new = malloc(1);
+		new = ms_join_char(new, '\'');
 		new = ms_join_str(new, p.env);
-		ft_strlcpy(&new[ft_strlen(p.env) + 1], "\'", 2);
+		new = ms_join_char(new, '\'');
 	}
 	else
 	{
 		p.sub = ft_substr(str, p.start, str_len - p.start);
-		p.env = get_env_from_string(p.sub);
+		p.env = get_env_from_string(p.sub, malloc(1));
+		parse_env_exit_status(&p, str_len);
 		new = malloc(sizeof(char) * ft_strlen(p.env) + 1);
 		new = ms_join_str(new, p.env);
 	}
+	free(p.sub);
 	return (new);
 }
