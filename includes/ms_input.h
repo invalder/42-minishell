@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/10 23:59:04 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 01:01:22 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ void		free_3star(char ***cmd);
 
 // ms_environ.c
 void		unset_env(char *name);
+char		**dup_environ(char **environ);
+void		sort_str(char **str);
 
 // ms_envp.c
 char		*check_envp(char **list_envp, char *cmd);
@@ -211,7 +213,8 @@ void		sig_handler_main(void);
 void		print_cmd_lst(t_cmd_lst *cmd);
 void		print_cmd(t_cmd_lst *cmd);
 void		print2d(char **ptr);
-void	skip_token(char *line, int *i, int mode);
+void		skip_token(char *line, int *i, int mode);
+void		print_3star(char ***cmd);
 // int		check_close_quote(char *cmd);
 
 // ms_string_utils.c

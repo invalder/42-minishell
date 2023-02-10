@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_expander.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 23:45:11 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/01/28 18:04:10 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 00:56:20 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 void	expander(t_cmd *lst, int idx, int is_pipe)
 {
 	t_cmd_lst	*new_lst;
-	char		**cmd;
 
 	(void) is_pipe;
-	(void) cmd;
 	while (idx < lst->cmd_len)
 	{
 		new_lst = cmd_lst_new(lst, idx);

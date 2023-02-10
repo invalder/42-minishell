@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ms_expander_helper.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 00:17:59 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/09 22:02:42 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/11 00:44:31 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ms_input.h"
+#include "ms_input.h"
 
 char	find_sep(char *str)
 {

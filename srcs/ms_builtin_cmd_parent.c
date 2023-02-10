@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_builtin_cmd_parent.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 01:02:12 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/05 19:44:34 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 01:18:27 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@ int	cmd_bltn_parent_exec(t_cmd_lst *cmd)
 	if (!ft_strncmp(cmd->bargv[0], "unset\0", 6))
 		return (cmd_bltn_unset(cmd));
 	if (!ft_strncmp(cmd->bargv[0], "export\0", 7))
-		return (cmd_bltn_unset(cmd));
+	{
+		if (!cmd->bargv[1])
+			return (cmd_bltn_export(cmd));
+		else
+			return (0);
+	}
 	return (-1);
 }
 

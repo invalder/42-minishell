@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:40:04 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/11 00:39:57 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 01:01:07 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,7 @@
 
 int	g_status = 0;
 
-void	print_3star(char ***cmd)
-{
-	int	i;
-	int	j;
 
-	i = 0;
-	while (cmd[i])
-	{
-		j = 0;
-		while (cmd[i][j])
-		{
-			printf("cmd[%d][%d] = %s\n", i, j, cmd[i][j]);
-			j++;
-		}
-		printf("cmd[%d][%d] = %s\n", i, j, cmd[i][j]);
-		i++;
-		printf("==========\n");
-	}
-	printf("%p\n", cmd[i]);
-}
 
 void	print_2star(char **cmd)
 {

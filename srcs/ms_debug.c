@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_debug.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 14:47:09 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/04 03:24:23 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 01:00:55 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,25 @@ void	print_form_begin(t_cmd_lst *cmd)
 		print2d(p_cmd->argv);
 		p_cmd = p_cmd->right;
 	}
+}
+
+void	print_3star(char ***cmd)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (cmd[i])
+	{
+		j = 0;
+		while (cmd[i][j])
+		{
+			dprintf(2, "cmd[%d][%d] = %s\n", i, j, cmd[i][j]);
+			j++;
+		}
+		dprintf(2, "cmd[%d][%d] = %s\n", i, j, cmd[i][j]);
+		i++;
+		dprintf(2, "==========\n");
+	}
+	dprintf(2, "%p\n", cmd[i]);
 }
