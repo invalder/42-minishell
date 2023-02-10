@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 23:12:53 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/10 23:55:47 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 02:42:02 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	export_env(char *exp)
 		i++;
 	new = malloc(sizeof(char *) * (i + 2));
 	i = 0;
+	if (getenv(arr[0]))
+		unset_env(arr[0]);
 	while (environ[i])
 	{
 		new[i] = ft_strdup(environ[i]);

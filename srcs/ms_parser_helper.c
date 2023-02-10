@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 00:19:39 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/11 00:40:25 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 02:33:09 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char	*parse_env_get_env(char *str, int str_len, char first, char last)
 		p.sub = ft_substr(str, p.start, str_len - p.start);
 		p.env = get_env_from_string(p.sub, malloc(1));
 		parse_env_exit_status(&p, str_len);
-		new = malloc(sizeof(char) * ft_strlen(p.env) + 1);
+		new = ft_calloc(1, ft_strlen(p.env) + 1);
 		new = ms_join_str(new, p.env);
 	}
 	free(p.sub);

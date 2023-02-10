@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 01:02:12 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/11 01:18:27 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 02:36:59 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ int	cmd_bltn_parent_exec(t_cmd_lst *cmd)
 		if (!cmd->bargv[1])
 			return (cmd_bltn_export(cmd));
 		else
-			return (0);
+		{
+			if (ft_strchr(cmd->bargv[1], '='))
+				export_env(cmd->bargv[1]);
+		}
+
 	}
 	return (-1);
 }
