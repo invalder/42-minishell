@@ -6,25 +6,29 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 01:28:26 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/11 00:49:16 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 14:39:38 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ms_input.h"
 
-char	**dup_environ(char **environ)
+extern t_global g_globe;
+
+char	**dup_environ(char **envp)
 {
 	int		i;
 	char	**new;
+	int		size;
 
 	i = 0;
-	while (environ[i])
-		i++;
-	new = (char **)malloc(sizeof(char *) * (i + 1));
+	size = arr2dsize(envp);
+	// while (envp[i])
+	// 	i++;
+	new = (char **)malloc(sizeof(char *) * (size + 1));
 	i = 0;
-	while (environ[i])
+	while (envp[i])
 	{
-		new[i] = ft_strdup(environ[i]);
+		new[i] = ft_strdup(envp[i]);
 		i++;
 	}
 	new[i] = NULL;
@@ -97,9 +101,8 @@ int	print_env(void)
 
 void	init_list(t_cmd *lst)
 {
-	lst->tmp_envp = environ;
-	lst->new_envp = dup_environ(environ);
-	environ = lst->new_envp;
+	lst->env_addr = &environ;
+	g_globe.env_addr = lst->env_addr;
 	lst->cmd = NULL;
 	lst->cmd_len = 0;
 	lst->cmd_lst = NULL;

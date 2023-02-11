@@ -6,11 +6,13 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 23:12:53 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/11 09:09:03 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 14:54:45 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_input.h"
+
+extern t_global g_globe;
 
 void	unset_env(char *name)
 {
@@ -40,8 +42,8 @@ int	export_env(char *exp)
 	while (environ[i])
 		i++;
 	new = ft_calloc((i + 2), sizeof(char *));
-	i = 0;
-	while (environ[i])
+	i = -1;
+	while (environ[++i])
 	{
 		if (!ft_strncmp(environ[i], arr[0], ft_strlen(arr[0])))
 		{
@@ -50,14 +52,12 @@ int	export_env(char *exp)
 		}
 		else
 			new[i] = ft_strdup(environ[i]);
-		i++;
 	}
 	if (!found)
 		new[i++] = ft_strdup(exp);
 	new[i] = NULL;
 	environ = new;
 	free_split(arr);
-	free_split(tmp);
 	return (0);
 }
 

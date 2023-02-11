@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 16:03:07 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/11 11:21:23 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 11:33:44 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,11 @@ char	**list_envp(char **envp, char *cmd)
 	char	*ptr;
 	char	*ptr2;
 
-	ptr = NULL;
-	ptr2 = NULL;
-	cmd_lst = ft_split(cmd, ' ');
 	while (*envp && ft_strncmp("PATH=", *envp, 5))
 		envp++;
 	if (!(*envp))
 		return (NULL);
+	cmd_lst = ft_split(cmd, ' ');
 	lst_envp = ft_split((*envp) + 5, ':');
 	lst_tmp = lst_envp;
 	while (*lst_tmp != NULL)

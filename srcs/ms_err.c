@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 15:43:38 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/11 09:25:12 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 11:33:59 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	err_efork(void)
 void	err_eexec(char *msg, int is_exit)
 {
 	DIR	*dir;
+
 	ft_putstr_fd(RED, 2);
 	ft_putstr_fd(msg, 2);
 	dir = opendir(msg);

@@ -6,13 +6,11 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 01:04:35 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/11 08:15:41 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 13:52:01 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ms_input.h"
-
-extern int	g_status;
 
 static char	*parse_env(char *str)
 {

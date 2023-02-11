@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:44:29 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/11 09:15:04 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 12:42:56 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	*free_split(char **split)
 		free(split[i]);
 		i++;
 	}
-	free(split[i]);
 	free(split);
 	return (NULL);
 }

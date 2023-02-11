@@ -6,13 +6,13 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 15:10:15 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/11 01:42:01 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 13:52:53 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_input.h"
 
-extern int	g_status;
+extern t_global g_globe;
 
 void	parse_env_exit_status(t_parse *p, int str_len)
 {
@@ -20,7 +20,7 @@ void	parse_env_exit_status(t_parse *p, int str_len)
 	{
 		if (p->env)
 			free(p->env);
-		p->env = ft_itoa(g_status);
+		p->env = ft_itoa(g_globe.status);
 	}
 
 }

@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/11 08:22:44 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 14:12:53 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,11 @@ typedef struct s_cmd_lst
 typedef struct s_cmd
 {
 	char		***cmd;
-	char		**tmp_envp;
-	char		**new_envp;
 	int			cmd_len;
 	t_cmd_lst	*cmd_lst;
 	char		*cwd;
 	int			status;
+	char		***env_addr;
 }	t_cmd;
 
 typedef struct s_parse
@@ -86,6 +85,12 @@ typedef struct s_parse
 	char	*sub;
 	char	*env;
 }	t_parse;
+
+typedef struct s_global
+{
+	int		status;
+	char	***env_addr;
+}	t_global;
 
 // ms_split.c -> split from char* to char**
 char		**cmd_split(char *line);
@@ -216,6 +221,7 @@ void		print_cmd(t_cmd_lst *cmd);
 void		print2d(char **ptr);
 void		skip_token(char *line, int *i, int mode);
 void		print_3star(char ***cmd);
+void		print_2star(char **cmd);
 // int		check_close_quote(char *cmd);
 
 // ms_string_utils.c

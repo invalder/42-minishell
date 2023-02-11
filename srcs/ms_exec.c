@@ -6,19 +6,19 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 21:01:52 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/11 06:57:08 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 13:53:07 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_input.h"
 
-extern int	g_status;
+extern t_global g_globe;
 
 void	parent(t_cmd_lst *cmd, int *fd)
 {
 	(void) fd;
 	waitpid(cmd->pid, &cmd->status, 0);
-	g_status = WEXITSTATUS(cmd->status);
+	g_globe.status = WEXITSTATUS(cmd->status);
 }
 
 void	exec(t_cmd_lst *cmd, int *fd)

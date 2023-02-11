@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exec_child.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:51:17 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/05 19:43:58 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 13:53:40 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_input.h"
 
-extern int	g_status;
+extern t_global g_globe;
 
 void	close_other_pipes(t_cmd_lst *cmd)
 {
@@ -86,7 +86,7 @@ void	parent_piping(t_cmd_lst *cmd, int *fd)
 		if (cmd->bargv)
 		{
 			if (cmd->btype)
-				g_status = cmd_bltn_exec(cmd);
+				g_globe.status = cmd_bltn_exec(cmd);
 		}
 		if (cmd->left)
 		{
