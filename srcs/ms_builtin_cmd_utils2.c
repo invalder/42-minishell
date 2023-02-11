@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 19:37:18 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/11 00:53:36 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 11:28:25 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,14 @@ int	cmd_bltn_export(t_cmd_lst *cmd)
 	sort_str(tmp_env);
 	while (tmp_env[i])
 	{
-		ft_putstr_fd("declare -x ", 1);
-		ft_putstr_fd(tmp_env[i], 1);
-		ft_putstr_fd("\n", 1);
-		free(tmp_env[i++]);
+		if (*tmp_env[i])
+		{
+			ft_putstr_fd("declare -x ", 1);
+			ft_putstr_fd(tmp_env[i], 1);
+			ft_putstr_fd("\n", 1);
+			free(tmp_env[i]);
+		}
+		i++;
 	}
 	free(tmp_env);
 	return (0);
