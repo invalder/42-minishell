@@ -6,11 +6,25 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 01:02:12 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/11 08:45:43 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:02:36 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_input.h"
+
+int	cmd_bltn_export_env(t_cmd_lst *cmd)
+{
+	int	i;
+
+	i = 1;
+	while (cmd->bargv[i])
+	{
+		if (ft_strchr(cmd->bargv[i], '='))
+			export_env(cmd->bargv[i]);
+		i++;
+	}
+	return (0);
+}
 
 int	cmd_bltn_parent_exec(t_cmd_lst *cmd)
 {
@@ -25,10 +39,7 @@ int	cmd_bltn_parent_exec(t_cmd_lst *cmd)
 		if (!cmd->bargv[1])
 			return (cmd_bltn_export(cmd));
 		else
-		{
-			if (ft_strchr(cmd->bargv[1], '='))
-				return (export_env(cmd->bargv[1]));
-		}
+			return (cmd_bltn_export_env(cmd));
 	}
 	return (-1);
 }
