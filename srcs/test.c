@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:40:04 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/11 09:21:50 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 11:09:06 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,9 @@ int	main(void)
 	if (!ret)
 		printf("exit\n");
 	tcsetattr(STDIN_FILENO, TCSANOW, &old_tio);
-	print_2star(environ);
+	// print_2star(environ);
 	environ = lst.tmp_envp;
-	print_2star(lst.new_envp);
+	// print_2star(lst.new_envp);
 	// free_split(lst.new_envp);
 	rl_clear_history();
 	return (ret);
