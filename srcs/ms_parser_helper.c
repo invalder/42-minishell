@@ -6,7 +6,7 @@
 /*   By: sthitiku <sthitiku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 00:19:39 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/11 02:19:44 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/11 21:44:38 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,28 @@
 char	*cut_quote(char *str, char quote)
 {
 	int		i;
-	int		len;
+	int		close;
 	char	*new;
 
+	close = 1;
 	i = 0;
-	len = 0;
+	new = ft_calloc(1, 1);
 	while (str[i])
 	{
-		if (str[i] != quote)
-			len++;
+		if (str[i] == '\'' || str[i] == '\"')
+		{
+			if (close)
+				quote = str[i];
+			if (str[i] == quote)
+				close = !close;
+			else
+				new = ms_join_char(new, str[i]);
+		}
+		else
+			new = ms_join_char(new, str[i]);
 		i++;
 	}
-	new = malloc(sizeof(char) * len + 1);
-	i = 0;
-	len = 0;
-	while (str[i])
-	{
-		if (str[i] != quote)
-			new[len++] = str[i];
-		i++;
-	}
-	new[len] = '\0';
+	new[i] = '\0';
 	free(str);
 	return (new);
 }
@@ -47,14 +48,15 @@ static char	get_char_to_join(char *env, int *st)
 	return (env[*st]);
 }
 
-static char	*get_env_from_string(char *env, char *rt) 
+static char	*get_env_str(char *env, char *rt)
 {
 	int		st;
 	int		sp;
 	char	sep;
-	
+
 	st = -1;
 	sep = 0;
+	printf("env = %s\n", env);
 	while (env[++st])
 	{
 		sp = st;
@@ -71,6 +73,34 @@ static char	*get_env_from_string(char *env, char *rt)
 	return (rt);
 }
 
+char	*complicated_env(t_parse *p, char *str, int str_len)
+{
+	char	*new;
+	char	*tmp;
+	int		start;
+	int		end;
+	int		i;
+
+	i = 0;
+	new = ft_calloc(1, 1);
+	end = str_len - 1;
+	while (str[i] && str[i] != '$')
+		i++;
+	start = i;
+	while ((end >= 0 && ft_isalnum(str[end])) || !str[end])
+		end--;
+	p->sub = ft_substr(str, start, end - start);
+	p->env = get_env_str(p->sub, ft_calloc(1, 1));
+	new = ms_join_str(new, ft_substr(str, 0, start - 0));
+	new = ms_join_str(new, p->env);
+	tmp = ft_substr(str, end, str_len - end);
+	if (ft_strchr(tmp, '$'))
+		new = ms_join_str(new, get_env_str(tmp, ft_calloc(1, 1)));
+	else
+		new = ms_join_str(new, tmp);
+	return (new);
+}
+
 char	*parse_env_get_env(char *str, int str_len, char first, char last)
 {
 	char	*new;
@@ -78,22 +108,22 @@ char	*parse_env_get_env(char *str, int str_len, char first, char last)
 
 	p.start = 0;
 	p.end = 0;
+	printf("str = %s\tfirst = %c\tlast = %c\n", str, first, last);
 	if (first == '\'' && last == '\'')
 	{
 		p.start = 1;
 		p.end = str_len - 1;
 		p.sub = ft_substr(str, p.start, p.end - p.start);
-		p.env = get_env_from_string(p.sub, malloc(1));
-		new = malloc(1);
+		p.env = get_env_str(p.sub, ft_calloc(1, 1));
+		new = ft_calloc(1, 1);
 		new = ms_join_char(new, '\'');
 		new = ms_join_str(new, p.env);
 		new = ms_join_char(new, '\'');
 	}
 	else
 	{
-		p.sub = ft_substr(str, p.start, str_len - p.start);
-		p.env = get_env_from_string(p.sub, malloc(1));
-		new = ft_calloc(1, ft_strlen(p.env) + 1);
+		p.env = complicated_env(&p, str, str_len);
+		new = ft_calloc(1, 1);
 		new = ms_join_str(new, p.env);
 	}
 	free(p.sub);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sthitiku <sthitiku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 01:04:35 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/09 22:34:49 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/11 21:52:48 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,80 @@ static char	*parse_env(char *str)
 	return (new);
 }
 
-static void	parse_cmd_one_pair(char ***cmd, int i, int j, char first_char)
+// return 1 if quote is not closed, 0 otherwise
+int	check_close_quote(char *cmd)
 {
-	if (first_char == '\"' || first_char == '\'')
+	int		i;
+	int		close;
+	char	first_quote;
+
+	close = 0;
+	first_quote = 0;
+	i = -1;
+	if (!ft_strchr(cmd, '\'') && !ft_strchr(cmd, '\"'))
+		return (1);
+	while (cmd[++i])
 	{
-		cmd[i][j] = cut_quote(cmd[i][j], first_char);
-		if (cmd[i][j][0] == '$')
+		if (cmd[i] == '\'' || cmd[i] == '\"')
 		{
-			cmd[i][j] = ft_substr(cmd[i][j], 0, ft_strlen(cmd[i][j]));
-			return ;
+			first_quote = cmd[i++];
+			while (cmd[i] && cmd[i] != first_quote)
+			{
+				i++;
+			}
+			if (cmd[i] == first_quote)
+				close = 1;
+			else
+				close = 0;
 		}
 	}
-	if (cmd[i][j][0] == '\'')
-		return ;
-	if (ft_strchr(cmd[i][j], '$') && cmd[i][j][0] != '\"')
-		cmd[i][j] = parse_env(cmd[i][j]);
+	return (close);
+}
+
+int	check_dollar_in_sq(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'')
+		{
+			while (str[i])
+			{
+				if (str[i] == '$')
+					return (1);
+				if (str[i] == '\"')
+					return (0);
+				i++;
+			}
+		}
+		i++;
+	}
+	return (0);
+}
+
+char	*skip_quote(char *str)
+{
+	int		i;
+	char	*new;
+
+	i = 0;
+	new = ft_calloc(1, 1);
+	while (str[i])
+	{
+		if (str[i] != '\'')
+			new = ms_join_char(new, str[i]);
+		i++;
+	}
+	free(str);
+	return (new);
 }
 
 void	parse_cmd(char ***cmd)
 {
 	int		i;
 	int		j;
-	char	first_char;
 
 	i = 0;
 	while (cmd[i])
@@ -59,16 +111,16 @@ void	parse_cmd(char ***cmd)
 		j = 0;
 		while (cmd[i][++j])
 		{
-			first_char = cmd[i][j][0];
-			if (cmd[i][j][1] == '\'' || cmd[i][j][1] == '\"')
+			printf("check: %d\n", check_dollar_in_sq(cmd[i][j]));
+			if (check_dollar_in_sq(cmd[i][j]))
+				cmd[i][j] = skip_quote(cmd[i][j]);
+			else
 			{
-				if ((first_char == '\'' || first_char == '\"'))
-					cmd[i][j] = cut_quote(cmd[i][j], first_char);
-				if (ft_strchr(cmd[i][j], '$') && cmd[i][j][0] != '\"')
+				cmd[i][j] = cut_quote(cmd[i][j], cmd[i][j][0]);
+				printf("PARSE cmd[i][j]: %s\n", cmd[i][j]);
+				if (ft_strchr(cmd[i][j], '$'))
 					cmd[i][j] = parse_env(cmd[i][j]);
 			}
-			else
-				parse_cmd_one_pair(cmd, i, j, first_char);
 		}
 		i++;
 	}

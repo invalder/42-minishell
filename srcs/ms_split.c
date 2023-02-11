@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sthitiku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sthitiku <sthitiku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 01:00:44 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/09 21:33:46 by sthitiku         ###   ########.fr       */
+/*   Updated: 2023/02/11 21:25:17 by sthitiku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ms_count_words(char *line)
 			continue ;
 		}
 		else if (line[i] == '|' || line[i] == '<' || line[i] == '>'
-			|| line[i] == '&')
+			|| line[i] == '&' || line[i] == '=' || line[i] == '?')
 			skip_token(line, &i, 1);
 		else if (line[i] == '\'' || line[i] == '\"')
 			skip_token(line, &i, 2);
@@ -47,7 +47,8 @@ static int	ms_count_chars(char *str)
 	tmp = str[i];
 	if (str[i] == '\'' || str[i] == '\"')
 		skip_token(str, &i, 2);
-	else if (str[i] == '|' || str[i] == '<' || str[i] == '>' || str[i] == '&')
+	else if (str[i] == '|' || str[i] == '<' || str[i] == '>' || str[i] == '&'
+		|| str[i] == '=')
 	{
 		if (str[i + 1] == tmp)
 			return (2);

@@ -126,7 +126,7 @@ int	main_loop(t_cmd *lst)
 		if (*line && *line != '\0')
 			add_history(line);
 		// check quotes are closed, if not print error message free line and continue
-		if (!ms_check_full_quotes(line))
+		if (!check_close_quote(line))
 		{
 			printf("minishell: syntax error: quotes are not closed\n");
 			free(line);
@@ -141,7 +141,7 @@ int	main_loop(t_cmd *lst)
 		// cmd != NULL when quote is closed correctly
 		if (cmd != NULL)
 		{
-			lst->cmd = create_cmd(cmd, lst); 
+			lst->cmd = create_cmd(cmd, lst);
 			print_3star(lst->cmd);
 			parse_cmd(lst->cmd);
 			print_3star(lst->cmd);
