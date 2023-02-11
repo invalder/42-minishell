@@ -6,13 +6,13 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 23:44:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/11 08:12:29 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:20:24 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ms_input.h"
 
-static void skip_token_3(char *line, int *i, char tmp)
+static void	skip_token_3(char *line, int *i, char tmp)
 {
 	char	tmp_quote;
 

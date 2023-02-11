@@ -6,13 +6,13 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 01:28:26 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/11 14:39:38 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:39:15 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ms_input.h"
 
-extern t_global g_globe;
+extern t_global	g_globe;
 
 char	**dup_environ(char **envp)
 {
@@ -22,8 +22,6 @@ char	**dup_environ(char **envp)
 
 	i = 0;
 	size = arr2dsize(envp);
-	// while (envp[i])
-	// 	i++;
 	new = (char **)malloc(sizeof(char *) * (size + 1));
 	i = 0;
 	while (envp[i])
@@ -103,6 +101,7 @@ void	init_list(t_cmd *lst)
 {
 	lst->env_addr = &environ;
 	g_globe.env_addr = lst->env_addr;
+	environ = dup_environ(environ);
 	lst->cmd = NULL;
 	lst->cmd_len = 0;
 	lst->cmd_lst = NULL;

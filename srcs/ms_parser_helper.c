@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 00:19:39 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/11 08:34:16 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:16:24 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,14 +99,7 @@ char	*parse_env_get_env(char *str, int str_len, char first, char last)
 		new = ms_join_char(new, '\'');
 	}
 	else
-	{
-		// p.sub = ft_substr(str, p.start, str_len - p.start);
-		// p.env = get_env_from_string(p.sub, malloc(1));
-		// parse_env_exit_status(&p, str_len);
-		// new = ft_calloc(1, ft_strlen(p.env) + 1);
-		// new = ms_join_str(new, p.env);
 		parse_env_get_env_helper(&p, str, str_len, &new);
-	}
 	free(p.sub);
 	return (new);
 }

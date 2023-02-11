@@ -6,13 +6,13 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:40:04 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/11 14:39:09 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:24:18 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_input.h"
 
-t_global g_globe;
+t_global	g_globe;
 
 void	print_2star(char **cmd)
 {
@@ -41,6 +41,20 @@ void	free_main_loop(char *line, char **cmd, char ***cmd_3star)
 	cmd_3star = NULL;
 }
 
+void	cmd_in_loop(char *line, char **cmd, t_cmd *lst)
+{
+	cmd = cmd_split(line);
+	if (cmd != NULL)
+	{
+		lst->cmd = create_cmd(cmd, lst);
+		parse_cmd(lst->cmd);
+		exec_main(lst);
+	}
+	else
+		lst->cmd = NULL;
+	free_main_loop(line, cmd, lst->cmd);
+}
+
 int	main_loop(t_cmd *lst)
 {
 	char	*line;
@@ -64,16 +78,7 @@ int	main_loop(t_cmd *lst)
 			free(line);
 			continue ;
 		}
-		cmd = cmd_split(line);
-		if (cmd != NULL)
-		{
-			lst->cmd = create_cmd(cmd, lst);
-			parse_cmd(lst->cmd);
-			exec_main(lst);
-		}
-		else
-			lst->cmd = NULL;
-		free_main_loop(line, cmd, lst->cmd);
+		cmd_in_loop(line, cmd, lst);
 	}
 	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 21:01:52 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/11 13:53:07 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:15:06 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_input.h"
 
-extern t_global g_globe;
+extern t_global	g_globe;
 
 void	parent(t_cmd_lst *cmd, int *fd)
 {

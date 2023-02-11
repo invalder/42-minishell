@@ -6,13 +6,13 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 23:12:53 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/11 14:54:45 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:50:24 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_input.h"
 
-extern t_global g_globe;
+extern t_global	g_globe;
 
 void	unset_env(char *name)
 {
@@ -27,25 +27,15 @@ void	unset_env(char *name)
 	}
 }
 
-int	export_env(char *exp)
+void	export_env_util(char **new, char **arr, char *exp, int found)
 {
-	char	**arr;
-	char	**new;
-	char	**tmp;
-	int		i;
-	int		found;
+	int	i;
 
-	i = 0;
-	found = 0;
-	arr = ft_split(exp, '=');
-	tmp = environ;
-	while (environ[i])
-		i++;
-	new = ft_calloc((i + 2), sizeof(char *));
 	i = -1;
 	while (environ[++i])
 	{
-		if (!ft_strncmp(environ[i], arr[0], ft_strlen(arr[0])))
+		if (!ft_strncmp(environ[i], arr[0], ft_strlen(arr[0])) \
+			&& environ[i][ft_strlen(arr[0])] == '=')
 		{
 			new[i] = ft_strdup(exp);
 			found = 1;
@@ -58,6 +48,21 @@ int	export_env(char *exp)
 	new[i] = NULL;
 	environ = new;
 	free_split(arr);
+}
+
+int	export_env(char *exp)
+{
+	char	**arr;
+	char	**new;
+	char	**tmp;
+	int		found;
+
+	found = 0;
+	arr = ft_split(exp, '=');
+	tmp = environ;
+	new = ft_calloc(arr2dsize(environ) + 2, sizeof(char *));
+	export_env_util(new, arr, exp, found);
+	free_split(tmp);
 	return (0);
 }
 
@@ -87,30 +92,4 @@ int	echo(char **args, int newline)
 char	*get_pwd(void)
 {
 	return (getcwd(NULL, MAXPATHLEN));
-}
-
-int	ms_cd(char *path_str)
-{
-	int		status_code;
-	char	*new_path;
-
-	new_path = NULL;
-	if (path_str[0] == '~' || path_str[0] == '\0')
-	{
-		new_path = malloc(sizeof(char) * (ft_strlen(getenv("HOME")) + \
-			1 + ft_strlen(path_str) - 1));
-		ft_strlcpy(new_path, getenv("HOME"), ft_strlen(getenv("HOME")) + 1);
-		ft_strlcpy(&new_path[ft_strlen(new_path)], &path_str[1], \
-			ft_strlen(path_str));
-	}
-	else
-	{
-		new_path = malloc(sizeof(char) * (ft_strlen(path_str) + 1));
-		ft_strlcpy(new_path, path_str, ft_strlen(path_str) + 1);
-	}
-	status_code = access(new_path, F_OK);
-	if (!status_code)
-		chdir(new_path);
-	free(new_path);
-	return (status_code);
 }

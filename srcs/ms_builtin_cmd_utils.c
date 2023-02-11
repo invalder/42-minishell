@@ -3,14 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ms_builtin_cmd_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 19:37:18 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/05 19:38:02 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:41:08 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_input.h"
+
+int	ms_cd(char *path_str)
+{
+	int		status_code;
+	char	*new_path;
+
+	new_path = NULL;
+	if (path_str[0] == '~' || path_str[0] == '\0')
+	{
+		new_path = malloc(sizeof(char) * (ft_strlen(getenv("HOME")) + \
+			1 + ft_strlen(path_str) - 1));
+		ft_strlcpy(new_path, getenv("HOME"), ft_strlen(getenv("HOME")) + 1);
+		ft_strlcpy(&new_path[ft_strlen(new_path)], &path_str[1], \
+			ft_strlen(path_str));
+	}
+	else
+	{
+		new_path = malloc(sizeof(char) * (ft_strlen(path_str) + 1));
+		ft_strlcpy(new_path, path_str, ft_strlen(path_str) + 1);
+	}
+	status_code = access(new_path, F_OK);
+	if (!status_code)
+		chdir(new_path);
+	free(new_path);
+	return (status_code);
+}
 
 int	cmd_bltn_pwd(t_cmd_lst *cmd)
 {
