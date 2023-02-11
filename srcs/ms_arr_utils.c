@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ms_arr_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/09 11:22:47 by nnakarac          #+#    #+#             */
-/*   Updated: 2022/10/14 23:30:57 by nnakarac         ###   ########.fr       */
+/*   Created: 2023/01/21 23:59:57 by nnakarac          #+#    #+#             */
+/*   Updated: 2023/01/22 00:00:06 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "ms_input.h"
 
-int	main(int argc, char **argv)
+size_t	arr2dsize(char **ptr)
 {
-	(void) argc;
-	(void) argv;
-	ft_printf("Hello\n");
-	return (0);
+	int	cnt;
+
+	cnt = 0;
+	if (ptr)
+	{
+		while (ptr[cnt])
+		{
+			cnt++;
+		}
+	}
+	return (cnt);
 }

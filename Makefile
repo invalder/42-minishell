@@ -6,13 +6,14 @@
 #    By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 01:24:09 by nnakarac          #+#    #+#              #
-#    Updated: 2022/10/30 19:38:38 by nnakarac         ###   ########.fr        #
+#    Updated: 2023/02/11 22:07:48 by nnakarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NORM = norminette -R CheckForbiddenSourceHeaderDefine
 
 UNAME = $(shell uname -s)
+ARCH = $(shell arch)
 ifeq ($(UNAME), Linux)
 	MEME = aplay easter_egg/meme2.mp3 &
 	ANYA = aplay easter_egg/anya.mp3 &
@@ -41,7 +42,18 @@ SPONSOR3 = ./easter_egg/sponsor.sh
 NAME = minishell
 NAMEP = pipex
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g
+CFLAGS	= -g -Wall -Wextra -Werror
+
+ifeq ($(ARCH), arm64)
+	LDFLAGS	= -L${HOMEBREW_PREFIX}/opt/readline/lib
+	CPPFLAGS	= -I${HOMEBREW_PREFIX}/opt/readline/include
+else
+	LDFLAGS	= -L/usr/local/opt/readline/lib
+	CPPFLAGS	= -I/usr/local/opt/readline/include
+endif
+
+# CFLAGS	= -Wall -Wextra -Werror -g -I/opt/homebrew/opt/readline/include
+# RL	= -lreadline -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include
 RM		= /bin/rm -rf
 
 SRC_DIR	= srcs/
@@ -54,13 +66,49 @@ LIBS	= -L$(LIB_DIR) -lft
 INCS	= -I$(INC_DIR)\
 		-I$(LIB_DIR)includes \
 
-SRCS	= minishell.c \
+SRCS	=	test.c \
+			ms_split.c \
+			ms_cmd_split.c \
+			ms_environ.c \
+			ms_parser.c \
+			ms_parse_exit_stat.c \
+			ms_token.c \
+			ms_free_input.c \
+			ms_exec.c \
+			ms_exec_child.c \
+			ms_envp.c \
+			ms_heredoc.c \
+			ms_implement.c \
+			ms_infile.c \
+			ms_outfile.c \
+			ms_expander.c \
+			ms_exec_cmd_lst.c \
+			ms_exec_cmd_lst_2.c \
+			ms_exec_cmd_prep.c \
+			ms_exec_cmd_prep_2.c \
+			ms_cmd_lst_utils.c \
+			ms_realloc.c \
+			ms_builtin_cmd.c \
+			ms_builtin_cmd_parent.c \
+			ms_builtin_cmd_child.c \
+			ms_builtin_cmd_utils.c \
+			ms_builtin_cmd_utils2.c \
+			ms_signals.c \
+			ms_debug.c \
+			ms_err.c \
+			ms_err2.c \
+			ms_arr_utils.c \
+			ms_string_utils.c \
+			ms_parser_helper.c \
+			ms_expander_helper.c \
 
-SRCS_P	= pipex.c \
-		pipex_error.c \
-		pipex_envp.c \
-		pipex_exec.c \
-		pipex_utils.c \
+# SRCS	= minishell.c \
+
+# SRCS_P	= pipex.c \
+# 		pipex_error.c \
+# 		pipex_envp.c \
+# 		pipex_exec.c \
+# 		pipex_utils.c \
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -72,23 +120,17 @@ all: $(NAME)
 
 $(NAME): $(addprefix $(OBJ_DIR),$(OBJS))
 	@make -C $(LIB_DIR) --silent
-	@$(CC) $(CFLAGS) $(addprefix $(OBJ_DIR),$(OBJS)) $(LIBS) -o $(NAME)
-
-$(NAMEP): $(addprefix $(OBJ_DIR),$(OBJP))
-	@make -C $(LIB_DIR) --silent
-	@$(CC) $(CFLAGS) $(addprefix $(OBJ_DIR),$(OBJP)) $(LIBS) -o $(NAMEP)
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -lreadline $(LDFLAGS) $(addprefix $(OBJ_DIR),$(OBJS)) $(LIBS) -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
-	@$(CC) -Ilibft $(CFLAGS) -c $< $(INCS) -o $@
+	@$(CC) -Ilibft $(CFLAGS) $(CPPFLAGS) -c $< $(INCS) -o $@
 
 clean:
 	@make -C $(LIB_DIR) clean --silent
 	@$(RM) $(OBJ_DIR)
 	@$(RM) $(NAME)
-	@$(RM) $(NAMEP)
 	@$(RM) "$(NAME).dSYM"
-	@$(RM) "$(NAMEP).dSYM"
 
 fclean: clean
 	@make -C $(LIB_DIR) fclean --silent

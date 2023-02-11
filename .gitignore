@@ -57,3 +57,6 @@ pipex
 outfile
 infile
 fd_tmp
+
+*.pdf
+.vscode/

@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ms_parse_exit_stat.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 16:08:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2022/10/30 19:20:31 by nnakarac         ###   ########.fr       */
+/*   Created: 2023/01/28 15:10:15 by nnakarac          #+#    #+#             */
+/*   Updated: 2023/02/11 23:03:36 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "ms_input.h"
 
-int	main(int argc, char **argv, char **envp)
+extern t_global	g_globe;
+
+void	parse_env_exit_status(t_parse *p, int str_len, char *str)
 {
-	(void) argc;
-	(void) argv;
-	(void) envp;
-	if (argc < 5)
+	if (str_len == 2 && !ft_strncmp(str, "$?\0", 3))
 	{
-		err_message("Not Enough Parameters\n");
-		if (argc >= 2 && !ft_strncmp("here_doc", argv[1], 9))
-			exit_message("./pipex here_doc LIMITER cmd cmd1 ... cmdn file\n");
-		exit_message("./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2\n");
+		if (p->env)
+			free(p->env);
+		p->env = ft_itoa(g_globe.status);
 	}
-	pipex_initial(argc, argv, envp);
-	return (0);
+	else if (str_len == 1 && !ft_strncmp(str, "$\0", 2))
+	{
+		if (p->env)
+			free(p->env);
+		p->env = ft_strdup(str);
+	}
 }
