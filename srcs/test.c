@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:40:04 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/11 15:24:18 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 22:37:04 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,11 @@ int	main_loop(t_cmd *lst)
 		}
 		if (*line && *line != '\0')
 			add_history(line);
-		if (!ms_check_full_quotes(line))
+		if (!check_close_quote(line))
 		{
-			printf("minishell: syntax error: quotes are not closed\n");
+			dprintf(2, "minishell: syntax error: quotes are not closed\n");
 			free(line);
+			g_globe.status = 1;
 			continue ;
 		}
 		cmd_in_loop(line, cmd, lst);

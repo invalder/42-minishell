@@ -6,11 +6,11 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 01:28:26 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/11 15:39:15 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 22:02:19 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ms_input.h"
+#include "ms_input.h"
 
 extern t_global	g_globe;
 

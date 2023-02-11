@@ -6,86 +6,12 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:09:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/11 08:14:20 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 22:02:13 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ms_input.h"
+#include "ms_input.h"
 
-// int	count_cmd(char **cmd, int *i)
-// {
-// 	int		count;
-
-// 	count = 0;
-// 	if (cmd[*i][0] == '|' || cmd[*i][0] == '<' || cmd[*i][0] == '>'
-// 		|| cmd[*i][0] == '&')
-// 	{
-// 		count++;
-// 		(*i)++;
-// 	}
-// 	while (cmd[*i])
-// 	{
-// 		if (cmd[*i][0] == '|' || cmd[*i][0] == '<' || cmd[*i][0] == '>'
-// 			|| cmd[*i][0] == '&')
-// 			break ;
-// 		count++;
-// 		(*i)++;
-// 	}
-// 	return (count);
-// }
-
-// int	is_empty_quote(char *str)
-// {
-// 	int		i;
-// 	int		j;
-
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		j = i + 1;
-// 		if (str[i] == '\'' || str[i] == '\"')
-// 		{
-// 			while (str[j])
-// 			{
-// 				if (str[j] == str[i])
-// 				{
-// 					if (i == j - 1)
-// 						return (1);
-// 					break ;
-// 				}
-// 				j++;
-// 			}
-// 		}
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
-int	ms_check_full_quotes(char *line)
-{
-	int	d_quote;
-	int	s_quote;
-	int	i;
-
-	i = 0;
-	d_quote = 0;
-	s_quote = 0;
-	while (line[i])
-	{
-		if (line[i] == '\"')
-			d_quote++;
-		else if (line[i] == '\'')
-			s_quote++;
-		i++;
-	}
-	if (d_quote % 2 == 0 && s_quote % 2 == 0)
-		return (1);
-	return (0);
-}
-
-// trying to check if there is an empty quote
-// if (cmd[*i][0]== '\' )
-// 	count--;
 int	count_cmd(char **cmd, int *i)
 {
 	int		count;
@@ -106,6 +32,15 @@ int	count_cmd(char **cmd, int *i)
 	return (count);
 }
 
+int	is_something_too_many(char **cmd)
+{
+	return (!ft_isalnum(cmd[0][0]) && cmd[0][0] != '\'' && cmd[0][0] != '\"'
+		&& cmd[0][0] != '$' && cmd[0][0] != '|' && cmd[0][0] != '&' && \
+		cmd[0][0] != '>' && cmd[0][0] != '<' && cmd[0][0] != '(' && \
+		cmd[0][0] != '/' && cmd[0][0] != '.' && cmd[0][0] != '~' && \
+		cmd[0][0] != '?');
+}
+
 int	count_block(char **cmd)
 {
 	int		i;
@@ -116,10 +51,7 @@ int	count_block(char **cmd)
 		return (0);
 	i = -1;
 	count = 1;
-	if (!ft_isalnum(cmd[0][0]) && cmd[0][0] != '\'' && cmd[0][0] != '\"' && \
-		cmd[0][0] != '$' && cmd[0][0] != '|' && cmd[0][0] != '&' && \
-		cmd[0][0] != '>' && cmd[0][0] != '<' && cmd[0][0] != '(' && \
-		cmd[0][0] != '/' && cmd[0][0] != '.' && cmd[0][0] != '~')
+	if (is_something_too_many(cmd))
 			count--;
 	while (cmd[++i])
 	{

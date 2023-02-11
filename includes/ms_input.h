@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/11 15:39:23 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 22:14:04 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void		init_list(t_cmd *lst);
 
 void		parse_cmd(char ***cmd);
 int			print_env(void);
-void		parse_env_exit_status(t_parse *p, int str_len);
+void		parse_env_exit_status(t_parse *p, int str_len, char *str);
 
 // ms_directory.c
 char		*get_pwd(void);
@@ -222,7 +222,7 @@ void		print2d(char **ptr);
 void		skip_token(char *line, int *i, int mode);
 void		print_3star(char ***cmd);
 void		print_2star(char **cmd);
-// int		check_close_quote(char *cmd);
+int			check_close_quote(char *cmd);
 
 // ms_string_utils.c
 int			is_string_numeric(char *num_str);

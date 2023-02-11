@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 01:02:12 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/11 16:02:36 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 22:33:13 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,25 @@
 
 int	cmd_bltn_export_env(t_cmd_lst *cmd)
 {
-	int	i;
+	int		i;
+	char	*tmp;
+	char	*env;
 
 	i = 1;
 	while (cmd->bargv[i])
 	{
-		if (ft_strchr(cmd->bargv[i], '='))
-			export_env(cmd->bargv[i]);
-		i++;
+		if (cmd->bargv[i] && !ft_strncmp(cmd->bargv[i + 1], "=\0", 2) \
+			&& cmd->bargv[i + 2])
+		{
+			tmp = ft_strjoin(cmd->bargv[i], cmd->bargv[i + 1]);
+			env = ft_strjoin(tmp, cmd->bargv[i + 2]);
+			export_env(env);
+			free(tmp);
+			free(env);
+			i += 3;
+		}
+		else
+			i++;
 	}
 	return (0);
 }

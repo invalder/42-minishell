@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 23:44:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/11 15:20:24 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 22:36:51 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static void	skip_token_3(char *line, int *i, char tmp)
 
 	tmp_quote = tmp;
 	while (line[*i] && !ft_isspace(line[*i]) && line[*i] != '|' && \
-			line[*i] != '<' && line[*i] != '>' && line[*i] != '&')
+			line[*i] != '<' && line[*i] != '>' && line[*i] != '&' && \
+			line[*i] != '=')
 	{
 		if (line[*i] == '\'' || line[*i] == '\"')
 		{
@@ -31,17 +32,28 @@ static void	skip_token_3(char *line, int *i, char tmp)
 	}
 }
 
-static void	skip_token_2(char *line, int *i, char tmp)
+static void	skip_token_2(char *ln, int *i, char tmp)
 {
+	char	qte;
+	int		close;
+
+	qte = 0;
+	close = 0;
 	(*i)++;
-	while (line[*i] && line[*i] != tmp)
+	while (ln[*i])
 	{
-		if (line[*i + 1] == '\'' || line[*i + 1] == '\"')
-			(*i) += 2;
+		if (ln[*i] == '\'' || ln[*i] == '\"')
+		{
+			tmp = ln[*i];
+			while (ln[*i] && ln[*i] != tmp && ln[*i] != '|')
+				(*i)++;
+			if (ln[*i] == tmp)
+				close = 1;
+			else
+				close = 0;
+		}
 		(*i)++;
 	}
-	if (line[*i])
-		(*i)++;
 }
 
 void	skip_token(char *line, int *i, int mode)
