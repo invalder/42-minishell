@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:09:46 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/10 23:55:19 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 08:14:20 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,14 +114,14 @@ int	count_block(char **cmd)
 
 	if (!cmd[0])
 		return (0);
-	i = 0;
+	i = -1;
 	count = 1;
 	if (!ft_isalnum(cmd[0][0]) && cmd[0][0] != '\'' && cmd[0][0] != '\"' && \
 		cmd[0][0] != '$' && cmd[0][0] != '|' && cmd[0][0] != '&' && \
 		cmd[0][0] != '>' && cmd[0][0] != '<' && cmd[0][0] != '(' && \
 		cmd[0][0] != '/' && cmd[0][0] != '.' && cmd[0][0] != '~')
 			count--;
-	while (cmd[i])
+	while (cmd[++i])
 	{
 		j = 0;
 		if (cmd[i][j] == '|' || cmd[i][j] == '&')
@@ -131,7 +131,6 @@ int	count_block(char **cmd)
 				|| !cmd[i][j + 1]) && i == 0)
 				count--;
 		}
-		i++;
 	}
 	return (count);
 }

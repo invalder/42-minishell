@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exec_cmd_lst_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnakarac <nnakarac@42.fr>                  +#+  +:+       +#+        */
+/*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 11:13:31 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/03 22:16:53 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 08:43:57 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_cmd_lst	*cmd_lst_new(t_cmd *lst, int idx)
 	new_lst->pid = -1;
 	new_lst->type = 0;
 	new_lst->btype = -1;
+	new_lst->status = 0;
 	cmd_lst_new_2(new_lst, lst, idx);
 	return (new_lst);
 }

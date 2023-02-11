@@ -6,49 +6,13 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:40:04 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/11 03:07:50 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 09:21:50 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_input.h"
 
-// typedef struct s_pipe
-// {
-// 	t_cmd	*cmd;
-// 	int		to_fd;
-// }	t_pipe;
-
-// typedef struct s_redir_l
-// {
-// 	t_cmd	*cmd;
-// 	char	*file;
-// 	int		to_fd;
-// }	t_redir_l;
-
-// typedef struct s_redir_r
-// {
-// 	t_cmd	*cmd;
-// 	char	*file;
-// 	char	*target_file;
-// }	t_redir_r;
-
-// typedef struct s_logic
-// {
-// 	t_cmd	*cmd;
-// 	t_cmd	*cmd2;
-// }	t_logic;
-
-// typedef struct s_block
-// {
-// 	t_pipe		*pipe;
-// 	t_redir_l	*redir_l;
-// 	t_redir_r	*redir_r;
-// 	t_logic		*logic;
-// }	t_block;
-
 int	g_status = 0;
-
-
 
 void	print_2star(char **cmd)
 {
@@ -82,24 +46,24 @@ int	main_loop(t_cmd *lst)
 	char	*line;
 	char	**cmd;
 
+	line = NULL;
+	cmd = NULL;
 	while (1)
 	{
 		line = readline("minimini> ");
 		if (line == NULL || !ft_strncmp(line, "exit\0", 5))
+		{
+			free(line);
 			return (0);
+		}
 		if (*line && *line != '\0')
 			add_history(line);
-		// check quotes are closed, if not print error message free line and continue
 		if (!ms_check_full_quotes(line))
 		{
 			printf("minishell: syntax error: quotes are not closed\n");
 			free(line);
 			continue ;
 		}
-		if (!ft_strncmp(line, "env\0", 4))
-			print_env();
-
-		// dak $?
 		cmd = cmd_split(line);
 		if (cmd != NULL)
 		{
@@ -131,8 +95,10 @@ int	main(void)
 	if (!ret)
 		printf("exit\n");
 	tcsetattr(STDIN_FILENO, TCSANOW, &old_tio);
+	print_2star(environ);
 	environ = lst.tmp_envp;
-	free_split(lst.new_envp);
+	print_2star(lst.new_envp);
+	// free_split(lst.new_envp);
 	rl_clear_history();
 	return (ret);
 }

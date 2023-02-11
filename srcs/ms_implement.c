@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 23:12:53 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/11 02:42:02 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 09:09:03 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,40 @@ void	unset_env(char *name)
 	}
 }
 
-void	export_env(char *exp)
+int	export_env(char *exp)
 {
 	char	**arr;
 	char	**new;
 	char	**tmp;
 	int		i;
+	int		found;
 
 	i = 0;
+	found = 0;
 	arr = ft_split(exp, '=');
 	tmp = environ;
 	while (environ[i])
 		i++;
-	new = malloc(sizeof(char *) * (i + 2));
+	new = ft_calloc((i + 2), sizeof(char *));
 	i = 0;
-	if (getenv(arr[0]))
-		unset_env(arr[0]);
 	while (environ[i])
 	{
-		new[i] = ft_strdup(environ[i]);
+		if (!ft_strncmp(environ[i], arr[0], ft_strlen(arr[0])))
+		{
+			new[i] = ft_strdup(exp);
+			found = 1;
+		}
+		else
+			new[i] = ft_strdup(environ[i]);
 		i++;
 	}
-	new[i++] = ft_strdup(exp);
+	if (!found)
+		new[i++] = ft_strdup(exp);
 	new[i] = NULL;
 	environ = new;
 	free_split(arr);
 	free_split(tmp);
+	return (0);
 }
 
 int	echo(char **args, int newline)

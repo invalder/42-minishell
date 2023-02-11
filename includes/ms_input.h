@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:48:20 by nnakarac          #+#    #+#             */
-/*   Updated: 2023/02/11 01:31:30 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 08:22:44 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ char		**cmd_split(char *line);
 void		skip_token(char *line, int *i, int mode);
 
 // ms_cmd_split.c -> split from char** to char***
-char	***create_cmd(char **cmd, t_cmd *lst);
-int		ms_check_full_quotes(char *line);
-void	init_list(t_cmd *lst);
+char		***create_cmd(char **cmd, t_cmd *lst);
+int			ms_check_full_quotes(char *line);
+void		init_list(t_cmd *lst);
 
 void		parse_cmd(char ***cmd);
 int			print_env(void);
@@ -114,7 +114,7 @@ void		free_3star(char ***cmd);
 
 // ms_environ.c
 void		unset_env(char *name);
-void		export_env(char *exp);
+int			export_env(char *exp);
 char		**dup_environ(char **environ);
 void		sort_str(char **str);
 
@@ -222,14 +222,14 @@ void		print_3star(char ***cmd);
 int			is_string_numeric(char *num_str);
 
 // ms_parser_helper.c
-char	*cut_quote(char *str, char quote);
-char	*parse_env_get_env(char *str, int str_len, char first, char last);
+char		*cut_quote(char *str, char quote);
+char		*parse_env_get_env(char *str, int str_len, char first, char last);
 
 // ms_expander_helper.c
-char	find_sep(char *str);
-char	*ms_join_char(char *str, char c);
-char	*ms_join_str(char *str1, char *str2);
-char	*expand_env(char *env);
-int		find_sep_index(char *str, char sep);
+char		find_sep(char *str);
+char		*ms_join_char(char *str, char c);
+char		*ms_join_str(char *str1, char *str2);
+char		*expand_env(char *env);
+int			find_sep_index(char *str, char sep);
 
 #endif

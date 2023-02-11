@@ -6,7 +6,7 @@
 /*   By: nnakarac <nnakarac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 00:19:39 by sthitiku          #+#    #+#             */
-/*   Updated: 2023/02/11 02:33:09 by nnakarac         ###   ########.fr       */
+/*   Updated: 2023/02/11 08:34:16 by nnakarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,15 @@ static char	*get_env_from_string(char *env, char *rt)
 	return (rt);
 }
 
+void	parse_env_get_env_helper(t_parse *p, char *str, int str_len, char **new)
+{
+	p->sub = ft_substr(str, p->start, str_len - p->start);
+	p->env = get_env_from_string(p->sub, ft_calloc(1, 1));
+	parse_env_exit_status(p, str_len);
+	*new = ft_calloc(1, ft_strlen(p->env) + 1);
+	*new = ms_join_str(*new, p->env);
+}
+
 char	*parse_env_get_env(char *str, int str_len, char first, char last)
 {
 	char	*new;
@@ -91,11 +100,12 @@ char	*parse_env_get_env(char *str, int str_len, char first, char last)
 	}
 	else
 	{
-		p.sub = ft_substr(str, p.start, str_len - p.start);
-		p.env = get_env_from_string(p.sub, malloc(1));
-		parse_env_exit_status(&p, str_len);
-		new = ft_calloc(1, ft_strlen(p.env) + 1);
-		new = ms_join_str(new, p.env);
+		// p.sub = ft_substr(str, p.start, str_len - p.start);
+		// p.env = get_env_from_string(p.sub, malloc(1));
+		// parse_env_exit_status(&p, str_len);
+		// new = ft_calloc(1, ft_strlen(p.env) + 1);
+		// new = ms_join_str(new, p.env);
+		parse_env_get_env_helper(&p, str, str_len, &new);
 	}
 	free(p.sub);
 	return (new);
