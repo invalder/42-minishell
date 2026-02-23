@@ -34,11 +34,6 @@ static void	skip_token_3(char *line, int *i, char tmp)
 
 static void	skip_token_2(char *ln, int *i, char tmp)
 {
-	char	qte;
-	int		close;
-
-	qte = 0;
-	close = 0;
 	(*i)++;
 	while (ln[*i])
 	{
@@ -47,10 +42,6 @@ static void	skip_token_2(char *ln, int *i, char tmp)
 			tmp = ln[*i];
 			while (ln[*i] && ln[*i] != tmp && ln[*i] != '|')
 				(*i)++;
-			if (ln[*i] == tmp)
-				close = 1;
-			else
-				close = 0;
 		}
 		(*i)++;
 	}
