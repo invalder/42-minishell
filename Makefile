@@ -120,7 +120,7 @@ all: $(NAME)
 
 $(NAME): $(addprefix $(OBJ_DIR),$(OBJS))
 	@make -C $(LIB_DIR) --silent
-	@$(CC) $(CFLAGS) $(CPPFLAGS) -lreadline $(LDFLAGS) $(addprefix $(OBJ_DIR),$(OBJS)) $(LIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(CPPFLAGS) $(addprefix $(OBJ_DIR),$(OBJS)) $(LDFLAGS) $(LIBS) -lreadline -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
